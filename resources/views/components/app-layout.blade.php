@@ -59,11 +59,11 @@
 
 </head>
 
-{{-- <div id="cover" class="css3-spinner">
+<div id="cover" class="css3-spinner">
     <div class="css3-spinner-bounce1"></div>
     <div class="css3-spinner-bounce2"></div>
     <div class="css3-spinner-bounce3"></div>
-</div> --}}
+</div>
 
 <body class="stretched side-push-panel">
 
@@ -641,9 +641,9 @@
             tpj;
         var $ = jQuery.noConflict();
 
-        // $(window).on('load', function() {
-        //     $("#cover").fadeOut(1750);
-        // });
+        $(window).on('load', function() {
+            $("#cover").fadeOut(1750);
+        });
 
         (function() {
             if (!/loaded|interactive|complete/.test(document.readyState)) document.addEventListener("DOMContentLoaded",
