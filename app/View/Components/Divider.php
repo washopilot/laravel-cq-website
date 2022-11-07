@@ -4,8 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Divider extends Component
-{
+class Divider extends Component {
     public string $title = '';
     public string $href = '';
     /**
@@ -13,8 +12,7 @@ class Divider extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->title = 'Configura tu producto a tu gusto. ';
         $this->href = 'javascript:void(0);';
     }
@@ -24,8 +22,7 @@ class Divider extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render()
-    {
+    public function render() {
         return view('components.divider');
     }
 }

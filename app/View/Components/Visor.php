@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class AppLayout extends Component {
+class Visor extends Component {
     /**
      * Create a new component instance.
      *
@@ -20,6 +20,6 @@ class AppLayout extends Component {
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render() {
-        return view('components.app-layout');
+        return view('components.visor');
     }
 }

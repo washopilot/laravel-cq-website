@@ -5,10 +5,22 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@prettier/plugin-php": "^0.19.2",
+        "@types/node": "^18.11.9",
+        "@types/react": "^18.0.25",
+        "@types/react-dom": "^18.0.8",
+        "@vitejs/plugin-react": "^2.2.0",
         "axios": "^0.27",
-        "laravel-vite-plugin": "^0.6.0",
+        "laravel-vite-plugin": "^0.6.1",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "vite": "^3.0.0"
+        "prettier": "^2.7.1",
+        "typescript": "^4.8.4",
+        "vite": "^3.0.0",
+        "vite-tsconfig-paths": "^3.5.2"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     }
 }

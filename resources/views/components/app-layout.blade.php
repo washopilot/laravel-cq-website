@@ -5,6 +5,9 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="SemiColonWeb" />
+    @viteReactRefresh
+    @vite('resources/src/main.tsx')
+
 
     <!-- Stylesheets
  ============================================= -->
@@ -296,11 +299,11 @@
 
                 </div> --}}
 
-                <x-section-why />
+                {{-- <x-section-why /> --}}
 
-                <x-divider />
+                {{-- <x-divider /> --}}
 
-                <x-portfolio />
+                {{-- <x-portfolio /> --}}
 
 
                 {{-- <div id="section-services" class="page-section pt-0">
@@ -590,7 +593,9 @@
 
                 </div> --}}
 
-                <x-contact />
+                {{-- <x-contact /> --}}
+
+                <x-visor />
 
             </div>
         </section><!-- #content end -->

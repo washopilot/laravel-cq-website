@@ -5,8 +5,7 @@ namespace App\View\Components;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 
-class Portfolio extends Component
-{
+class Portfolio extends Component {
     public string $title = '';
     public array $items = [];
     public array $tabs = [];
@@ -15,15 +14,19 @@ class Portfolio extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->title = 'Somos una empresa especializada en la producción, ensamblaje, acabado y distribución de mobiliario metálico. Desde nuestros inicios, nuestra misión ha sido evolucionar en el campo de la producción y desarrollo de la región sur del país.';
+    public function __construct() {
+        $this->title =
+            'Somos una empresa especializada en la producción, ensamblaje, acabado y distribución de mobiliario metálico. Desde nuestros inicios, nuestra misión ha sido evolucionar en el campo de la producción y desarrollo de la región sur del país.';
 
         $this->items = [
             [
                 'category' => ['Estantería'],
                 'title' => 'Perchas',
-                'images' => [url('images/portfolio/percha.jpg'), url('images/portfolio/percha-1.jpg'), url('images/portfolio/percha-2.jpg')],
+                'images' => [
+                    url('images/portfolio/percha.jpg'),
+                    url('images/portfolio/percha-1.jpg'),
+                    url('images/portfolio/percha-2.jpg')
+                ],
                 'wide' => true
             ],
             [
@@ -47,9 +50,13 @@ class Portfolio extends Component
             [
                 'category' => ['Estantería'],
                 'title' => 'Perchas',
-                'images' => [url('images/portfolio/percha.jpg'), url('images/portfolio/percha-1.jpg'), url('images/portfolio/percha-2.jpg')],
+                'images' => [
+                    url('images/portfolio/percha.jpg'),
+                    url('images/portfolio/percha-1.jpg'),
+                    url('images/portfolio/percha-2.jpg')
+                ],
                 'wide' => false
-            ],
+            ]
         ];
 
         $this->tabs = array_unique(Arr::flatten(Arr::pluck($this->items, 'category')));
@@ -60,8 +67,7 @@ class Portfolio extends Component
      *
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
-    public function render()
-    {
+    public function render() {
         return view('components.portfolio');
     }
 }
