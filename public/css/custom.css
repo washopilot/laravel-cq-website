@@ -222,4 +222,5 @@
 
 #visor > div[class^='leva'] {
     position: absolute;
+    z-index: 298;
 }
