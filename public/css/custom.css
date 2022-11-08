@@ -35,7 +35,7 @@
     }
 
     .block-nav-menu .menu-item .menu-link::before {
-        content: "";
+        content: '';
         position: absolute;
         opacity: 0;
         top: 50%;
@@ -99,7 +99,7 @@
 
 .style-6 .menu-container > .menu-item > .menu-link::after,
 .style-6 .menu-container > .menu-item.current > .menu-link::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 50%;
@@ -126,20 +126,20 @@
 }
 
 .svg-underline::before {
-    content: "";
+    content: '';
     position: absolute;
     bottom: -2px;
     left: 0;
     right: 0;
     height: 13px;
-    background-image: url("../images/underline.svg");
+    background-image: url('../images/underline.svg');
     background-size: 100% 13px;
     background-position: bottom center;
     opacity: 0.7;
 }
 
 .svg-underline[data-animate]::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 100%;
@@ -155,7 +155,7 @@
 
 .dark .svg-underline::before {
     opacity: 0.7;
-    background-image: url("../images/underline.svg");
+    background-image: url('../images/underline.svg');
 }
 
 .custom-bg,
@@ -213,4 +213,13 @@
 
 .fluid-width-video-wrapper {
     height: 100%;
+}
+
+#visor {
+    position: relative;
+    height: 60em;
+}
+
+#visor > div[class^='leva'] {
+    position: absolute;
 }

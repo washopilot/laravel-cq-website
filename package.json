@@ -11,17 +11,16 @@
         "@types/react-dom": "^18.0.8",
         "@types/three": "^0.144.0",
         "@vitejs/plugin-react": "^2.2.0",
-        "axios": "^0.27",
         "laravel-vite-plugin": "^0.6.1",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
         "prettier": "^2.7.1",
         "typescript": "^4.8.4",
         "vite": "^3.0.0",
         "vite-tsconfig-paths": "^3.5.2"
     },
     "dependencies": {
+        "@react-three/drei": "^9.40.0",
         "@react-three/fiber": "^8.9.1",
+        "leva": "^0.9.34",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "three": "^0.146.0"
