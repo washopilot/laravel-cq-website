@@ -218,6 +218,7 @@
 #visor {
     position: relative;
     height: 60em;
+    padding-top: 2em;
 }
 
 #visor > div[class^='leva'] {
