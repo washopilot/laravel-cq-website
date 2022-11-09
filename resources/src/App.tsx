@@ -1,33 +1,49 @@
-import * as THREE from 'three';
-import React, { useRef, useState, useTransition } from 'react';
-import { Canvas, useFrame, ThreeElements, PrimitiveProps } from '@react-three/fiber';
-import { useGLTF, OrbitControls, ContactShadows, Environment } from '@react-three/drei';
-import { Leva, useControls } from 'leva';
+import { ContactShadows, Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
+import { Canvas } from '@react-three/fiber';
+import { useControls } from 'leva';
+import { useState, useTransition } from 'react';
+import * as THREE from 'three';
 
-const MODELS: { [key: string]: string } = {
-    Percha: 'gltf/percha_02_03.glb',
-    Góndola: 'gltf/gondola_01.gltf'
+import { GLTF } from 'three-stdlib';
+
+const MODELS: { [key: string]: { url: string; nodes: string[] } } = {
+    ['percha']: { url: 'gltf/percha_02_05.glb', nodes: ['vertical', 'plate', 'base'] },
+    ['gondola']: { url: 'gltf/percha_02_04_recalculate.glb', nodes: ['vertical', 'plate', 'base'] }
+};
+
+type GLTFResult = GLTF & {
+    nodes: {
+        [K in typeof MODELS['percha']['nodes'][number]]: THREE.Mesh;
+    };
+    materials: {
+        [K in typeof MODELS['percha']['nodes'][number]]: THREE.MeshStandardMaterial;
+    };
+} & {
+    nodes: {
+        [K in typeof MODELS['gondola']['nodes'][number]]: THREE.Mesh;
+    };
+    materials: {
+        [K in typeof MODELS['gondola']['nodes'][number]]: THREE.MeshStandardMaterial;
+    };
 };
 
 const App = () => {
     const { model } = useControls({
-        model: { value: 'Percha', options: Object.keys(MODELS) }
+        model: { value: 'percha', options: Object.keys(MODELS) }
     });
 
     return (
-        <>
-            <Canvas camera={{ position: [100, 90, 200], fov: 50 }}>
-                {/* <hemisphereLight color="white" groundColor="blue" intensity={0.75} /> */}
-                {/* <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
-                <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
-                    <Model position={[0, 0.25, 0]} url={MODELS[model]} />
-                    <ContactShadows scale={20} blur={10} far={20} />
-                    <Env />
-                </group>
-                <OrbitControls />
-            </Canvas>
-        </>
+        <Canvas camera={{ position: [100, 90, 200], fov: 50 }}>
+            {/* <hemisphereLight color="white" groundColor="blue" intensity={0.75} />
+            <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
+            <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
+                <Model position={[0, 0.25, 0]} url={MODELS[model].url} />
+                <ContactShadows scale={20} blur={10} far={20} />
+            </group>
+            <Env />
+            <OrbitControls />
+        </Canvas>
     );
 };
 
@@ -50,8 +66,28 @@ function Env() {
 }
 
 function Model({ url, ...props }: { url: string; position: any }) {
-    const { scene } = useGLTF(url);
-    return <primitive object={scene} {...props} />;
+    const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
+    console.log(nodes);
+
+    useGLTF.preload(url);
+    return (
+        <group {...props} dispose={null}>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes['plate'].geometry}
+                material={nodes['plate'].material}
+                material-color={'red'}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes['vertical'].geometry}
+                material={nodes['vertical'].material}
+                material-color={'white'}
+            />
+        </group>
+    );
 }
 
 export default App;
