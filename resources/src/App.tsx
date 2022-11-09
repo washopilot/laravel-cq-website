@@ -1,6 +1,7 @@
 import { ContactShadows, Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
-import { Canvas } from '@react-three/fiber';
+import { applyProps, Canvas } from '@react-three/fiber';
+import { Instance } from '@react-three/fiber/dist/declarations/src/core/renderer';
 import { useControls } from 'leva';
 import { useState, useTransition } from 'react';
 import * as THREE from 'three';
@@ -35,8 +36,8 @@ const App = () => {
 
     return (
         <Canvas camera={{ position: [100, 90, 200], fov: 50 }}>
-            {/* <hemisphereLight color="white" groundColor="blue" intensity={0.75} />
-            <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
+            {/* <hemisphereLight color="white" intensity={0.75} /> */}
+            {/* <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
             <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
                 <Model position={[0, 0.25, 0]} url={MODELS[model].url} />
                 <ContactShadows scale={20} blur={10} far={20} />
@@ -67,24 +68,36 @@ function Env() {
 
 function Model({ url, ...props }: { url: string; position: any }) {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
-    console.log(nodes);
+    console.log(materials);
 
-    useGLTF.preload(url);
+    const [{ color }] = useControls(() => ({
+        color: {
+            value: '#000000'
+        }
+    }));
+
+    applyProps(materials['plate'] as unknown as Instance, {
+        color: color,
+        roughness: 0.1,
+        metalness: 0.1
+    });
+
     return (
         <group {...props} dispose={null}>
             <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes['plate'].geometry}
-                material={nodes['plate'].material}
-                material-color={'red'}
+                material={materials['plate']}
+                // material-color={get('color')}
+                // material-roughness={0.1}
             />
             <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes['vertical'].geometry}
-                material={nodes['vertical'].material}
-                material-color={'white'}
+                material={materials['vertical']}
+                // material-color={'white'}
             />
         </group>
     );
