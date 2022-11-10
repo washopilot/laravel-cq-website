@@ -1,7 +1,6 @@
 import { ContactShadows, Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
-import { applyProps, Canvas } from '@react-three/fiber';
-import { Instance } from '@react-three/fiber/dist/declarations/src/core/renderer';
+import { Canvas } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { useState, useTransition } from 'react';
 import * as THREE from 'three';
@@ -31,7 +30,7 @@ type GLTFResult = GLTF & {
 
 const App = () => {
     const { model } = useControls({
-        model: { value: 'percha', options: Object.keys(MODELS) }
+        model: { value: 'percha', options: Object.keys(MODELS), label: 'Mueble' }
     });
 
     return (
@@ -39,7 +38,7 @@ const App = () => {
             {/* <hemisphereLight color="white" intensity={0.75} /> */}
             {/* <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
             <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
-                <Model position={[0, 0.25, 0]} url={MODELS[model].url} />
+                <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
                 <ContactShadows scale={20} blur={10} far={20} />
             </group>
             <Env />
@@ -60,45 +59,40 @@ function Env() {
             // If onChange is present the value will not be reactive, see https://github.com/pmndrs/leva/blob/main/docs/advanced/controlled-inputs.md#onchange
             // Instead we transition the preset value, which will prevents the suspense bound from triggering its fallback
             // That way we can hang onto the current environment until the new one has finished loading ...
+            label: 'Ambiente',
             onChange: (value) => startTransition(() => setPreset(value))
         }
     });
     return <Environment preset={preset} background />;
 }
 
-function Model({ url, ...props }: { url: string; position: any }) {
+function Model({ url, model, ...props }: { url: string; position: any; model: string }) {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
-    console.log(materials);
 
-    const [{ color }] = useControls(() => ({
-        color: {
-            value: '#000000'
-        }
-    }));
+    const [controls] = useControls(() =>
+        MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {})
+    );
 
-    applyProps(materials['plate'] as unknown as Instance, {
-        color: color,
-        roughness: 0.1,
-        metalness: 0.1
-    });
+    // applyProps(materials['plate'] as unknown as Instance, {
+    //     color: plate,
+    //     roughness: 0.1,
+    //     metalness: 0.1
+    // });
 
     return (
         <group {...props} dispose={null}>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes['plate'].geometry}
-                material={materials['plate']}
-                // material-color={get('color')}
-                // material-roughness={0.1}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes['vertical'].geometry}
-                material={materials['vertical']}
-                // material-color={'white'}
-            />
+            {MODELS[model].nodes.map((item, index) => (
+                <mesh
+                    key={index}
+                    castShadow
+                    receiveShadow
+                    geometry={nodes[item].geometry}
+                    material={materials[item]}
+                    material-color={{ ...(controls as Object) }[item]}
+                    material-roughness={0}
+                    material-metalness={0.1}
+                />
+            ))}
         </group>
     );
 }
