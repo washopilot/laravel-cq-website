@@ -1,14 +1,7 @@
-import {
-    AccumulativeShadows,
-    ContactShadows,
-    Environment,
-    OrbitControls,
-    RandomizedLight,
-    useGLTF
-} from '@react-three/drei';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
-import { Canvas } from '@react-three/fiber';
-import { useControls } from 'leva';
+import { Canvas, useThree } from '@react-three/fiber';
+import { button, useControls } from 'leva';
 import { useState, useTransition } from 'react';
 import * as THREE from 'three';
 
@@ -41,7 +34,7 @@ const App = () => {
     });
 
     return (
-        <Canvas camera={{ position: [100, 90, 200], fov: 50 }}>
+        <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
             <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
                 <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
                 <Env />
@@ -53,6 +46,7 @@ const App = () => {
 
 function Env() {
     const [preset, setPreset] = useState<PresetsType>('warehouse');
+    const gl = useThree((state) => state.gl);
     // You can use the "inTransition" boolean to react to the loading in-between state,
     // For instance by showing a message
     const [inTransition, startTransition] = useTransition();
@@ -65,17 +59,24 @@ function Env() {
             // That way we can hang onto the current environment until the new one has finished loading ...
             label: 'Ambiente',
             onChange: (value) => startTransition(() => setPreset(value))
-        }
+        },
+        ['capturar pantalla']: button(() => {
+            const link = document.createElement('a');
+            link.setAttribute('download', 'canvas.png');
+            link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
+            link.click();
+        })
     });
     return <Environment preset={preset} background />;
 }
 
 function Model({ url, model, ...props }: { url: string; position: any; model: string }) {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
+
     console.log(url, model);
 
-    const [controls] = useControls(
-        () => MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {}),
+    const controls = useControls(
+        { ...MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {}) },
         [nodes]
     );
 
