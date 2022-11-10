@@ -1,4 +1,11 @@
-import { ContactShadows, Environment, OrbitControls, useGLTF } from '@react-three/drei';
+import {
+    AccumulativeShadows,
+    ContactShadows,
+    Environment,
+    OrbitControls,
+    RandomizedLight,
+    useGLTF
+} from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
 import { Canvas } from '@react-three/fiber';
 import { useControls } from 'leva';
@@ -8,40 +15,37 @@ import * as THREE from 'three';
 import { GLTF } from 'three-stdlib';
 
 const MODELS: { [key: string]: { url: string; nodes: string[] } } = {
-    ['percha']: { url: 'gltf/percha_02_05.glb', nodes: ['vertical', 'plate', 'base'] },
-    ['gondola']: { url: 'gltf/percha_02_04_recalculate.glb', nodes: ['vertical', 'plate', 'base'] }
+    ['percha-1']: { url: 'gltf/percha_03_final.glb', nodes: ['elemento-1', 'elemento-2', 'elemento-3'] },
+    ['percha-2']: { url: 'gltf/percha_04_final.glb', nodes: ['elemento-4', 'elemento-5', 'elemento-6'] }
 };
 
 type GLTFResult = GLTF & {
     nodes: {
-        [K in typeof MODELS['percha']['nodes'][number]]: THREE.Mesh;
+        [K in typeof MODELS['percha-1']['nodes'][number]]: THREE.Mesh;
     };
     materials: {
-        [K in typeof MODELS['percha']['nodes'][number]]: THREE.MeshStandardMaterial;
+        [K in typeof MODELS['percha-1']['nodes'][number]]: THREE.MeshStandardMaterial;
     };
 } & {
     nodes: {
-        [K in typeof MODELS['gondola']['nodes'][number]]: THREE.Mesh;
+        [K in typeof MODELS['percha-2']['nodes'][number]]: THREE.Mesh;
     };
     materials: {
-        [K in typeof MODELS['gondola']['nodes'][number]]: THREE.MeshStandardMaterial;
+        [K in typeof MODELS['percha-2']['nodes'][number]]: THREE.MeshStandardMaterial;
     };
 };
 
 const App = () => {
     const { model } = useControls({
-        model: { value: 'percha', options: Object.keys(MODELS), label: 'Mueble' }
+        model: { value: 'percha-1', options: Object.keys(MODELS), label: 'Mueble' }
     });
 
     return (
         <Canvas camera={{ position: [100, 90, 200], fov: 50 }}>
-            {/* <hemisphereLight color="white" intensity={0.75} /> */}
-            {/* <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} /> */}
             <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
                 <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
-                <ContactShadows scale={20} blur={10} far={20} />
+                <Env />
             </group>
-            <Env />
             <OrbitControls />
         </Canvas>
     );
@@ -68,6 +72,7 @@ function Env() {
 
 function Model({ url, model, ...props }: { url: string; position: any; model: string }) {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
+    console.log(url, model);
 
     const [controls] = useControls(() =>
         MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {})
@@ -89,7 +94,7 @@ function Model({ url, model, ...props }: { url: string; position: any; model: st
                     geometry={nodes[item].geometry}
                     material={materials[item]}
                     material-color={{ ...(controls as Object) }[item]}
-                    material-roughness={0}
+                    material-roughness={0.1}
                     material-metalness={0.1}
                 />
             ))}
