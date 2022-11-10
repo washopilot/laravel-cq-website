@@ -74,8 +74,9 @@ function Model({ url, model, ...props }: { url: string; position: any; model: st
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
     console.log(url, model);
 
-    const [controls] = useControls(() =>
-        MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {})
+    const [controls] = useControls(
+        () => MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {}),
+        [nodes]
     );
 
     // applyProps(materials['plate'] as unknown as Instance, {
