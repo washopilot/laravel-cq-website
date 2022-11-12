@@ -17,41 +17,46 @@
     <link
         href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700,800,900|Poppins:700|Oswald:300&display=swap"
         rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('style.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}" type="text/css" />
 
     <!-- One Page Module Specific Stylesheet -->
-    <link rel="stylesheet" href="{{ asset('one-page/onepage.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/one-page/onepage.css') }}" type="text/css" />
     <!-- / -->
 
-    <link rel="stylesheet" href="{{ asset('css/dark.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/font-icons.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/dark.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/font-icons.css') }}" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css"
         type="text/css" />
-    <link rel="stylesheet" href="{{ asset('one-page/css/et-line.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/animate.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/one-page/css/et-line.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" type="text/css" />
 
-    <link rel="stylesheet" href="{{ asset('one-page/css/fonts.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/one-page/css/fonts.css') }}" type="text/css" />
 
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
     <link rel="stylesheet" type="text/css"
-        href="{{ asset('include/rs-plugin/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}">
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/fonts/font-awesome/css/font-awesome.css">
+        href="{{ asset('assets/include/rs-plugin/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/include/rs-plugin/fonts/font-awesome/css/font-awesome.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/addons/typewriter.css">
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/addons/revolution.addon.revealer.css">
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/addons/revolution.addon.revealer.preloaders.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/include/rs-plugin/css/addons/typewriter.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/include/rs-plugin/css/addons/revolution.addon.revealer.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/include/rs-plugin/css/addons/revolution.addon.revealer.preloaders.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/settings.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/layers.css">
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/navigation.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/include/rs-plugin/css/settings.css') }}"
+        media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/include/rs-plugin/css/layers.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/include/rs-plugin/css/navigation.css') }}">
 
     <!-- ADD-ONS CSS FILES -->
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/addons/revolution.addon.particles.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/include/rs-plugin/css/addons/revolution.addon.particles.css') }}">
 
     <!-- Document Title
  ============================================= -->
@@ -610,30 +615,31 @@
 
     <!-- JavaScripts
  ============================================= -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/plugins.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.min.js') }}"></script>
     <script src="https://maps.google.com/maps/api/js?key=API-KEY"></script>
 
     <!-- Footer Scripts
  ============================================= -->
-    <script src="{{ asset('js/functions.js') }}"></script>
+    <script src="{{ asset('assets/js/functions.js') }}"></script>
 
     <!-- SLIDER REVOLUTION 5.x SCRIPTS  -->
-    <script src="include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-    <script src="include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="include/rs-plugin/js/addons/revolution.addon.particles.min.js"></script>
-    <script src="include/rs-plugin/js/addons/revolution.addon.typewriter.min.js"></script>
-    <script src="include/rs-plugin/js/addons/revolution.addon.revealer.min.js"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/addons/revolution.addon.particles.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/addons/revolution.addon.typewriter.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/addons/revolution.addon.revealer.min.js') }}"></script>
     <!-- SLIDER REVOLUTION EXTENSIONS  -->
-    <script src="include/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.carousel.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.migration.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.parallax.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js"></script>
-    <script src="include/rs-plugin/js/extensions/revolution.extension.video.min.js"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.actions.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js') }}">
+    </script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.migration.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
+    <script src="{{ asset('assets/include/rs-plugin/js/extensions/revolution.extension.video.min.js') }}"></script>
 
     <!-- ADD-ONS JS FILES -->
     <script>
@@ -661,7 +667,7 @@
                 } else {
                     revapi134 = tpj("#rev_slider_134_1").show().revolution({
                         sliderType: "standard",
-                        jsFileLocation: "include/rs-plugin/js/",
+                        jsFileLocation: "assets/include/rs-plugin/js/",
                         sliderLayout: "fullwidth",
                         dottedOverlay: "none",
                         delay: 9000,

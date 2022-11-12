@@ -10,11 +10,11 @@
 ============================================= -->
                 <div id="logo" class="my-2">
                     <a href="index.html" class="standard-logo"
-                        data-dark-logo="{{ asset('images/logo/CQ-LOGO.png') }}"><img
-                            src="{{ asset('images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
+                        data-dark-logo="{{ asset('assets/images/logo/CQ-LOGO.png') }}"><img
+                            src="{{ asset('assets/images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
                     <a href="index.html" class="retina-logo"
-                        data-dark-logo="{{ asset('images/logo/CQ-LOGO.png') }}"><img
-                            src="{{ asset('images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
+                        data-dark-logo="{{ asset('assets/images/logo/CQ-LOGO.png') }}"><img
+                            src="{{ asset('assets/images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
 
                 </div><!-- #logo end -->
 

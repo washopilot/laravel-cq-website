@@ -8,12 +8,12 @@
               <!-- SLIDE  -->
               <li data-index="rs-330" data-transition="fade" data-slotamount="default" data-hideafterloop="0"
                   data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300"
-                  data-thumb="include/rs-plugin/demos/assets/images/transparent.png" data-rotate="0"
+                  data-thumb="assets/include/rs-plugin/demos/assets/images/transparent.png" data-rotate="0"
                   data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3=""
                   data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
                   data-param10="" data-description="">
                   <!-- MAIN IMAGE -->
-                  <img src="include/rs-plugin/demos/assets/images/transparent.png" data-bgcolor='#000000'
+                  <img src="assets/include/rs-plugin/demos/assets/images/transparent.png" data-bgcolor='#000000'
                       style='background:#24fbbf' alt="Image" data-bgposition="center center" data-bgfit="cover"
                       data-bgrepeat="no-repeat" data-bgparallax="on" class="rev-slidebg" data-no-retina>
                   <!-- LAYERS -->
@@ -27,7 +27,7 @@
                       data-frames='[{"delay":800,"speed":1000,"frame":"0","from":"rX:90deg;sX:1;sY:1;skY:10px;opacity:0;","to":"o:1;tO:50% 100%;z:-5;","ease":"Power4.easeOut"},{"delay":"wait","speed":1000,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
                       data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[0,0,0,0]"
                       data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                      style="z-index: 5;"><img src="images/slide/CQ-logo-alpha.png" alt="Image"
+                      style="z-index: 5;"><img src="assets/images/slide/CQ-logo-alpha.png" alt="Image"
                           data-ww="['720px','600px','480px','360px']" data-hh="['792px','660px','528px','396px']"
                           data-no-retina> </div>
 
@@ -88,7 +88,7 @@
                       data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                       style="z-index: 9;">
                       <div class="tp-element-background"
-                          style=" background: url('images/slide/rect2058.png'); background-size: cover; opacity: 1;">
+                          style=" background: url('assets/images/slide/rect2058.png'); background-size: cover; opacity: 1;">
                       </div>
                   </div>
 
@@ -423,14 +423,14 @@
               <li class="dark" data-transition="slidehorizontal" data-slotamount="1" data-masterspeed="1000"
                   data-saveperformance="off" data-title="Mobile Ready Design">
                   <!-- MAIN IMAGE -->
-                  <img src="video/videoCq.png" alt="video_typing_cover" data-bgposition="center center"
+                  <img src="assets/video/videoCq.png" alt="video_typing_cover" data-bgposition="center center"
                       data-bgfit="cover" data-bgrepeat="no-repeat">
                   <!-- LAYERS -->
 
                   <!-- LAYER NR. 1 -->
                   <div class="tp-fade fadeout fullscreenvideo rs-background-video-layer" data-forcerewind="on"
                       data-volume="mute" data-videowidth="100%" data-videoheight="100%"
-                      data-videomp4="video/videoCq.webm" data-videopreload="preload" data-videoloop="none"
+                      data-videomp4="assets/video/videoCq.webm" data-videopreload="preload" data-videoloop="none"
                       data-forceCover="1" data-aspectratio="16:9" data-autoplay="true"
                       data-autoplayonlyfirsttime="false" data-nextslideatend="true">
                   </div>
