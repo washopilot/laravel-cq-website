@@ -23,7 +23,7 @@ const App = () => {
 
     return (
         <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
-            <group position={[10, -100, 10]} rotation={[0, -10, 0]}>
+            <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
                 <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
             </group>
             <Env />
