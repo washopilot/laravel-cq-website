@@ -306,9 +306,10 @@
 
                 <x-section-why />
 
+                <x-portfolio />
+
                 <x-divider />
 
-                {{-- <x-portfolio /> --}}
 
 
                 {{-- <div id="section-services" class="page-section pt-0">
