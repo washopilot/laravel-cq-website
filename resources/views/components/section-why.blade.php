@@ -1,6 +1,6 @@
      <!-- 1. Section Why Choose Us
     ============================================= -->
-     <div class="section bg-color-light my-0">
+     <div id="why-section" class="section bg-color-light my-0">
          <div class="mw-md topmargin bottommargin container text-center">
 
              <h2 class="display-4 fw-normal">{{ reset($title) }} <span data-animate="svg-underline-animated"

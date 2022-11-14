@@ -1,4 +1,4 @@
-<div class="row">
+<div id="visor-section" class="row">
     <div class="col-2 col-md-2 col-lg-2">
     </div>
     <div id="visor" class="page-section col-8 col-md-8 col-lg-8">

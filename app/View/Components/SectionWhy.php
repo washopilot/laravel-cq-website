@@ -17,24 +17,24 @@ class SectionWhy extends Component {
 
         $this->items = [
             [
-                'icon' => 'bi-patch-check',
+                'icon' => 'icon-handshake1',
                 'href' => 'javascript:void(0);',
-                'title' => 'Excelente Calidad',
-                'description' => 'Nos aseguramos de utilizar los mejores materiales y acabados'
+                'title' => 'Compromiso',
+                'description' => 'La satisfacción de nuestros clientes y la calidad del producto, nuestro principal objetivo'
             ],
             [
-                'icon' => 'icon-truck1',
+                'icon' => 'icon-award',
                 'href' => 'javascript:void(0);',
-                'title' => 'Envío rápido y oprtuno',
+                'title' => 'Calidad',
                 'description' =>
-                    'Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.'
+                    'Somos especialistas en la fabricación y proyección de muebles metálicos, nos apasiona lo que hacemos.'
             ],
             [
-                'icon' => 'bi-shield-check',
+                'icon' => 'icon-settings',
                 'href' => 'javascript:void(0);',
-                'title' => 'Seguro',
+                'title' => 'Innovación',
                 'description' =>
-                    'Powerful Layout with Responsive functionality that can be adapted to any screen size. Resize browser to view.'
+                    'Invertimos e innovamos en los procesos de calidad y producción, adaptándonos a las necesidades del mercado.'
             ]
         ];
     }

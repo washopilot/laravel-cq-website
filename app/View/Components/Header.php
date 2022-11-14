@@ -13,10 +13,10 @@ class Header extends Component {
      */
     public function __construct() {
         $this->navigationItems = [
-            ['label' => 'Acerca de', 'href' => '#acerca', 'active' => ''],
-            ['label' => 'Galería', 'href' => '#galeria', 'active' => ''],
-            ['label' => 'Configura tu producto', 'href' => '#galeria', 'active' => 'current'],
-            ['label' => 'Contacto', 'href' => '#contacto', 'active' => '']
+            ['label' => 'Acerca de', 'href' => '#why-section', 'active' => ''],
+            ['label' => 'Galería', 'href' => '#gallery-section', 'active' => ''],
+            ['label' => 'Configura tu producto', 'href' => '#visor-section', 'active' => 'current'],
+            ['label' => 'Contacto', 'href' => '#section-contact', 'active' => '']
         ];
     }
 

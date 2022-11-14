@@ -60,7 +60,7 @@
 
     <!-- Document Title
  ============================================= -->
-    <title>One Page Module | Canvas</title>
+    <title>Industrias metálicas CQ</title>
 
 </head>
 

@@ -40,22 +40,6 @@ class Portfolio extends Component {
                 'title' => 'Góndola Doble',
                 'images' => [url('assets/images/portfolio/gondolad.jpg'), url('assets/images/portfolio/gondolad-1.jpg')],
                 'wide' => false
-            ],
-            [
-                'category' => ['Exhibición'],
-                'title' => 'Góndola Doble',
-                'images' => [url('assets/images/portfolio/gondolad.jpg'), url('assets/images/portfolio/gondolad-1.jpg')],
-                'wide' => false
-            ],
-            [
-                'category' => ['Estantería'],
-                'title' => 'Perchas',
-                'images' => [
-                    url('assets/images/portfolio/percha.jpg'),
-                    url('assets/images/portfolio/percha-1.jpg'),
-                    url('assets/images/portfolio/percha-2.jpg')
-                ],
-                'wide' => false
             ]
         ];
 

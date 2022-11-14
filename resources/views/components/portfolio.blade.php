@@ -1,4 +1,4 @@
-<div id="section-works" class="page-section pt-0">
+<div id="gallery-section" class="page-section pt-0">
 
     <div class="section m-0">
         <div class="clearfix container">

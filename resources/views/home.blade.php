@@ -1,4 +1,4 @@
 <x-app-layout>
     <x-header />
-    <x-slider />
+    {{-- <x-slider /> --}}
 </x-app-layout>

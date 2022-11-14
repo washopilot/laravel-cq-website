@@ -9,10 +9,10 @@
                 <!-- Logo
 ============================================= -->
                 <div id="logo" class="my-2">
-                    <a href="index.html" class="standard-logo"
+                    <a href="/" class="standard-logo"
                         data-dark-logo="{{ asset('assets/images/logo/CQ-LOGO.png') }}"><img
                             src="{{ asset('assets/images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
-                    <a href="index.html" class="retina-logo"
+                    <a href="/" class="retina-logo"
                         data-dark-logo="{{ asset('assets/images/logo/CQ-LOGO.png') }}"><img
                             src="{{ asset('assets/images/logo/CQ-LOGO.png') }}" alt="Canvas Logo"></a>
 
