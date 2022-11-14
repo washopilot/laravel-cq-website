@@ -44,7 +44,8 @@
    ============================================= -->
                 <nav class="primary-menu with-arrows block-nav-menu style-6">
 
-                    <ul class="menu-container justify-content-center">
+                    <ul class="one-page-menu menu-container" data-easing="easeInOutExpo" data-speed="1250"
+                        data-offset="160">
                         <!-- justify-content-center class for center menu-->
                         {{-- <li class="menu-item current">
                             <a class="menu-link" href="#">
@@ -96,7 +97,7 @@
 
                         @foreach ($navigationItems as $item)
                             <li class="menu-item {{ $item['active'] }}">
-                                <a class="menu-link" href="{{ $item['href'] }}">
+                                <a class="menu-link" href="#" data-href="{{ $item['href'] }}">
                                     <div>{{ $item['label'] }}</div>
                                 </a>
                             </li>
