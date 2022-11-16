@@ -17,9 +17,7 @@ class ContactFormController extends Controller {
             'template-contactform-message' => 'required'
         ]);
 
-        // dump(new ContactForm($data));
-
-        Mail::to('washopilot@yahoo.com')->send(new ContactForm($data));
+        Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactForm($data));
 
         return redirect()
             ->route('home')

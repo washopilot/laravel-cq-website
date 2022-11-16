@@ -188,7 +188,7 @@
  ============================================= -->
     <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.min.js') }}"></script>
-    <script src="https://maps.google.com/maps/api/js?key=API-KEY"></script>
+    {{-- <script src="https://maps.google.com/maps/api/js?key=API-KEY"></script> --}}
 
     <!-- Footer Scripts
  ============================================= -->
