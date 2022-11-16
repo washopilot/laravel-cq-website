@@ -24,7 +24,7 @@ class AppLayout extends Component {
         SEOTools::setTitle('Industrias metálicas Carrión Quezada', false);
         SEOTools::setDescription('Empresa lojana de muebles metálicos');
         SEOTools::opengraph()->setUrl('https://industriasmetalicascq.com');
-        SEOTools::setCanonical('https://industriasmetalicascq.com/');
+        SEOTools::setCanonical('https://industriasmetalicascq.com');
         SEOTools::opengraph()->addProperty('type', 'articles');
         // SEOTools::twitter()->setSite('@Nigmacode');
 

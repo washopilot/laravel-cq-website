@@ -472,9 +472,9 @@
                       {{-- <a href="#"
                           class="button button-border button-white button-large button-rounded m-0 text-end "><span>Aprender
                               más</span><i class="icon-angle-right"></i></a> --}}
-                      <a href="{{ $slides[1]['href_show_more'] }}"
+                      {{-- <a href="{{ $slides[1]['href_show_more'] }}"
                           class="button button-border button-large button-rounded button-fill fill-from-bottom button-black text-end"><span>Aprender
-                              más</span><i class="icon-angle-right"></i></a>
+                              más</span><i class="icon-angle-right"></i></a> --}}
                   </div>
 
               </li>

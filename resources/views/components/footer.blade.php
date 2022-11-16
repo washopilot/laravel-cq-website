@@ -14,7 +14,7 @@
 
                                 <ul class="list-unstyled footer-site-links mb-0">
                                     @foreach ($navigationItems as $item)
-                                        <li><a href="{{ $item['href'] }}" data-scrollto="#wrapper"
+                                        <li><a href="#" data-scrollto="{{ $item['href'] }}"
                                                 data-easing="easeInOutExpo" data-speed="1250"
                                                 data-offset="70">{{ $item['label'] }}</a></li>
                                     @endforeach
