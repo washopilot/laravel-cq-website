@@ -19,12 +19,11 @@ class ContactFormController extends Controller {
 
         // dump(new ContactForm($data));
 
-        // Mail::to('washopilot@yahoo.com')->send(new ContactForm($data));
+        Mail::to('washopilot@yahoo.com')->send(new ContactForm($data));
 
         return redirect()
             ->route('home')
             ->with('data', $data)
-            ->with('message', 'Message sent succesfully')
-            ->send();
+            ->with('message', 'Su mensaje ha sido enviado exitosamente. Pronto le contestaremos');
     }
 }

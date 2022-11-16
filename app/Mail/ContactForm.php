@@ -28,7 +28,7 @@ class ContactForm extends Mailable {
      * @return \Illuminate\Mail\Mailables\Envelope
      */
     public function envelope() {
-        return new Envelope(subject: 'Contact Form');
+        return new Envelope(subject: 'Formulario de Contacto WebSite');
     }
 
     /**

@@ -12,11 +12,7 @@
 
     <div class="row bottommargin-lg align-items-stretch mx-0">
         <div class="col-lg-6 col-md-6 d-none d-md-block px-0">
-            {{-- <div class="gmap h-100" data-address="Melbourne, Australia" data-maptype="ROADMAP"
-                data-zoom="14"
-                data-markers='[{ address: "Melbourne, Australia", html: "Melbourne, Australia", icon:{ image: "one-page/images/icons/map-icon-red.png", iconsize: [32, 32], iconanchor: [14,44] } }]'
-                data-styles='[{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.country","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.country","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":"-100"},{"lightness":"30"}]},{"featureType":"administrative.neighborhood","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"simplified"},{"gamma":"0.00"},{"lightness":"74"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"lightness":"3"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"featureType":"road","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]}]'>
-            </div> --}}
+
             <!-- Google Maps - Settings on footer -->
             <div class="gmap h-100">
                 <iframe width="100%" height="50%"
@@ -70,12 +66,13 @@
 
         <div class="topmargin mx-auto" style="max-width: 850px;">
 
-            <div class="form-widget">
+            <div class="form">
 
-                <div class="form-result"></div>
-                @if (Session::has('message'))
-                    <p class="alert alert-danger">{{ Session::get('message') }}</p>
-                @endif
+                <div class="form-result">
+                    @if (Session::has('message'))
+                        <p class="alert alert-success">{{ Session::get('message') }}</p>
+                    @endif
+                </div>
 
                 <form class="row mb-0" id="template-contactform" name="template-contactform"
                     action="{{ route('contact.send') }}" method="POST">
@@ -128,14 +125,14 @@
                             posible. Gracias</small>
                     </div>
 
-                    {{-- <div class="w-100"></div>
+                    <div class="w-100"></div>
 
                     <div class="col-12 d-none">
                         <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck"
                             value="" class="sm-form-control" />
                     </div>
 
-                    <input type="hidden" name="prefix" value="template-contactform-"> --}}
+                    <input type="hidden" name="prefix" value="template-contactform-">
 
                 </form>
 
