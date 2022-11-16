@@ -8,6 +8,7 @@
     @viteReactRefresh
     @vite('resources/src/main.tsx')
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Stylesheets
  ============================================= -->
@@ -304,11 +305,11 @@
 
                 </div> --}}
 
-                <x-section-why />
+                {{-- <x-section-why /> --}}
 
-                <x-portfolio />
+                {{-- <x-portfolio /> --}}
 
-                <x-divider />
+                {{-- <x-divider /> --}}
 
 
 
@@ -599,7 +600,7 @@
 
                 </div> --}}
 
-                <x-visor />
+                {{-- <x-visor /> --}}
 
                 <x-contact />
 

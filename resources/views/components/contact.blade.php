@@ -58,7 +58,8 @@
                     <abbr title="Fax"><strong>Fax:</strong></abbr> (1) 11 4752 1433<br>
                     <abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com --}}
                     @foreach ($contacts as $contact)
-                        <abbr title="{{ $contact['title'] }}"><strong>{{ $contact['title'] }}: </strong></abbr>{{ $contact['description'] }}<br>
+                        <abbr title="{{ $contact['title'] }}"><strong>{{ $contact['title'] }}:
+                            </strong></abbr>{{ $contact['description'] }}<br>
                     @endforeach
                 </div>
             </div>
@@ -72,11 +73,14 @@
             <div class="form-widget">
 
                 <div class="form-result"></div>
+                @if (Session::has('message'))
+                    <p class="alert alert-danger">{{ Session::get('message') }}</p>
+                @endif
 
-                <form class="row mb-0" id="template-contactform" name="template-contactform" action="include/form.php"
-                    method="post">
-
-                    <div class="form-process">
+                <form class="row mb-0" id="template-contactform" name="template-contactform"
+                    action="{{ route('contact.send') }}" method="POST">
+                    @csrf
+                    {{-- <div class="form-process">
                         <div class="css3-spinner">
                             <div class="css3-spinner-scale-ripple">
                                 <div></div>
@@ -84,7 +88,7 @@
                                 <div></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-6 mb-4">
                         <input type="text" id="template-contactform-name" name="template-contactform-name"
@@ -117,19 +121,21 @@
 
                     <div class="col-12 center mb-4">
                         <button class="button button-border button-circle fw-medium ms-0 topmargin-sm" type="submit"
-                            id="template-contactform-submit" name="template-contactform-submit" value="submit">Enviar mensaje</button>
+                            id="template-contactform-submit" name="template-contactform-submit" value="submit">Enviar
+                            mensaje</button>
                         <br>
-                        <small style="display: block; font-size: 13px; margin-top: 15px;">Le contestaremos lo más pronto posible. Gracias</small>
+                        <small style="display: block; font-size: 13px; margin-top: 15px;">Le contestaremos lo más pronto
+                            posible. Gracias</small>
                     </div>
 
-                    <div class="w-100"></div>
+                    {{-- <div class="w-100"></div>
 
                     <div class="col-12 d-none">
                         <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck"
                             value="" class="sm-form-control" />
                     </div>
 
-                    <input type="hidden" name="prefix" value="template-contactform-">
+                    <input type="hidden" name="prefix" value="template-contactform-"> --}}
 
                 </form>
 
