@@ -3,8 +3,8 @@
 
 <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    {!! SEO::generate() !!}
+
     @viteReactRefresh
     @vite('resources/src/main.tsx')
 
@@ -60,7 +60,7 @@
 
     <!-- Document Title
  ============================================= -->
-    <title>Industrias metálicas CQ</title>
+
 
 </head>
 
