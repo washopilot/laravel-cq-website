@@ -27,7 +27,7 @@ const App = () => {
                 <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
             </group>
             <Env />
-            <OrbitControls />
+            <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
         </Canvas>
     );
 };
@@ -62,7 +62,12 @@ function Model({ url, model, ...props }: { url: string; position: any; model: st
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
 
     const controls = useControls(
-        { ...MODELS[model].nodes.reduce((a, v) => ({ ...a, [v]: { value: '#ffffff' } }), {}) },
+        {
+            ...MODELS[model].nodes.reduce(
+                (prev, curr, idx) => ({ ...prev, [curr]: { value: MODELS[model]['colors'][idx] } }),
+                {}
+            )
+        },
         [nodes]
     );
 
