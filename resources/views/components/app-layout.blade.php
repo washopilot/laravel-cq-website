@@ -291,11 +291,11 @@
                                     distance: 80,
                                     color: "#ffffff",
                                     opacity: 0.1,
-                                    width: 1
+                                    width: 2
                                 },
                                 move: {
                                     enable: true,
-                                    speed: 1,
+                                    speed: 2,
                                     direction: "right",
                                     random: true,
                                     min_speed: 1,
@@ -310,7 +310,7 @@
                                         mode: "repulse"
                                     },
                                     onclick: {
-                                        enable: true,
+                                        enable: false,
                                         mode: "bubble"
                                     }
                                 },
@@ -323,7 +323,7 @@
                                     },
                                     bubble: {
                                         distance: 400,
-                                        size: 100,
+                                        size: 10,
                                         opacity: 1
                                     },
                                     repulse: {
@@ -337,9 +337,7 @@
                             color: "#ffffff",
                             duration: "1500",
                             delay: "0",
-                            easing: "Power3.easeOut",
-                            spinner: "2",
-                            spinnerColor: "rgb(0,0,0)",
+                            easing: "Power3.easeOut"
                         },
                         navigation: {
                             keyboardNavigation: "off",
@@ -372,18 +370,6 @@
                         gridwidth: [1240, 1024, 778, 480],
                         gridheight: [800, 700, 600, 500],
                         lazyType: "none",
-                        parallax: {
-                            type: "3D",
-                            origo: "slidercenter",
-                            speed: 5000,
-                            levels: [5, 10, 15, 20, 25, 30, 5, 0, 45, 50, 47, 48, 49, 50, 51, 55],
-                            type: "3D",
-                            ddd_shadow: "off",
-                            ddd_bgfreeze: "on",
-                            ddd_overflow: "hidden",
-                            ddd_layer_overflow: "visible",
-                            ddd_z_correction: 200,
-                        },
                         shadow: 0,
                         spinner: "spinner5",
                         stopLoop: "off",
@@ -405,9 +391,7 @@
                 } /* END OF revapi call */
 
 
-                RsRevealerAddOn(tpj, revapi134,
-                    "<div class='rsaddon-revealer-spinner rsaddon-revealer-spinner-2'><div class='rsaddon-revealer-2' ><\/div><\/div>"
-                );
+                RsRevealerAddOn(tpj, revapi134);
                 RsParticlesAddOn(revapi134);
 
             }; /* END OF ON LOAD FUNCTION */

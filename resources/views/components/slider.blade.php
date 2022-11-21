@@ -8,12 +8,12 @@
               <!-- SLIDE  -->
               <li data-index="rs-330" data-transition="fade" data-slotamount="default" data-hideafterloop="0"
                   data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300"
-                  data-thumb="assets/include/rs-plugin/demos/assets/images/transparent.png" data-rotate="0"
+                  data-thumb="assets/images/transparent.png" data-rotate="0"
                   data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3=""
                   data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
                   data-param10="" data-description="">
                   <!-- MAIN IMAGE -->
-                  <img src="assets/include/rs-plugin/demos/assets/images/transparent.png" data-bgcolor='#000000'
+                  <img src="assets/images/transparent.png" data-bgcolor='#000000'
                       style='background:#24fbbf' alt="Image" data-bgposition="center center" data-bgfit="cover"
                       data-bgrepeat="no-repeat" data-bgparallax="on" class="rev-slidebg" data-no-retina>
                   <!-- LAYERS -->
