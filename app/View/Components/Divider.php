@@ -13,7 +13,7 @@ class Divider extends Component {
      * @return void
      */
     public function __construct() {
-        $this->title = 'Configura tu producto a tu gusto. ';
+        $this->title = 'Configura tu producto. ';
         $this->href = 'javascript:void(0);';
     }
 

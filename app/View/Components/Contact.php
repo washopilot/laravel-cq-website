@@ -19,7 +19,7 @@ class Contact extends Component {
         $this->addresses = [
             [
                 'description' => 'Principal',
-                'address' => 'Edificio Carrión Quezada (Piso 1-2) Av. Manuel Agustín Aguirre y Mercadillo'
+                'address' => 'Edificio Carrión Quezada (Piso 1-2) Av. Manuel Agustín Aguirre y Mercadillo. LOJA - ECUADOR'
             ]
         ];
         $this->contacts = [

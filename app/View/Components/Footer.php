@@ -23,7 +23,7 @@ class Footer extends Component {
         ];
         $this->contact = [
             'description' => 'Principal',
-            'address' => 'Edificio Carrión Quezada (Piso 1-2) Av. Manuel Agustín Aguirre y Mercadillo'
+            'address' => 'Edificio Carrión Quezada (Piso 1-2) Av. Manuel Agustín Aguirre y Mercadillo. LOJA - ECUADOR'
         ];
         $this->socials = [
             ['title' => 'Facebook', 'icon' => 'icon-facebook', 'href' => 'javascript:void(0);'],

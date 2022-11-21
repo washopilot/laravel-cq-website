@@ -20,7 +20,7 @@ class Slider extends Component {
             ],
             1 => [
                 'paragraph_1' => ['Trabajamos ', ' con la mejor tecnología '],
-                'paragraph_2' => ['Con más de 30,000 clientes satisfechos, somos un refrente a nivel nacional'],
+                'paragraph_2' => ['Con una multitud de clientes satisfechos, somos un refrente a nivel nacional'],
                 'href_show_more' => 'javascript:void(0);'
             ]
         ];

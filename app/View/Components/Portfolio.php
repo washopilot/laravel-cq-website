@@ -16,7 +16,7 @@ class Portfolio extends Component {
      */
     public function __construct() {
         $this->title =
-            'Somos una empresa especializada en la producción, ensamblaje, acabado y distribución de mobiliario metálico. Desde nuestros inicios, nuestra misión ha sido evolucionar en el campo de la producción y desarrollo de la región sur del país.';
+            'Somos una empresa orgullosamente lojana especializada en la producción, ensamblaje, acabado y distribución de mobiliario metálico. Desde nuestros inicios, nuestra misión ha sido evolucionar en el campo de la producción y desarrollo de la región sur del país.';
 
         $this->items = [
             [

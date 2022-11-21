@@ -22,7 +22,7 @@ class AppLayout extends Component {
      */
     public function render() {
         SEOTools::setTitle('Industrias metálicas Carrión Quezada', false);
-        SEOTools::setDescription('Empresa lojana de muebles metálicos');
+        SEOTools::setDescription('Industria lojana especializada en la fabricación de muebles metálicos de la región sur del país. Loja Ecuador.');
         SEOTools::opengraph()->setUrl('https://industriasmetalicascq.com');
         SEOTools::setCanonical('https://industriasmetalicascq.com');
         SEOTools::opengraph()->addProperty('type', 'articles');

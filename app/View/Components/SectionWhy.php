@@ -13,7 +13,7 @@ class SectionWhy extends Component {
      * @return void
      */
     public function __construct() {
-        $this->title = ['¿Por qué', 'elegirnos?'];
+        $this->title = ['Industrias CQ ¿Por qué', 'elegirnos?'];
 
         $this->items = [
             [
