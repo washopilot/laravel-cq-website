@@ -17,7 +17,7 @@ class Footer extends Component {
         $this->navigationItems = [
             ['label' => 'Inicio', 'href' => '#wrapper'],
             ['label' => 'Acerca de', 'href' => '#why-section'],
-            ['label' => 'Galería', 'href' => '#gallery-section'],
+            ['label' => 'Galería', 'href' => '#page-menu'],
             ['label' => 'Configura tu producto', 'href' => '#visor-section'],
             ['label' => 'Contacto', 'href' => '#section-contact']
         ];

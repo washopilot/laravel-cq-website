@@ -15,7 +15,7 @@ class Header extends Component {
         $this->navigationItems = [
             ['label' => 'Inicio', 'href' => '#wrapper', 'active' => 'current'],
             ['label' => 'Acerca de', 'href' => '#why-section', 'active' => ''],
-            ['label' => 'Galería', 'href' => '#gallery-section', 'active' => ''],
+            ['label' => 'Galería', 'href' => '#page-menu', 'active' => ''],
             ['label' => 'Configura tu producto', 'href' => '#visor-section', 'active' => ''],
             ['label' => 'Contacto', 'href' => '#section-contact', 'active' => '']
         ];
