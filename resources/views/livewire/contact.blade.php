@@ -66,18 +66,10 @@
 
         <div class="topmargin mx-auto" style="max-width: 850px;">
 
-            <div class="form-result">
-                @if (Session::has('message'))
-                    <p class="alert alert-success">{{ Session::get('message') }}</p>
-                @endif
-            </div>
-
             <div class="form">
 
-
-
                 <form class="row mb-0" id="template-contactform" name="template-contactform"
-                    action="{{ route('contact.send') }}" method="POST" wire:submit.prevent="update">
+                    wire:submit.prevent="update">
                     @csrf
                     {{-- <div class="form-process">
                         <div class="css3-spinner">
@@ -90,11 +82,11 @@
                     </div> --}}
 
                     <div class="col-md-6 mb-4">
-                        <input type="text" id="template-contactform-name" name="template-contactform-name"
+                        <input type="text" id="template-contactform-name" wire:model="template_contactform_name"
                             value="" class="sm-form-control border-form-control required" placeholder="Nombre" />
                     </div>
                     <div class="col-md-6 mb-4">
-                        <input type="email" id="template-contactform-email" name="template-contactform-email"
+                        <input type="email" id="template-contactform-email" wire:model="template_contactform_email"
                             value="" class="required email sm-form-control border-form-control"
                             placeholder="Dirección de Email" />
                     </div>
@@ -102,12 +94,12 @@
                     <div class="w-100"></div>
 
                     <div class="col-md-4 mb-4">
-                        <input type="text" id="template-contactform-phone" name="template-contactform-phone"
+                        <input type="text" id="template-contactform-phone" wire:model="template_contactform_phone"
                             value="" class="sm-form-control border-form-control" placeholder="Teléfono" />
                     </div>
 
                     <div class="col-md-8 mb-4">
-                        <input type="text" id="template-contactform-subject" name="subject" value=""
+                        <input type="text" id="template-contactform-subject" wire:model="subject" value=""
                             class="required sm-form-control border-form-control" placeholder="Asunto" />
                     </div>
 
@@ -115,7 +107,7 @@
 
                     <div class="col-12 mb-4">
                         <textarea class="required sm-form-control border-form-control" id="template-contactform-message"
-                            name="template-contactform-message" rows="7" cols="30" placeholder="Escriba su mensaje"></textarea>
+                            wire:model="template_contactform_message" rows="7" cols="30" placeholder="Escriba su mensaje"></textarea>
                     </div>
 
                     <div class="col-12 center mb-4">
@@ -127,14 +119,20 @@
                             posible. Gracias</small>
                     </div>
 
+                    <div class="form-result">
+                        @if (Session::has('message'))
+                            <p class="alert alert-success">{{ Session::get('message') }}</p>
+                        @endif
+                    </div>
+
                     <div class="w-100"></div>
 
-                    <div class="col-12 d-none">
+                    {{-- <div class="col-12 d-none">
                         <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck"
                             value="" class="sm-form-control" />
                     </div>
 
-                    <input type="hidden" name="prefix" value="template-contactform-">
+                    <input type="hidden" name="prefix" value="template-contactform-"> --}}
 
                 </form>
 

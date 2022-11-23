@@ -12,6 +12,12 @@ class Contact extends Component {
     public array $addresses = [];
     public array $contacts = [];
 
+    public string $template_contactform_name = '';
+    public string $template_contactform_email = '';
+    public string $template_contactform_phone = '';
+    public string $subject = '';
+    public string $template_contactform_message = '';
+
     public function __construct() {
         $this->coordinates = '-4.001825,-79.204704';
         $this->addresses = [
@@ -29,11 +35,19 @@ class Contact extends Component {
     }
 
     public function update() {
+        $data = $this->validate([
+            'template_contactform_name' => 'required',
+            'template_contactform_email' => 'required',
+            'template_contactform_phone' => 'required',
+            'subject' => 'required',
+            'template_contactform_message' => 'required'
+        ]);
 
+        Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactForm($data));
+        // dd($data);
 
         session()->flash('message', 'Su mensaje ha sido enviado exitosamente. Pronto le contestaremos');
         // return redirect()->route('home');
-
     }
 
     public function render() {

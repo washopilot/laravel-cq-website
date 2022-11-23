@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Mail;
 class ContactFormController extends Controller {
     //
     public function send(Request $request) {
-        $data = $request->validate([
-            'template-contactform-name' => 'required',
-            'template-contactform-email' => 'required',
-            'template-contactform-phone' => 'required',
-            'subject' => 'required',
-            'template-contactform-message' => 'required'
-        ]);
+        // $data = $request->validate([
+        //     'template-contactform-name' => 'required',
+        //     'template-contactform-email' => 'required',
+        //     'template-contactform-phone' => 'required',
+        //     'subject' => 'required',
+        //     'template-contactform-message' => 'required'
+        // ]);
 
-        Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactForm($data));
+        // Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactForm($data));
 
         // return redirect()
         //     ->route('home')

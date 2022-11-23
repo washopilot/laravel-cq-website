@@ -15,11 +15,11 @@
         </div>
         <div class="card-body">
             <h3 class="card-title">Datos del mensaje</h3>
-            <p class="card-text"><b>Name:</b> {{ $data['template-contactform-name'] }}</p>
-            <p class="card-text"><b>Telephone:</b> {{ $data['template-contactform-phone'] }}</p>
-            <p class="card-text"><b>Email:</b> {{ $data['template-contactform-email'] }}.</p>
+            <p class="card-text"><b>Name:</b> {{ $data['template_contactform_name'] }}</p>
+            <p class="card-text"><b>Telephone:</b> {{ $data['template_contactform_phone'] }}</p>
+            <p class="card-text"><b>Email:</b> {{ $data['template_contactform_email'] }}.</p>
             <p class="card-text"><b>Subject:</b> {{ $data['subject'] }}.</p>
-            <p class="card-text"><b>Message:</b> {{ $data['template-contactform-message'] }}.</p>
+            <p class="card-text"><b>Message:</b> {{ $data['template_contactform_message'] }}.</p>
 
         </div>
     </div>
