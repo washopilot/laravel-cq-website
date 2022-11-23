@@ -1,4 +1,4 @@
-<div id="section-contact" class="page-section">
+<div class="page-section py-0">
 
     <div class="container text-center">
 

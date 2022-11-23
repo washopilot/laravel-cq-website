@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
+// Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');

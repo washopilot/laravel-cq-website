@@ -94,10 +94,12 @@
 
                 <x-divider />
 
-                {{-- <x-visor /> --}}
+                <x-visor />
 
                 {{-- <x-contact /> --}}
-                <livewire:contact />
+                <div id="section-contact">
+                    <livewire:contact />
+                </div>
 
 
             </div>
