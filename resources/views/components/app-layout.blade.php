@@ -57,6 +57,8 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/include/rs-plugin/css/addons/revolution.addon.particles.css') }}">
 
+    @livewireStyles
+
     <!-- Document Title
  ============================================= -->
 
@@ -92,9 +94,11 @@
 
                 <x-divider />
 
-                <x-visor />
+                {{-- <x-visor /> --}}
 
-                <x-contact />
+                {{-- <x-contact /> --}}
+                <livewire:contact />
+
 
             </div>
         </section><!-- #content end -->
@@ -320,6 +324,9 @@
             }; /* END OF ON LOAD FUNCTION */
         }()); /* END OF WRAPPING FUNCTION */
     </script>
+
+    @livewireScripts
+
 
 </body>
 

@@ -19,9 +19,9 @@ class ContactFormController extends Controller {
 
         Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactForm($data));
 
-        return redirect()
-            ->route('home')
-            ->with('data', $data)
-            ->with('message', 'Su mensaje ha sido enviado exitosamente. Pronto le contestaremos');
+        // return redirect()
+        //     ->route('home')
+        //     ->with('data', $data)
+        //     ->with('message', 'Su mensaje ha sido enviado exitosamente. Pronto le contestaremos');
     }
 }
