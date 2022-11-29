@@ -3,9 +3,11 @@ import { PresetsType } from '@react-three/drei/helpers/environment-assets';
 import { Canvas, useThree } from '@react-three/fiber';
 import { button, useControls } from 'leva';
 import { useState, useTransition } from 'react';
-import * as THREE from 'three';
+
+import 'react-var-ui/dist/index.css';
 import { GLTF } from 'three-stdlib';
 import { MODELS } from './Models';
+import VarUICustom from './VarUICustom';
 
 type GLTFResult = GLTF & {
     nodes: {
@@ -22,13 +24,16 @@ const App = () => {
     });
 
     return (
-        <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
-            <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
-                <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
-            </group>
-            <Env />
-            <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
-        </Canvas>
+        <>
+            <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
+                <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
+                    <Model position={[0, 0.25, 0]} url={MODELS[model].url} model={model} />
+                </group>
+                <Env />
+                <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
+            </Canvas>
+            <VarUICustom />
+        </>
     );
 };
 

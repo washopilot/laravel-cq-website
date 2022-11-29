@@ -90,7 +90,7 @@
 
                 <x-section-why />
 
-                <x-portfolio />
+                {{-- <x-portfolio /> --}}
 
                 <x-divider />
 

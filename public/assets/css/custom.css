@@ -215,13 +215,24 @@
     height: 100%;
 }
 
+#visor-section {
+    height: 50em;
+}
+
 #visor {
     position: relative;
-    height: 55em;
+    height: 50em;
     padding-top: 2em;
 }
 
-#visor > div[class^='leva'] {
+/* #visor > div[class^='leva'] {
     position: absolute;
     z-index: 298;
+} */
+
+.react-var-ui {
+    position: absolute;
+    max-width: 12em;
+    top: 2em;
+    right: 0;
 }
