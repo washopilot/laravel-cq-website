@@ -23,7 +23,7 @@ export const VarColorCustom: FC<IVarColorProps> = ({ label, path, value, onChang
     return (
         <VarBase label={label} disabled={disabled} className={className}>
             <span>
-                <span className="react-var-ui-color-value">{currentValue}</span>
+                {/* <span className="react-var-ui-color-value">{currentValue}</span> */}
                 <div className="react-var-ui-color">
                     <div className="react-var-ui-color-swatch" onClick={toggle}>
                         <div
@@ -40,8 +40,10 @@ export const VarColorCustom: FC<IVarColorProps> = ({ label, path, value, onChang
                                 styles={{
                                     default: {
                                         card: {
-                                            top: '10em',
-                                            right: '2em'
+                                            top: '9em',
+                                            right: '5em',
+                                            width: '8.3em'
+
                                         }
                                     }
                                 }}
