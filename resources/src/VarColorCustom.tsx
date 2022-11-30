@@ -50,9 +50,9 @@ export const VarColorCustom: FC<IVarColorProps> = ({
                                 styles={{
                                     default: {
                                         card: {
-                                            top: '9em',
-                                            right: '5em',
-                                            width: '8.3em'
+                                            top: '6em',
+                                            right: '4em',
+                                            width: '7.9em'
                                         }
                                     }
                                 }}
