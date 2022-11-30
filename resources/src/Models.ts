@@ -20,4 +20,16 @@ export const MODELS: MODELS_Type = {
     }
 };
 
-export const PAINT_PALETTE: PAINT_PALETTE_Type = ['red', 'blue', 'cyan'];
+export const PAINT_PALETTE: PAINT_PALETTE_Type = [
+    '#064FBE',
+    '#121B22',
+    '#99165F',
+    '#4C3C6E',
+    '#004621',
+    '#AB6949',
+    '#C4A854',
+    '#112393',
+    '#94B6CF',
+    '#871716',
+    '#EBEEF5'
+];

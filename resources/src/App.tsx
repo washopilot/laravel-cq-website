@@ -28,20 +28,20 @@ const App = () => {
 
     const [values, setValues] = useState<valuesCustomType>({
         selectModel: Object.keys(MODELS)[0],
-        elemento_1: '#FF0000',
-        elemento_2: '#FF0000',
-        elemento_3: '#FF0000',
-        elemento_4: '#FF0000',
-        elemento_5: '#FF0000',
-        elemento_6: '#FF0000',
-        elemento_7: '#FF0000',
-        elemento_8: '#FF0000',
-        elemento_9: '#FF0000',
-        elemento_10: '#FF0000',
-        elemento_11: '#FF0000',
-        elemento_12: '#FF0000',
-        elemento_13: '#FF0000',
-        elemento_14: '#FF0000',
+        elemento_1: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_2: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_3: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_4: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_5: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_6: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_7: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_8: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_9: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_10: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_11: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_12: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_13: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        elemento_14: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)]
     });
 
     return (
@@ -58,7 +58,12 @@ const App = () => {
                 <Env fireCapture={fireCapture} setFireCapture={setFireCapture} />
                 <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
             </Canvas>
-            <VarUICustom values={values} onSetValues={setValues} captureScreen={fireCaptureScreen} paintPalette={PAINT_PALETTE} />
+            <VarUICustom
+                values={values}
+                onSetValues={setValues}
+                captureScreen={fireCaptureScreen}
+                paintPalette={PAINT_PALETTE}
+            />
         </>
     );
 };
