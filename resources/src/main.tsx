@@ -8,6 +8,5 @@ import App from './App';
 ReactDOM.createRoot(document.getElementById('visor') as HTMLElement).render(
     <React.StrictMode>
         <App />
-        <Leva collapsed hideCopyButton titleBar={{ drag: false }} />
     </React.StrictMode>
 );

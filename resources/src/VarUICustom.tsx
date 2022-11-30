@@ -1,5 +1,4 @@
-import { useThree } from '@react-three/fiber';
-import { VarButton, VarCategory, VarSelect, VarToggle, VarUI } from 'react-var-ui';
+import { VarButton, VarCategory, VarSelect, VarUI } from 'react-var-ui';
 import { MODELS } from './Models';
 import { VarColorCustom } from './VarColorCustom';
 

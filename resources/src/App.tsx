@@ -23,8 +23,8 @@ const App = () => {
     // });
     // const gl = useThree((state) => state.gl);
 
-    const [fireCapture, setfireCapture] = useState(false);
-    const fireCaptureScreen = () => setfireCapture(true);
+    const [fireCapture, setFireCapture] = useState(false);
+    const fireCaptureScreen = () => setFireCapture(true);
 
     const [values, setValues] = useState<valuesCustomType>({
         selectModel: Object.keys(MODELS)[0],
@@ -58,7 +58,7 @@ const App = () => {
                         values={values}
                     />
                 </group>
-                <Env fireCapture={fireCapture} />
+                <Env fireCapture={fireCapture} setFireCapture={setFireCapture} />
                 <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
             </Canvas>
             <VarUICustom values={values} onSetValues={setValues} captureScreen={fireCaptureScreen} />
@@ -66,18 +66,29 @@ const App = () => {
     );
 };
 
-function Env({ fireCapture }: { fireCapture: boolean }) {
+function Env({
+    fireCapture,
+    setFireCapture
+}: {
+    fireCapture: boolean;
+    setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     const [preset, setPreset] = useState<PresetsType>('warehouse');
     const gl = useThree((state) => state.gl);
     // You can use the "inTransition" boolean to react to the loading in-between state,
     // For instance by showing a message
 
     useEffect(() => {
-        captureScreen();
+        if (fireCapture) captureScreen();
+        return () => setFireCapture(false);
     }, [fireCapture]);
 
     const captureScreen = () => {
         console.log('function Called');
+        const link = document.createElement('a');
+        link.setAttribute('download', 'canvas.png');
+        link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
+        link.click();
     };
 
     const [inTransition, startTransition] = useTransition();
