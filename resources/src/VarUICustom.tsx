@@ -1,5 +1,5 @@
 import { VarButton, VarCategory, VarSelect, VarToggle, VarUI } from 'react-var-ui';
-import { MODELS } from './Models';
+import { HDRI_FILES, MODELS } from './Models';
 import { VarColorCustom } from './VarColorCustom';
 
 export type valuesCustomType = {
@@ -19,6 +19,7 @@ export type valuesCustomType = {
     elemento_13: string;
     elemento_14: string;
     toggle: boolean;
+    selectAmbiente: string;
 };
 
 interface IVarUICustom {
@@ -81,6 +82,11 @@ const VarUICustom = ({ values, paintPalette, onSetValues, captureScreen }: IVarU
                     <VarColorCustom paintPalette={paintPalette} path="elemento_14" label="Elem-14" />
                 )}
                 <VarToggle path="toggle" label="Fondo" />
+                <VarSelect
+                    path="selectAmbiente"
+                    label="Ambiente"
+                    options={HDRI_FILES.map((value, idx) => ({ key: idx, label: value.label, value: value.path }))}
+                />
                 <VarButton buttonLabel="capturar pantalla" onClick={captureScreen} />
             </VarCategory>
         </VarUI>

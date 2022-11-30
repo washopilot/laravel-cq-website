@@ -5,7 +5,7 @@ import { useEffect, useState, useTransition } from 'react';
 
 import 'react-var-ui/dist/index.css';
 import { GLTF } from 'three-stdlib';
-import { MODELS, PAINT_PALETTE } from './Models';
+import { HDRI_FILES, MODELS, PAINT_PALETTE } from './Models';
 import VarUICustom, { valuesCustomType } from './VarUICustom';
 
 type GLTFResult = GLTF & {
@@ -42,7 +42,8 @@ const App = () => {
         elemento_12: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         elemento_13: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         elemento_14: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        toggle: false
+        toggle: false,
+        selectAmbiente: HDRI_FILES[0].path
     });
 
     return (
@@ -56,7 +57,12 @@ const App = () => {
                         values={values}
                     />
                 </group>
-                <Env fireCapture={fireCapture} setFireCapture={setFireCapture} background={values.toggle} />
+                <Env
+                    fireCapture={fireCapture}
+                    setFireCapture={setFireCapture}
+                    backgroundToggle={values.toggle}
+                    backgroundFile={values.selectAmbiente}
+                />
                 <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
             </Canvas>
             <VarUICustom
@@ -72,11 +78,13 @@ const App = () => {
 function Env({
     fireCapture,
     setFireCapture,
-    background
+    backgroundToggle,
+    backgroundFile
 }: {
     fireCapture: boolean;
     setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
-    background: boolean;
+    backgroundToggle: boolean;
+    backgroundFile: string;
 }) {
     const [preset, setPreset] = useState<PresetsType>('warehouse');
     const gl = useThree((state) => state.gl);
@@ -115,7 +123,7 @@ function Env({
     //     })
     // });
 
-    return <Environment files={'storeroom_1k.hdr'} path={'assets/images/hdri/'} background={background} />;
+    return <Environment files={backgroundFile} path={'assets/images/hdri/'} background={backgroundToggle} />;
 }
 
 function Model({

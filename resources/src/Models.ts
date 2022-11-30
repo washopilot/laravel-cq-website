@@ -1,5 +1,10 @@
 type MODELS_Type = { [key: string]: { url: string; nodes: string[] } };
+
 type PAINT_PALETTE_Type = string[];
+type HDRI_FILES_Type = {
+    path: string;
+    label: string;
+}[];
 
 export const MODELS: MODELS_Type = {
     ['Estante metálico']: {
@@ -32,4 +37,13 @@ export const PAINT_PALETTE: PAINT_PALETTE_Type = [
     '#94B6CF',
     '#871716',
     '#EBEEF5'
+];
+
+export const HDRI_FILES: HDRI_FILES_Type = [
+    { path: 'christmas_photo_studio_04_1k.hdr', label: 'ambiente_1' },
+    { path: 'empty_warehouse_01_1k.hdr', label: 'ambiente_2' },
+    { path: 'gear_store_1k.hdr', label: 'ambiente_3' },
+    { path: 'unfinished_office_night_1k.hdr', label: 'ambiente_4' },
+    { path: 'industrial_workshop_foundry_1k.hdr', label: 'ambiente_5' },
+    { path: 'phone_shop_1k.hdr', label: 'ambiente_6' },
 ];
