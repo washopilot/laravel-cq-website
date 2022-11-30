@@ -232,7 +232,7 @@
 
 .react-var-ui {
     position: absolute;
-    /* max-width: 12em; */
+    max-width: 12em;
     top: 2em;
     right: 0;
     padding: 0.3em;
@@ -241,7 +241,7 @@
 
 .react-var-ui-label {
     font-size: 0.7em !important;
-    padding: 0.2em 0.6em !important;
+    padding: 0.2em 0.4em !important;
 }
 
 .react-var-ui-category {

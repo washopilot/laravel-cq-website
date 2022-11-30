@@ -8,12 +8,21 @@ export interface IVarColorProps extends IVarBaseInputProps<string> {
      * Should allow picking alpha values?
      * If true, the result hex code will contain extra two characters representing the alpha value, from 00 to FF.
      */
+    paintPalette?: string[];
 }
 
 /**
  * Color picker component. Returns and accepts values in form of hex color strings.
  */
-export const VarColorCustom: FC<IVarColorProps> = ({ label, path, value, onChange, disabled, className }) => {
+export const VarColorCustom: FC<IVarColorProps> = ({
+    label,
+    path,
+    value,
+    onChange,
+    disabled,
+    className,
+    paintPalette
+}) => {
     const [currentValue, setCurrentValue] = useVarUIValue(path, value, onChange);
 
     const [show, setShow] = useState(false);
@@ -36,6 +45,7 @@ export const VarColorCustom: FC<IVarColorProps> = ({ label, path, value, onChang
                         <div className="react-var-ui-color-popover">
                             <div className="react-var-ui-color-cover" onClick={close} />
                             <GithubPicker
+                                colors={paintPalette}
                                 triangle="top-right"
                                 styles={{
                                     default: {
@@ -43,7 +53,6 @@ export const VarColorCustom: FC<IVarColorProps> = ({ label, path, value, onChang
                                             top: '9em',
                                             right: '5em',
                                             width: '8.3em'
-
                                         }
                                     }
                                 }}

@@ -5,7 +5,7 @@ import { useEffect, useState, useTransition } from 'react';
 
 import 'react-var-ui/dist/index.css';
 import { GLTF } from 'three-stdlib';
-import { MODELS } from './Models';
+import { MODELS, PAINT_PALETTE } from './Models';
 import VarUICustom, { valuesCustomType } from './VarUICustom';
 
 type GLTFResult = GLTF & {
@@ -42,9 +42,6 @@ const App = () => {
         elemento_12: '#FF0000',
         elemento_13: '#FF0000',
         elemento_14: '#FF0000',
-
-        slider: 0.4,
-        xy: [0, 0.2]
     });
 
     return (
@@ -61,7 +58,7 @@ const App = () => {
                 <Env fireCapture={fireCapture} setFireCapture={setFireCapture} />
                 <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
             </Canvas>
-            <VarUICustom values={values} onSetValues={setValues} captureScreen={fireCaptureScreen} />
+            <VarUICustom values={values} onSetValues={setValues} captureScreen={fireCaptureScreen} paintPalette={PAINT_PALETTE} />
         </>
     );
 };

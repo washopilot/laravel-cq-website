@@ -1,4 +1,5 @@
-type MODELS_Type = { [key: string]: { url: string; nodes: string[]} };
+type MODELS_Type = { [key: string]: { url: string; nodes: string[] } };
+type PAINT_PALETTE_Type = string[];
 
 export const MODELS: MODELS_Type = {
     ['Estante metálico']: {
@@ -18,3 +19,5 @@ export const MODELS: MODELS_Type = {
         nodes: ['elemento-11', 'elemento-12', 'elemento-13', 'elemento-14']
     }
 };
+
+export const PAINT_PALETTE: PAINT_PALETTE_Type = ['red', 'blue', 'cyan'];
