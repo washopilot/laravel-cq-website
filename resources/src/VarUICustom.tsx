@@ -1,4 +1,4 @@
-import { VarButton, VarCategory, VarSelect, VarUI } from 'react-var-ui';
+import { VarButton, VarCategory, VarSelect, VarToggle, VarUI } from 'react-var-ui';
 import { MODELS } from './Models';
 import { VarColorCustom } from './VarColorCustom';
 
@@ -18,6 +18,7 @@ export type valuesCustomType = {
     elemento_12: string;
     elemento_13: string;
     elemento_14: string;
+    toggle: boolean;
 };
 
 interface IVarUICustom {
@@ -79,7 +80,7 @@ const VarUICustom = ({ values, paintPalette, onSetValues, captureScreen }: IVarU
                 {values.selectModel == 'Góndola doble' && (
                     <VarColorCustom paintPalette={paintPalette} path="elemento_14" label="Elem-14" />
                 )}
-
+                <VarToggle path="toggle" label="Fondo" />
                 <VarButton buttonLabel="capturar pantalla" onClick={captureScreen} />
             </VarCategory>
         </VarUI>

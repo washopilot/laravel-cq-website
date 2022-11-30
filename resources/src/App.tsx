@@ -41,7 +41,8 @@ const App = () => {
         elemento_11: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         elemento_12: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         elemento_13: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_14: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)]
+        elemento_14: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        toggle: false
     });
 
     return (
@@ -55,7 +56,7 @@ const App = () => {
                         values={values}
                     />
                 </group>
-                <Env fireCapture={fireCapture} setFireCapture={setFireCapture} />
+                <Env fireCapture={fireCapture} setFireCapture={setFireCapture} background={values.toggle} />
                 <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
             </Canvas>
             <VarUICustom
@@ -70,10 +71,12 @@ const App = () => {
 
 function Env({
     fireCapture,
-    setFireCapture
+    setFireCapture,
+    background
 }: {
     fireCapture: boolean;
     setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
+    background: boolean;
 }) {
     const [preset, setPreset] = useState<PresetsType>('warehouse');
     const gl = useThree((state) => state.gl);
@@ -112,7 +115,7 @@ function Env({
     //     })
     // });
 
-    return <Environment preset={preset} background />;
+    return <Environment files={'storeroom_1k.hdr'} path={'assets/images/hdri/'} background={background} />;
 }
 
 function Model({

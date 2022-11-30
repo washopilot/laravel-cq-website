@@ -236,7 +236,7 @@
     top: 2em;
     right: 0;
     padding: 0.3em;
-    border-bottom-left-radius: 0.3em ;
+    border-bottom-left-radius: 0.3em;
 }
 
 .react-var-ui-label {
@@ -251,4 +251,12 @@
 .react-var-ui-category-title {
     font-size: 0.7em !important;
     padding: 0.3em !important;
+}
+
+.react-var-ui-toggle-helper {
+    border-radius: 1em !important;
+}
+
+.react-var-ui-toggle {
+    margin: 0 !important;
 }
