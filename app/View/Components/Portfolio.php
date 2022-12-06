@@ -22,24 +22,38 @@ class Portfolio extends Component {
             [
                 'category' => ['Estantería'],
                 'title' => 'Perchas',
+                'images' => [url('assets/images/portfolio/percha.jpg'), url('assets/images/portfolio/percha2.jpg')],
+                'overlay' => [url('assets/images/portfolio/percha.jpg'), url('assets/images/portfolio/percha2.jpg')],
+                'wide' => true
+            ],
+            [
+                'category' => ['Exhibición'],
+                'title' => 'Góndola Central - Doble',
                 'images' => [
-                    url('assets/images/portfolio/percha.jpg'),
-                    url('assets/images/portfolio/percha-1.jpg'),
-                    url('assets/images/portfolio/percha-2.jpg')
+                    url('assets/images/portfolio/gondola-c2.jpeg')
+                    // url('assets/images/portfolio/gondola-c3.jpeg')
+                ],
+                'overlay' => [
+                    url('assets/images/portfolio/gondola-c1.jpeg'),
+                    url('assets/images/portfolio/gondola-c2.jpeg'),
+                    url('assets/images/portfolio/gondola-c3.jpeg'),
+                    url('assets/images/portfolio/gondola-c4.jpg'),
+                    url('assets/images/portfolio/gondola-c5.jpeg')
                 ],
                 'wide' => true
             ],
             [
                 'category' => ['Exhibición'],
-                'title' => 'Góndola Cabecera',
-                'images' => [url('assets/images/portfolio/gondolac.jpg'), url('assets/images/portfolio/gondolac-1.jpg')],
-                'wide' => false
-            ],
-            [
-                'category' => ['Exhibición'],
-                'title' => 'Góndola Doble',
-                'images' => [url('assets/images/portfolio/gondolad.jpg'), url('assets/images/portfolio/gondolad-1.jpg')],
-                'wide' => false
+                'title' => 'Góndola Lateral',
+                'images' => [url('assets/images/portfolio/gondola-l4.jpeg')],
+                'overlay' => [
+                    url('assets/images/portfolio/gondola-l4.jpeg'),
+                    url('assets/images/portfolio/gondola-l1.jpg'),
+                    url('assets/images/portfolio/gondola-l2.jpeg'),
+                    url('assets/images/portfolio/gondola-l5.jpeg'),
+                    url('assets/images/portfolio/gondola-l3.jpeg')
+                ],
+                'wide' => true
             ]
         ];
 

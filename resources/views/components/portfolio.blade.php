@@ -118,7 +118,7 @@
 
                         </div>
                         <div class="d-flex">
-                            @foreach ($item['images'] as $image)
+                            @foreach ($item['overlay'] as $image)
                                 @if ($loop->index == 0)
                                     <a href="{{ $image }}" class="overlay-trigger-icon bg-secondary text-light"
                                         data-hover-animate="fadeInUpSmall" data-hover-animate-out="fadeOutDownSmall"
