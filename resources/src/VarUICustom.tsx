@@ -4,20 +4,7 @@ import { VarColorCustom } from './VarColorCustom';
 
 export type valuesCustomType = {
     selectModel: string;
-    elemento_1: string;
-    elemento_2: string;
-    elemento_3: string;
-    elemento_4: string;
-    elemento_5: string;
-    elemento_6: string;
-    elemento_7: string;
-    elemento_8: string;
-    elemento_9: string;
-    elemento_10: string;
-    elemento_11: string;
-    elemento_12: string;
-    elemento_13: string;
-    elemento_14: string;
+    [key: `elemento-${number}`]: string; // Template string pattern index signature
     toggle: boolean;
     selectAmbiente: string;
 };
@@ -40,46 +27,46 @@ const VarUICustom = ({ values, paintPalette, onSetValues, captureScreen }: IVarU
                 />
 
                 {values.selectModel == 'Estante metálico' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_1" label="Elem-1" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-1" label="Elem-1" />
                 )}
                 {values.selectModel == 'Estante metálico' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_2" label="Elem-2" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-2" label="Elem-2" />
                 )}
                 {values.selectModel == 'Estante metálico' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_3" label="Elem-3" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-3" label="Elem-3" />
                 )}
                 {values.selectModel == 'Estante metálico peq' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_4" label="Elem-4" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-4" label="Elem-4" />
                 )}
                 {values.selectModel == 'Estante metálico peq' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_5" label="Elem-5" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-5" label="Elem-5" />
                 )}
                 {values.selectModel == 'Estante metálico peq' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_6" label="Elem-6" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-6" label="Elem-6" />
                 )}
                 {values.selectModel == 'Góndola cabecera' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_7" label="Elem-7" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-7" label="Elem-7" />
                 )}
                 {values.selectModel == 'Góndola cabecera' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_8" label="Elem-8" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-8" label="Elem-8" />
                 )}
                 {values.selectModel == 'Góndola cabecera' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_9" label="Elem-9" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-9" label="Elem-9" />
                 )}
                 {values.selectModel == 'Góndola cabecera' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_10" label="Elem-10" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-10" label="Elem-10" />
                 )}
                 {values.selectModel == 'Góndola doble' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_11" label="Elem-11" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-11" label="Elem-11" />
                 )}
                 {values.selectModel == 'Góndola doble' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_12" label="Elem-12" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-12" label="Elem-12" />
                 )}
                 {values.selectModel == 'Góndola doble' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_13" label="Elem-13" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-13" label="Elem-13" />
                 )}
                 {values.selectModel == 'Góndola doble' && (
-                    <VarColorCustom paintPalette={paintPalette} path="elemento_14" label="Elem-14" />
+                    <VarColorCustom paintPalette={paintPalette} path="elemento-14" label="Elem-14" />
                 )}
                 <VarToggle path="toggle" label="Fondo" />
                 <VarSelect

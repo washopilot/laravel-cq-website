@@ -90,11 +90,11 @@
 
                 <x-section-why />
 
-                <x-portfolio />
+                {{-- <x-portfolio /> --}}
 
-                <x-divider />
+                {{-- <x-divider /> --}}
 
-                {{-- <x-visor /> --}}
+                <x-visor />
 
                 {{-- <x-contact /> --}}
                 {{-- <div id="section-contact">

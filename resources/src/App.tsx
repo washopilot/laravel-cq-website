@@ -28,20 +28,20 @@ const App = () => {
 
     const [values, setValues] = useState<valuesCustomType>({
         selectModel: Object.keys(MODELS)[0],
-        elemento_1: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_2: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_3: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_4: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_5: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_6: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_7: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_8: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_9: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_10: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_11: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_12: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_13: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        elemento_14: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-1']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-2']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-3']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-4']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-5']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-6']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-7']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-8']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-9']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-10']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-11']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-12']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-13']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ['elemento-14']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         toggle: false,
         selectAmbiente: HDRI_FILES[0].path
     });
@@ -165,7 +165,7 @@ function Model({
                         receiveShadow
                         geometry={nodes[item].geometry}
                         material={materials[item]}
-                        material-color={values[item.replace('-', '_') as keyof valuesCustomType]}
+                        material-color={values[item as keyof valuesCustomType]}
                         material-roughness={0.1}
                         material-metalness={0.1}
                     />
