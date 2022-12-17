@@ -37,8 +37,8 @@ const App = () => {
         ['elemento-12']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         ['elemento-13']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
         ['elemento-14']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        toggle: false,
-        selectAmbiente: HDRI_FILES[0].path
+        toggle: true,
+        selectAmbiente: HDRI_FILES[4].path
     });
 
     return (

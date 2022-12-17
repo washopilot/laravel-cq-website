@@ -181,6 +181,11 @@
     color: var(--custom-color-1);
 }
 
+.button.button-dark {
+    background-color: var(--custom-color-7);
+    color: var(--custom-color-1);
+}
+
 .button.button-dark:hover {
     background-color: var(--custom-color-7);
     color: var(--custom-color-1);
