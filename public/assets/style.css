@@ -16103,8 +16103,8 @@ label.checkbox { padding-left: 20px; }
 
 
 .css3-spinner > .css3-spinner-ball-scale-multiple {
-	width: 60px;
-	height: 60px;
+	width: 100px;
+	height: 100px;
 	margin-left: -30px;
 	margin-top: -30px;
 	background-color: transparent !important;
@@ -16113,14 +16113,14 @@ label.checkbox { padding-left: 20px; }
 }
 
 .css3-spinner-ball-scale-multiple > div {
-	background-color: #DDD;
+	background-color: #000;
 	border-radius: 100%;
 	position: absolute;
 	left: 0;
 	top: 0;
 	opacity: 0;
-	width: 60px;
-	height: 60px;
+	width: 100px;
+	height: 100px;
 	-webkit-animation: ball-scale-multiple 1.25s 0s linear infinite;
 	animation: ball-scale-multiple 1.25s 0s linear infinite;
 }

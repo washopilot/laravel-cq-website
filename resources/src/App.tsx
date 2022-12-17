@@ -1,7 +1,7 @@
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { PresetsType } from '@react-three/drei/helpers/environment-assets';
 import { Canvas, useThree } from '@react-three/fiber';
-import { useEffect, useState, useTransition } from 'react';
+import { Suspense, useEffect, useState, useTransition } from 'react';
 
 import 'react-var-ui/dist/index.css';
 import { GLTF } from 'three-stdlib';
@@ -18,11 +18,6 @@ type GLTFResult = GLTF & {
 };
 
 const App = () => {
-    // const { model } = useControls({
-    //     model: { value: Object.keys(MODELS)[0], options: Object.keys(MODELS), label: 'Mueble' }
-    // });
-    // const gl = useThree((state) => state.gl);
-
     const [fireCapture, setFireCapture] = useState(false);
     const fireCaptureScreen = () => setFireCapture(true);
 
@@ -47,7 +42,7 @@ const App = () => {
     });
 
     return (
-        <>
+        <Suspense fallback={<Spinner />}>
             <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
                 <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
                     <Model
@@ -71,11 +66,11 @@ const App = () => {
                 captureScreen={fireCaptureScreen}
                 paintPalette={PAINT_PALETTE}
             />
-        </>
+        </Suspense>
     );
 };
 
-function Env({
+const Env = ({
     fireCapture,
     setFireCapture,
     backgroundToggle,
@@ -85,11 +80,8 @@ function Env({
     setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
     backgroundToggle: boolean;
     backgroundFile: string;
-}) {
-    const [preset, setPreset] = useState<PresetsType>('warehouse');
+}) => {
     const gl = useThree((state) => state.gl);
-    // You can use the "inTransition" boolean to react to the loading in-between state,
-    // For instance by showing a message
 
     useEffect(() => {
         if (fireCapture) captureScreen();
@@ -104,29 +96,10 @@ function Env({
         link.click();
     };
 
-    const [inTransition, startTransition] = useTransition();
-    // const values = useControls({
-    //     preset: {
-    //         value: preset,
-    //         options: ['sunset', 'dawn', 'night', 'warehouse', 'forest', 'apartment', 'studio', 'city', 'park', 'lobby'],
-    //         // If onChange is present the value will not be reactive, see https://github.com/pmndrs/leva/blob/main/docs/advanced/controlled-inputs.md#onchange
-    //         // Instead we transition the preset value, which will prevents the suspense bound from triggering its fallback
-    //         // That way we can hang onto the current environment until the new one has finished loading ...
-    //         label: 'Ambiente',
-    //         onChange: (value) => startTransition(() => setPreset(value))
-    //     },
-    //     ['capturar pantalla']: button(() => {
-    //         const link = document.createElement('a');
-    //         link.setAttribute('download', 'canvas.png');
-    //         link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
-    //         link.click();
-    //     })
-    // });
-
     return <Environment files={backgroundFile} path={'assets/images/hdri/'} background={backgroundToggle} />;
-}
+};
 
-function Model({
+const Model = ({
     url,
     model,
     values,
@@ -136,24 +109,8 @@ function Model({
     position: any;
     model: string;
     values: valuesCustomType;
-}) {
+}) => {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
-
-    // const controls = useControls(
-    //     {
-    //         ...MODELS[model].nodes.reduce(
-    //             (prev, curr, idx) => ({ ...prev, [curr]: { value: MODELS[model]['colors'][idx] } }),
-    //             {}
-    //         )
-    //     },
-    //     [nodes]
-    // );
-
-    // applyProps(materials['plate'] as unknown as Instance, {
-    //     color: plate,
-    //     roughness: 0.1,
-    //     metalness: 0.1
-    // });
 
     return (
         <group {...props} dispose={null}>
@@ -173,6 +130,18 @@ function Model({
             })}
         </group>
     );
-}
+};
+
+const Spinner = () => {
+    return (
+        <div className="css3-spinner">
+            <div className="css3-spinner-ball-scale-multiple">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    );
+};
 
 export default App;
