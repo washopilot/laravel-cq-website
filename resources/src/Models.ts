@@ -45,5 +45,5 @@ export const HDRI_FILES: HDRI_FILES_Type = [
     { path: 'gear_store_1k.hdr', label: 'ambiente_3' },
     { path: 'unfinished_office_night_1k.hdr', label: 'ambiente_4' },
     { path: 'industrial_workshop_foundry_1k.hdr', label: 'ambiente_5' },
-    { path: 'phone_shop_1k.hdr', label: 'ambiente_6' },
+    { path: 'phone_shop_1k.hdr', label: 'ambiente_6' }
 ];

@@ -1,7 +1,6 @@
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
-import { PresetsType } from '@react-three/drei/helpers/environment-assets';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Suspense, useEffect, useState, useTransition } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import 'react-var-ui/dist/index.css';
 import { GLTF } from 'three-stdlib';
@@ -17,26 +16,35 @@ type GLTFResult = GLTF & {
     };
 };
 
+interface IEnvProps {
+    fireCapture: boolean;
+    setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
+    backgroundToggle: boolean;
+    backgroundFile: string;
+}
+
+interface IModelProps {
+    url: string;
+    position: any;
+    model: string;
+    values: valuesCustomType;
+}
+
 const App = () => {
     const [fireCapture, setFireCapture] = useState(false);
     const fireCaptureScreen = () => setFireCapture(true);
 
+    const elements = Object.keys(MODELS)
+        .map((value) => MODELS[value].nodes)
+        .flat()
+        .reduce((prev, curr) => {
+            return { ...prev, [curr]: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)] };
+        }, {});
+
+    // Default values UI
     const [values, setValues] = useState<valuesCustomType>({
         selectModel: Object.keys(MODELS)[0],
-        ['elemento-1']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-2']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-3']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-4']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-5']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-6']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-7']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-8']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-9']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-10']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-11']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-12']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-13']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
-        ['elemento-14']: PAINT_PALETTE[Math.floor(Math.random() * PAINT_PALETTE.length)],
+        ...elements,
         toggle: true,
         selectAmbiente: HDRI_FILES[4].path
     });
@@ -70,17 +78,7 @@ const App = () => {
     );
 };
 
-const Env = ({
-    fireCapture,
-    setFireCapture,
-    backgroundToggle,
-    backgroundFile
-}: {
-    fireCapture: boolean;
-    setFireCapture: React.Dispatch<React.SetStateAction<boolean>>;
-    backgroundToggle: boolean;
-    backgroundFile: string;
-}) => {
+const Env = ({ fireCapture, setFireCapture, backgroundToggle, backgroundFile }: IEnvProps) => {
     const gl = useThree((state) => state.gl);
 
     useEffect(() => {
@@ -99,17 +97,7 @@ const Env = ({
     return <Environment files={backgroundFile} path={'assets/images/hdri/'} background={backgroundToggle} />;
 };
 
-const Model = ({
-    url,
-    model,
-    values,
-    ...props
-}: {
-    url: string;
-    position: any;
-    model: string;
-    values: valuesCustomType;
-}) => {
+const Model = ({ url, model, values, ...props }: IModelProps) => {
     const { nodes, materials } = useGLTF(url) as unknown as GLTFResult;
 
     return (
