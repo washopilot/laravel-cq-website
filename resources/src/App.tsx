@@ -50,31 +50,33 @@ const App = () => {
     });
 
     return (
-        <Suspense fallback={<Spinner />}>
-            <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
-                <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
-                    <Model
-                        position={[0, 0.25, 0]}
-                        url={MODELS[values.selectModel].url}
-                        model={values.selectModel}
-                        values={values}
+        <>
+            <Suspense fallback={<Spinner />}>
+                <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [100, 90, 200], fov: 50 }}>
+                    <group position={[10, -100, 10]} rotation={[0, -190, 0]}>
+                        <Model
+                            position={[0, 0.25, 0]}
+                            url={MODELS[values.selectModel].url}
+                            model={values.selectModel}
+                            values={values}
+                        />
+                    </group>
+                    <Env
+                        fireCapture={fireCapture}
+                        setFireCapture={setFireCapture}
+                        backgroundToggle={values.toggle}
+                        backgroundFile={values.selectAmbiente}
                     />
-                </group>
-                <Env
-                    fireCapture={fireCapture}
-                    setFireCapture={setFireCapture}
-                    backgroundToggle={values.toggle}
-                    backgroundFile={values.selectAmbiente}
-                />
-                <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
-            </Canvas>
+                    <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
+                </Canvas>
+            </Suspense>
             <VarUICustom
                 values={values}
                 onSetValues={setValues}
                 captureScreen={fireCaptureScreen}
                 paintPalette={PAINT_PALETTE}
             />
-        </Suspense>
+        </>
     );
 };
 
@@ -89,7 +91,7 @@ const Env = ({ fireCapture, setFireCapture, backgroundToggle, backgroundFile }: 
     const captureScreen = () => {
         console.log('function Called');
         const link = document.createElement('a');
-        link.setAttribute('download', 'canvas.png');
+        link.setAttribute('download', 'carrionquezada.png');
         link.setAttribute('href', gl.domElement.toDataURL('image/png').replace('image/png', 'image/octet-stream'));
         link.click();
     };
