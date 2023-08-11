@@ -6,7 +6,7 @@ services:
             target: nginx
             dockerfile: docker/Dockerfile
         ports:
-            - '${APP_PORT:-8080}:8080'
+            - '${APP_PORT:-8080}'
         networks:
             - internal
         volumes:
@@ -36,6 +36,8 @@ services:
         user: '${WWWUSER}:${WWWGROUP}'
         networks:
             - internal
+        environment:
+            - NODE_OPTIONS="--max-old-space-size=1024"
         volumes:
             - .:/code
         command: sh -c "npm ci -d && npm run build"
