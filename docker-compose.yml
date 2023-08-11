@@ -1,10 +1,10 @@
 version: '3'
 services:
     nginx:
-        container_name: laravel-nginx
         build:
             context: .
             target: nginx
+            dockerfile: docker/Dockerfile
         ports:
             - '8080:8080'
         networks:
@@ -13,17 +13,20 @@ services:
             - ./:/var/www/html:ro
         depends_on:
             - php
+        restart: always
 
     php:
-        container_name: laravel-php
         build:
             context: .
             target: php
+            dockerfile: docker/Dockerfile
         user: '1000:1001'
         networks:
             - internal
         volumes:
             - ./:/var/www/html:rw
+        restart: always
+
 networks:
     internal:
         name: laravel-net
