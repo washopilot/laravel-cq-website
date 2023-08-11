@@ -6,7 +6,7 @@ services:
             target: nginx
             dockerfile: docker/Dockerfile
         ports:
-            - '8080:8080'
+            - '${APP_PORT:-8080}:8080'
         networks:
             - internal
         volumes:
@@ -20,12 +20,25 @@ services:
             context: .
             target: php
             dockerfile: docker/Dockerfile
-        user: '1000:1001'
+        user: '${WWWUSER}:${WWWGROUP}'
         networks:
             - internal
         volumes:
             - ./:/var/www/html:rw
         restart: always
+        depends_on:
+            npm:
+                condition: service_completed_successfully
+
+    npm:
+        image: node:18.17.1-alpine3.17
+        working_dir: /code
+        user: '${WWWUSER}:${WWWGROUP}'
+        networks:
+            - internal
+        volumes:
+            - .:/code
+        command: sh -c "npm ci -d && npm run build"
 
 networks:
     internal:
