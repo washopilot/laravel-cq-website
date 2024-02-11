@@ -1,4 +1,8 @@
 FROM php:8.1.20-fpm-alpine3.17 AS php
+
+ARG UID
+ARG GID
+
 # persistent / runtime deps
 RUN apk add --no-cache \
 	acl \
@@ -64,6 +68,10 @@ COPY docker/php/laravel.ini /usr/local/etc/php/conf.d/laravel.ini
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
+RUN addgroup -g $GID node && \
+	adduser -D -u $UID -G node node
+
+USER node
 WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
@@ -74,9 +82,9 @@ CMD \
 	php-fpm;
 
 FROM nginx:1.25.1-alpine3.17 AS nginx
-COPY --from=php /usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
-COPY --from=php /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
-COPY --from=php /usr/local/bin/docker-php-ext-* /usr/local/bin/
-COPY --from=php /usr/local/sbin/php-fpm /usr/local/sbin/
+# COPY --from=php /usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
+# COPY --from=php /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
+# COPY --from=php /usr/local/bin/docker-php-ext-* /usr/local/bin/
+# COPY --from=php /usr/local/sbin/php-fpm /usr/local/sbin/
 COPY docker/nginx/default.conf /etc/nginx/conf.d
 CMD ["nginx", "-g", "daemon off;"]

@@ -20,7 +20,9 @@ services:
             context: .
             target: php
             dockerfile: docker/Dockerfile
-        user: '${WWWUSER}:${WWWGROUP}'
+            args:
+                UID: ${WWWUSER}
+                GID: ${WWWGROUP}
         networks:
             - internal
         volumes:
