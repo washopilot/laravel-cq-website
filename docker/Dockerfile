@@ -1,9 +1,8 @@
-FROM php:8.1.20-apache AS php
-
-RUN apt-get update
+FROM php:8.1-apache-bullseye AS php
 
 # 1. development packages
-RUN apt-get install -y \
+RUN apt-get update && \
+	apt-get install -y \
 	git \
 	zip \
 	curl \
@@ -17,12 +16,13 @@ RUN apt-get install -y \
 	libreadline-dev \
 	libfreetype6-dev \
 	g++ \
-	libzip-dev
+	libzip-dev && \
+	rm -rf /var/lib/apt/lists/*
 
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
+	sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
 RUN a2enmod rewrite headers
@@ -40,23 +40,25 @@ RUN docker-php-ext-install \
 	calendar \
 	# mbstring \
 	pdo_mysql \
-	zip
+	zip && \
+	rm -rf /tmp/*
 
 # 5. composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
 
 # 6. we need a user with the same UID/GID with host user
 # so when we execute CLI commands, all the host file's ownership remains intact
 # otherwise command from inside container will create root-owned files and directories
 ARG uid
-RUN useradd -G www-data,root -u $uid -d /home/devuser devuser
-RUN mkdir -p /home/devuser/.composer && \
+RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
+	mkdir -p /home/devuser/.composer && \
 	chown -R devuser:devuser /home/devuser
+
 USER devuser
 WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
 CMD \
- 	composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
+	composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
 	composer clear-cache && \
 	apache2-foreground
