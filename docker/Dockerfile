@@ -1,90 +1,62 @@
-FROM php:8.1.20-fpm-alpine3.17 AS php
+FROM php:8.1.20-apache AS php
 
-ARG UID
-ARG GID
+RUN apt-get update
 
-# persistent / runtime deps
-RUN apk add --no-cache \
-	acl \
-	fcgi \
-	file \
-	gettext \
+# 1. development packages
+RUN apt-get install -y \
 	git \
-	ttf-freefont \
-	fontconfig \
-	dbus \
-	freetype-dev \
-	libjpeg-turbo-dev \
-	libpng-dev
-
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps \
-	$PHPIZE_DEPS \
-	icu-dev \
-	libzip-dev \
-	zlib-dev \
-	oniguruma-dev \
-	; \
-	\
-	docker-php-ext-configure zip; \
-	docker-php-ext-configure gd --with-freetype --with-jpeg ;\
-	docker-php-ext-install -j$(nproc) \
-	intl \
-	pdo_mysql \
 	zip \
-	gd \
-	exif \
-	pdo \
-	# iconv \
-	pcntl \
-	mbstring \
-	fileinfo \
-	posix \
-	; \
-	docker-php-ext-enable \
-	opcache \
-	; \
-	runDeps="$( \
-	scanelf --needed --nobanner --format '%n#p' --recursive /usr/local/lib/php/extensions \
-	| tr ',' '\n' \
-	| sort -u \
-	| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
-	)"; \
-	apk add --no-cache --virtual .api-phpexts-rundeps $runDeps; \
-	\
-	apk del .build-deps
+	curl \
+	sudo \
+	unzip \
+	libicu-dev \
+	libbz2-dev \
+	libpng-dev \
+	libjpeg-dev \
+	libmcrypt-dev \
+	libreadline-dev \
+	libfreetype6-dev \
+	g++ \
+	libzip-dev
 
-COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
+# 2. apache configs + document root
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini	
+# 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
+RUN a2enmod rewrite headers
+
+# 4. start with base php config, then add extensions
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY docker/php/laravel.ini /usr/local/etc/php/conf.d/laravel.ini
 
-# RUN set -eux; \
-# 	{ \
-# 		echo '[www]'; \
-# 		echo 'ping.path = /ping'; \
-# 	} | tee /usr/local/etc/php-fpm.d/docker-healthcheck.conf
+RUN docker-php-ext-install \
+	bz2 \
+	intl \
+	iconv \
+	bcmath \
+	opcache \
+	calendar \
+	# mbstring \
+	pdo_mysql \
+	zip
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV PATH="${PATH}:/root/.composer/vendor/bin"
+# 5. composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-RUN addgroup -g $GID node && \
-	adduser -D -u $UID -G node node
-
-USER node
+# 6. we need a user with the same UID/GID with host user
+# so when we execute CLI commands, all the host file's ownership remains intact
+# otherwise command from inside container will create root-owned files and directories
+ARG uid
+RUN useradd -G www-data,root -u $uid -d /home/devuser devuser
+RUN mkdir -p /home/devuser/.composer && \
+	chown -R devuser:devuser /home/devuser
+USER devuser
 WORKDIR /var/www/html
 COPY composer.json composer.lock ./
 
 CMD \
-	set -eux; \
-	composer install --prefer-dist --no-scripts --no-progress --no-suggest; \
-	composer clear-cache; \
-	php-fpm;
-
-FROM nginx:1.25.1-alpine3.17 AS nginx
-# COPY --from=php /usr/local/etc/php/php.ini /usr/local/etc/php/php.ini
-# COPY --from=php /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
-# COPY --from=php /usr/local/bin/docker-php-ext-* /usr/local/bin/
-# COPY --from=php /usr/local/sbin/php-fpm /usr/local/sbin/
-COPY docker/nginx/default.conf /etc/nginx/conf.d
-CMD ["nginx", "-g", "daemon off;"]
+ 	composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
+	composer clear-cache && \
+	apache2-foreground

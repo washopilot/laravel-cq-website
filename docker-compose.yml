@@ -1,46 +1,22 @@
-version: '3'
+version: '3.8'
 services:
-    nginx:
-        build:
-            context: .
-            target: nginx
-            dockerfile: docker/Dockerfile
-        ports:
-            - '${APP_PORT:-8080}:8080'
-        networks:
-            - internal
-        volumes:
-            - ./:/var/www/html:ro
-        depends_on:
-            - php
-        restart: always
-
     php:
         build:
             context: .
             target: php
             dockerfile: docker/Dockerfile
             args:
-                UID: ${WWWUSER}
-                GID: ${WWWGROUP}
+                uid: ${WWWUSER}
+        environment:
+            - APACHE_RUN_USER=#${WWWUSER}
+            - APACHE_RUN_GROUP=#${WWWUSER}
+        ports:
+            - 8080:80
         networks:
             - internal
         volumes:
             - ./:/var/www/html:rw
         restart: always
-        depends_on:
-            npm:
-                condition: service_completed_successfully
-
-    npm:
-        image: node:18.17.1-alpine3.17
-        working_dir: /code
-        user: '${WWWUSER}:${WWWGROUP}'
-        networks:
-            - internal
-        volumes:
-            - .:/code
-        command: sh -c "npm ci -d && npm run build"
 
 networks:
     internal:
