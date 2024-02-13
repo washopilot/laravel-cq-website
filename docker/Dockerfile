@@ -15,7 +15,8 @@ RUN apk add --no-cache \
 	dbus \
 	freetype-dev \
 	libjpeg-turbo-dev \
-	libpng-dev
+	libpng-dev \
+	starship
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \

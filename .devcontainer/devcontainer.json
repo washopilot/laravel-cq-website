@@ -17,7 +17,13 @@
 
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
-        "ghcr.io/cirolosapio/devcontainers-features/alpine-node:0": {}
+        "ghcr.io/cirolosapio/devcontainers-features/alpine-node:0": {
+            "corepack": true,
+            "pnpmVersion": "latest"
+        },
+        "ghcr.io/cirolosapio/devcontainers-features/alpine-ohmyzsh:0": {
+            "initStarship": true
+        }
     },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
