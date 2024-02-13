@@ -12,6 +12,7 @@ services:
             - APACHE_RUN_GROUP=#${WWWUSER}
         ports:
             - 8080:80
+            - 5173:5173
         networks:
             - internal
         volumes:
