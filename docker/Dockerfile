@@ -16,7 +16,8 @@ RUN apt-get update && \
 	libreadline-dev \
 	libfreetype6-dev \
 	g++ \
-	libzip-dev && \
+	libzip-dev \
+	zsh && \
 	rm -rf /var/lib/apt/lists/*
 
 # 2. apache configs + document root
@@ -42,6 +43,10 @@ RUN docker-php-ext-install \
 	pdo_mysql \
 	zip && \
 	rm -rf /tmp/*
+
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+	apt-get install -y nodejs && \
+	apt-get clean
 
 # 5. composer
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
