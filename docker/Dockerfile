@@ -16,8 +16,8 @@ RUN apt-get update && \
 	libreadline-dev \
 	libfreetype6-dev \
 	g++ \
-	libzip-dev \
-	zsh && \
+	libzip-dev && \
+	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
 # 2. apache configs + document root
@@ -46,7 +46,8 @@ RUN docker-php-ext-install \
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
 	apt-get install -y nodejs && \
-	apt-get clean
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/*
 
 # 5. composer
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
@@ -60,10 +61,9 @@ RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
 	chown -R devuser:devuser /home/devuser
 
 USER devuser
-WORKDIR /var/www/html
-COPY composer.json composer.lock ./
 
 CMD \
+	npm ci -d && npm run build && \
 	composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
 	composer clear-cache && \
 	apache2-foreground
