@@ -16,7 +16,18 @@
     "workspaceFolder": "/var/www/html",
 
     // Features to add to the dev container. More info: https://containers.dev/features.
-    "features": {},
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installOhMyZsh": true,
+            "installOhMyZshConfig": true,
+            "upgradePackages": false,
+            "username": "automatic",
+            "userUid": "automatic",
+            "userGid": "automatic"
+        }
+    },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
@@ -28,7 +39,8 @@
     // "shutdownAction": "none",
 
     // Uncomment the next line to run commands after the container is created.
-    // "postCreateCommand": "cat /etc/os-release",
+    "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions laravel)/' ~/.zshrc",
+
 
     // Configure tool-specific properties.
     "customizations": {
@@ -45,8 +57,8 @@
                 "esbenp.prettier-vscode"
             ]
         }
-    }
+    },
 
     // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-    // "remoteUser": "devuser"
+    "remoteUser": "devuser"
 }
