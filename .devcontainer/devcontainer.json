@@ -54,7 +54,8 @@
                 "onecentlin.laravel-extension-pack",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "donjayamanne.githistory",
-                "esbenp.prettier-vscode"
+                "esbenp.prettier-vscode",
+                "yy0931.vscode-sqlite3-editor"
             ]
         }
     },
