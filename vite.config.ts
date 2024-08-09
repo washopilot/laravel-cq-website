@@ -11,5 +11,10 @@ export default defineConfig({
             refresh: true
         }),
         tsconfigPaths()
-    ]
+    ],
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+    }
 });
