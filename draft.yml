@@ -1,0 +1,27 @@
+models:
+  Category:
+    name: string
+    description: long_text
+    relationships:
+      hasMany: Product
+
+  Product:
+    name: string
+    description: long_text
+    price: decimal:8,2
+    is_visible: boolean
+    category_id: foreign:categories:id
+    relationships:
+      belongsTo: Category
+
+factories:
+  Category:
+    name: "Electronics"
+    description: "Devices and gadgets."
+
+  Product:
+    name: "Smartphone"
+    description: "Latest model smartphone."
+    price: 699.99
+    is_visible: true
+    category_id: 1

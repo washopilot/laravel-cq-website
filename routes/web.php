@@ -20,3 +20,13 @@ Route::get('/', function () {
 })->name('home');
 
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
+
+
+
+
+
+
+
+
+
+
