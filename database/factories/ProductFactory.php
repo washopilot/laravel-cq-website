@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use App\Models\Product;
+use Database\Seeders\DatabaseSeeder;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\UnreachableUrl;
 
 class ProductFactory extends Factory
 {
@@ -31,4 +33,18 @@ class ProductFactory extends Factory
             'category_id' => Category::factory(),
         ];
     }
+
+    public function configure(): ProductFactory
+    {
+        return $this->afterCreating(function (Product $product) {
+            try {
+                $product
+                    ->addMediaFromUrl(DatabaseSeeder::IMAGE_URL)
+                    ->toMediaCollection('products');
+            } catch (UnreachableUrl $exception) {
+                return;
+            }
+        });
+    }
+
 }
