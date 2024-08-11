@@ -28,8 +28,25 @@ class Category extends Model
         'id' => 'integer',
     ];
 
+    /**
+     * Get the products for the category.
+     */
     public function products()
     {
-        return $this->hasMany(Product::class)->cascadeOnDelete();
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Boot the model.
+     */
+    protected static function booted()
+    {
+        static::deleting(function ($category) {
+            // Iterar sobre todos los productos de la categoría y eliminar los medios asociados
+            foreach ($category->products as $product) {
+                $product->clearMediaCollection(); // Eliminar todos los medios asociados al producto
+                $product->delete(); // Eliminar el producto
+            }
+        });
     }
 }

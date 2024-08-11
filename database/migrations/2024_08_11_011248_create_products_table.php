@@ -21,8 +21,6 @@ return new class extends Migration {
             $table->decimal('price', 8, 2);
             $table->boolean('is_visible');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-
-            ;
             $table->timestamps();
         });
 
