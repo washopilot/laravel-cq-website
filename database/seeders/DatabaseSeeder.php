@@ -19,22 +19,20 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        // Clear images
         $directories = Storage::directories('public');
 
         foreach ($directories as $directory) {
             Storage::deleteDirectory($directory);
         }
 
-        // Crear 2 categorías
-        $categories = Category::factory(2)->create();
+        $categories = Category::factory(3)->create();
 
-        // Crear 5 productos y asignarlos aleatoriamente a las categorías creadas
         Product::factory(5)->create([
-            'category_id' => $categories->random()->id,
+            'category_id' => function () use ($categories) {
+                return $categories->random()->id;
+            },
         ]);
 
-        // Crear usuario admin
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
