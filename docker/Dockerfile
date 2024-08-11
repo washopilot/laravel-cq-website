@@ -64,6 +64,6 @@ USER devuser
 
 CMD \
     npm ci -d && npm run build && \
-    composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
+    composer install --prefer-dist --no-progress --no-suggest && \
     composer clear-cache && \
     apache2-foreground

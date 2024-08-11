@@ -98,7 +98,7 @@
 
                 {{-- <x-contact /> --}}
                 <div id="section-contact">
-                    <livewire:contact />
+                    {{-- <livewire:contact /> --}}
                 </div>
 
 
