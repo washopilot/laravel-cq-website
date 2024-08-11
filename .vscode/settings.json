@@ -1,0 +1,5 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "php.version": "8.2",
+    "editor.formatOnSave": true
+}
