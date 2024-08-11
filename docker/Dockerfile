@@ -1,4 +1,4 @@
-FROM php:8.2-apache-bookworm AS php
+FROM php:8.3-apache-bookworm AS php
 
 # 1. development packages
 RUN apt-get update && \
@@ -39,6 +39,7 @@ RUN docker-php-ext-install \
     bcmath \
     opcache \
     calendar \
+    exif \
     # mbstring \
     pdo_mysql \
     zip && \
@@ -64,6 +65,6 @@ USER devuser
 
 CMD \
     npm ci -d && npm run build && \
-    composer install --prefer-dist --no-scripts --no-progress --no-suggest && \
+    composer install --prefer-dist --no-progress --no-suggest && \
     composer clear-cache && \
     apache2-foreground

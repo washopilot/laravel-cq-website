@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $categories = Category::factory(3)->create();
 
         // Crear 15 productos y asignarlos a las categorías creadas
-        Product::factory(15)->create([
+        Product::factory(10)->create([
             'category_id' => fn() => $categories->random()->id,
         ]);
 
