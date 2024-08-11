@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bee48bd038e66c1eeb7312ef479f03c",
+    "content-hash": "c097c3ff74ba67c3162677b6c22c74e4",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -1076,21 +1076,21 @@
         },
         {
             "name": "filament/spatie-laravel-media-library-plugin",
-            "version": "v3.0.8",
+            "version": "v2.17.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/spatie-laravel-media-library-plugin.git",
-                "reference": "567dfc50d4a544111e41f1f78fab6589688aa692"
+                "reference": "1481693a308993548647e41103e07991ef52a2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/spatie-laravel-media-library-plugin/zipball/567dfc50d4a544111e41f1f78fab6589688aa692",
-                "reference": "567dfc50d4a544111e41f1f78fab6589688aa692",
+                "url": "https://api.github.com/repos/filamentphp/spatie-laravel-media-library-plugin/zipball/1481693a308993548647e41103e07991ef52a2f2",
+                "reference": "1481693a308993548647e41103e07991ef52a2f2",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^9.0|^10.0",
-                "php": "^8.1",
+                "illuminate/support": "^8.6|^9.0|^10.0",
+                "php": "^8.0",
                 "spatie/laravel-medialibrary": "^9.0|^10.0"
             },
             "type": "library",
@@ -1109,7 +1109,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-08-01T22:15:58+00:00"
+            "time": "2023-05-22T21:18:30+00:00"
         },
         {
             "name": "filament/support",
