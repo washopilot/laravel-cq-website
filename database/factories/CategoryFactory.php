@@ -14,6 +14,7 @@ class CategoryFactory extends Factory
      * @var string
      */
     protected $model = Category::class;
+    private static $counter = 1;
 
     /**
      * Define the model's default state.
@@ -23,7 +24,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => 'Category_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
             'description' => $this->faker->text,
         ];
     }

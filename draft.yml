@@ -13,15 +13,3 @@ models:
     category_id: foreign:categories:id
     relationships:
       belongsTo: Category
-
-factories:
-  Category:
-    name: "Electronics"
-    description: "Devices and gadgets."
-
-  Product:
-    name: "Smartphone"
-    description: "Latest model smartphone."
-    price: 699.99
-    is_visible: true
-    category_id: 1
