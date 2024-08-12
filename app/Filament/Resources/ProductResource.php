@@ -55,8 +55,11 @@ class ProductResource extends Resource
                     ->collection('products')
                     ->size(50),
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('description')
+                    ->limit(50)
+                    ->wrap(),
+                Tables\Columns\TextColumn::make('price')
+                    ->money('USD', true),
                 Tables\Columns\IconColumn::make('is_visible')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
