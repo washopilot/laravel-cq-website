@@ -3,9 +3,10 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 
 createInertiaApp({
+    id: 'products',
     resolve: (name) => {
-        const pages = import.meta.glob('./Pages/**/*.tsx', { eager: true })
-        return pages[`./Pages/${name}.tsx`] as React.ReactNode // Asegúrate de que el tipo sea ReactNode
+        const pages = import.meta.glob('./pages/**/*.tsx', { eager: true })
+        return pages[`./pages/${name}.tsx`] as React.ReactNode // Asegúrate de que el tipo sea ReactNode
     },
     setup({ el, App, props }) {
         createRoot(el).render(
@@ -14,4 +15,4 @@ createInertiaApp({
             </React.StrictMode>
         )
     }
-})
+}).then((r) => {})

@@ -13,7 +13,7 @@ class ProductsController extends Controller
         $products = Product::all(); // Recupera todos los productos
         Inertia::setRootView('products.home');
 
-        return Inertia::render('Product/Index', [
+        return Inertia::render('AppProducts', [
             'products' => $products,
         ]);
     }

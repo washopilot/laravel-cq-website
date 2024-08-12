@@ -14,7 +14,7 @@ interface ProductsProps {
     products: Product[]
 }
 
-const Index: React.FC<ProductsProps> = ({ products }) => {
+const AppProducts = ({ products }: ProductsProps) => {
     return (
         <div>
             <h1>Products</h1>
@@ -46,4 +46,4 @@ const Index: React.FC<ProductsProps> = ({ products }) => {
     )
 }
 
-export default Index
+export default AppProducts

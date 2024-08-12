@@ -5,7 +5,7 @@
     <section id="content">
         <div class="content-wrap py-0">
 
-            @inertia
+            @inertia('products')
 
         </div>
     </section><!-- #content end -->
