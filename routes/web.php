@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactFormController;
 use App\Http\Livewire\Contact;
+use App\Http\Controllers\ProductsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +21,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/products', function () {
-    return view('products.index');
-})->name('products.index');
+Route::get(
+    '/products',
+    [ProductsController::class, 'index']
+);
 
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 

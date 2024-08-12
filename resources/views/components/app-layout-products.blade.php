@@ -6,7 +6,7 @@
     {!! SEO::generate() !!}
 
     @viteReactRefresh
-    @vite('resources/src/main.tsx')
+    @vite('resources/src/main-products.tsx')
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
