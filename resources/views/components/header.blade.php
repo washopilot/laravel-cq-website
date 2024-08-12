@@ -97,8 +97,10 @@
 
                         @foreach ($navigationItems as $item)
                             <li class="menu-item {{ $item['active'] }}">
-                                <a class="menu-link" href="#" data-href="{{ $item['href'] }}">
-                                    <div>{{ $item['label'] }}</div>
+                                <a class="menu-link" href="{{ $item['label'] === 'Productos' ? $item['href'] : '#' }}"
+                                    @if ($item['label'] !== 'Productos') data-href="{{ $item['href'] }}" @endif>
+                                    <div>{{ $item['label'] }}
+                                    </div>
                                 </a>
                             </li>
                         @endforeach

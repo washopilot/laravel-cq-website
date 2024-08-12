@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/products', function () {
+    return view('products.index');
+})->name('products.index');
+
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 
 

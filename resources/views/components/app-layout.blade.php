@@ -6,7 +6,13 @@
     {!! SEO::generate() !!}
 
     @viteReactRefresh
-    @vite('resources/src/main.tsx')
+    @if (Request::is('/'))
+        @vite('resources/src/main.tsx')
+    @elseif (Request::is('products'))
+        @vite('resources/src/main-products.tsx')
+    @else
+        @vite('resources/src/main.tsx')
+    @endif
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -79,33 +85,7 @@
  ============================================= -->
     <div id="wrapper" class="clearfix">
 
-
         {{ $slot }}
-
-
-        <!-- Content
-  ============================================= -->
-        <section id="content">
-            <div class="content-wrap py-0">
-
-                <x-section-why />
-
-                <x-portfolio />
-
-                <x-divider />
-
-                <x-visor />
-
-                {{-- <x-contact /> --}}
-                <div id="section-contact">
-                    <livewire:contact />
-                </div>
-
-
-            </div>
-        </section><!-- #content end -->
-
-        <x-footer />
 
     </div><!-- #wrapper end -->
 

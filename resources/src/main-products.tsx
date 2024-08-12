@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import App from './App'
+import App from './AppProducts'
 
-ReactDOM.createRoot(document.getElementById('visor') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('products') as HTMLElement).render(
     <React.StrictMode>
         <App />
     </React.StrictMode>
