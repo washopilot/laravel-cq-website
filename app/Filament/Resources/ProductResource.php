@@ -35,7 +35,7 @@ class ProductResource extends Resource
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('products')
                     ->multiple(false),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\Textarea::make('description')
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->required(),
