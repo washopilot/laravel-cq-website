@@ -39,8 +39,6 @@ class CategoryResource extends Resource
                     ->limit(50)
                     ->wrap()
                     ->columnSpan(2),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])

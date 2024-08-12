@@ -62,11 +62,7 @@ class ProductResource extends Resource
                     ->money('USD', true),
                 Tables\Columns\IconColumn::make('is_visible')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime(),
             ])
             ->filters([
