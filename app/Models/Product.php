@@ -42,5 +42,18 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function variants()
+    {
+        return $this->hasMany(Variant::class);
+    }
 
+    protected static function booted()
+    {
+        static::deleting(function ($product) {
+            foreach ($product->variants as $variant) {
+                $variant->clearMediaCollection();
+                $variant->delete();
+            }
+        });
+    }
 }
