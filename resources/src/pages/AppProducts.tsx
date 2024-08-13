@@ -1,13 +1,14 @@
-import React from 'react'
 import { Inertia } from '@inertiajs/inertia'
+import './app.css'
 
 interface Product {
     id: number
     name: string
     description: string
-    price: number
+    price: string
     is_visible: boolean
     category_id: number
+    order_column: number
 }
 
 interface ProductsProps {
@@ -15,9 +16,12 @@ interface ProductsProps {
 }
 
 const AppProducts = ({ products }: ProductsProps) => {
+    const sortedProducts = products.sort((a, b) => a.order_column - b.order_column)
+    console.log(products)
+
     return (
         <div>
-            <h1>Products</h1>
+            <h1 className='text-3xl font-bold underline'>Hello world!</h1>
             <table>
                 <thead>
                     <tr>
@@ -25,7 +29,6 @@ const AppProducts = ({ products }: ProductsProps) => {
                         <th>Description</th>
                         <th>Price</th>
                         <th>Visible</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,11 +36,8 @@ const AppProducts = ({ products }: ProductsProps) => {
                         <tr key={product.id}>
                             <td>{product.name}</td>
                             <td>{product.description}</td>
-                            {/* <td>${product.price.toFixed(2)}</td> */}
+                            <td>${Number(product.price).toFixed(2)}</td>
                             <td>{product.is_visible ? 'Yes' : 'No'}</td>
-                            <td>
-                                <button onClick={() => Inertia.visit(`/products/${product.id}`)}>View</button>
-                            </td>
                         </tr>
                     ))}
                 </tbody>
