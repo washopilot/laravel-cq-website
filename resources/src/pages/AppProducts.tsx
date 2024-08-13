@@ -17,11 +17,10 @@ interface ProductsProps {
 
 const AppProducts = ({ products }: ProductsProps) => {
     const sortedProducts = products.sort((a, b) => a.order_column - b.order_column)
-    console.log(products)
 
     return (
         <div>
-            <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+            <h1 className='text-3xl font-bold underline text-yellow-400'>Hello world!</h1>
             <table>
                 <thead>
                     <tr>

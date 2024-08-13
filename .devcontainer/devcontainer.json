@@ -57,7 +57,8 @@
                 "esbenp.prettier-vscode",
                 "yy0931.vscode-sqlite3-editor",
                 "redhat.vscode-yaml",
-                "WallabyJs.console-ninja"
+                "WallabyJs.console-ninja",
+                "bradlc.vscode-tailwindcss"
             ]
         }
     },
