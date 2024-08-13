@@ -17,22 +17,16 @@ interface ProductsProps {
 }
 
 const AppProducts = ({ products }: ProductsProps) => {
-    console.log(products)
-
-    const sortedProducts = products.sort((a, b) => a.order_column - b.order_column)
+    products.sort((a, b) => a.order_column - b.order_column)
 
     return (
-        <>
-            <h1 className='text-3xl font-bold underline text-indigo-500'>Hello world!</h1>
-
-            <div className='min-h-screen bg-gray-100 flex flex-col justify-center'>
-                <div className='relative m-3 flex flex-wrap mx-auto justify-center'>
-                    {products.map((product) => (
-                        <Card key={product.id} product={product} />
-                    ))}
-                </div>
+        <div className='min-h-screen bg-gray-100 flex flex-col justify-center'>
+            <div className='relative m-3 flex flex-wrap mx-auto justify-center'>
+                {products.map((product) => (
+                    <Card key={product.id} product={product} />
+                ))}
             </div>
-        </>
+        </div>
     )
 }
 

@@ -18,6 +18,7 @@ class ProductsController extends Controller
                 return [
                     'id' => $product->id,
                     'name' => $product->name,
+                    'order_column' => $product->order_column,
                     'description' => $product->description,
                     'price' => $product->price,
                     'is_visible' => $product->is_visible,
