@@ -38,6 +38,9 @@ class VariantsRelationManager extends RelationManager
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('order_column')
+                    ->toggleable(true, true)
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->sortable(),
                 SpatieMediaLibraryImageColumn::make('images')
@@ -46,6 +49,8 @@ class VariantsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('price')
                     ->money('USD', true),
             ])
+            ->reorderable('order_column')
+            ->defaultSort('order_column')
             ->filters([
                 //
             ])

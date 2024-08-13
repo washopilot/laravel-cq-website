@@ -20,27 +20,32 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        // Limpiar las imágenes existentes en el almacenamiento
         $directories = Storage::directories('public');
         foreach ($directories as $directory) {
             Storage::deleteDirectory($directory);
         }
 
-        // Crear categorías
         $categories = Category::factory(3)->create();
 
-        // Crear productos y variantes
-        Product::factory(5)->create([
+        $products = Product::factory(3)->create([
             'category_id' => function () use ($categories) {
                 return $categories->random()->id;
             },
-        ])->each(function ($product) {
-            // Generar un número aleatorio de variantes entre 1 y 3
-            $variantCount = rand(0, 3); // Cambiado para ser aleatorio
-            Variant::factory($variantCount)->create(['product_id' => $product->id]);
+        ]);
+
+        $products->each(function ($product, $index) {
+            $product->update(['order_column' => $index + 1]);
         });
 
-        // Crear un usuario administrador
+        $products->each(function ($product) {
+            $variantCount = rand(1, 3);
+            $variants = Variant::factory($variantCount)->create(['product_id' => $product->id]);
+
+            $variants->each(function ($variant, $index) {
+                $variant->update(['order_column' => $index + 1]);
+            });
+        });
+
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',

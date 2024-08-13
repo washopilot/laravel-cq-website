@@ -21,4 +21,9 @@ class ListProducts extends ListRecords
     {
         return ProductResource::getWidgets();
     }
+
+    public function reorderTable(array $order): void
+    {
+        static::getResource()::getModel()::setNewOrder($order);
+    }
 }

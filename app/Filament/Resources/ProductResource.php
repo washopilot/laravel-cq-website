@@ -53,6 +53,9 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('order_column')
+                    ->toggleable(true, true)
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
                     ->sortable(),
@@ -70,6 +73,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
+            ->reorderable('order_column')
+            ->defaultSort('order_column')
             ->filters([
                 //
             ])

@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('order_column')->default(0);
             $table->decimal('price', 8, 2);
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
