@@ -14,12 +14,15 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use App\Filament\Resources\ProductResource\Widgets\ProductStats;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-lightning-bolt';
+
+    protected static ?string $navigationGroup = 'Shop';
 
     public static function form(Form $form): Form
     {
@@ -38,6 +41,7 @@ class ProductResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required(),
                 Forms\Components\TextInput::make('price')
+                    ->numeric()
                     ->required(),
                 Forms\Components\Toggle::make('is_visible')
                     ->required(),
@@ -77,10 +81,19 @@ class ProductResource extends Resource
             ]);
     }
 
+    public static function getWidgets(): array
+    {
+        return [
+            ProductStats::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageProducts::route('/'),
+            'index' => Pages\ListProducts::route('/'),
+            'create' => Pages\CreateProduct::route('/create'),
+            'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
 }
