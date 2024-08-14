@@ -1,5 +1,5 @@
 <x-app-layout-products>
-    <x-header />
+    {{-- <x-header /> --}}
     <!-- Content
   ============================================= -->
     <section id="content">

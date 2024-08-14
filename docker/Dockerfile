@@ -64,7 +64,7 @@ RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
 USER devuser
 
 CMD \
-    npm ci -d && npm run build && \
-    composer install --prefer-dist --no-progress --no-suggest && \
-    composer clear-cache && \
+    # npm ci -d && npm run build && \
+    # composer install --prefer-dist --no-progress --no-suggest && \
+    # composer clear-cache && \
     apache2-foreground
