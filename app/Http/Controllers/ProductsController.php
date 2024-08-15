@@ -45,7 +45,7 @@ class ProductsController extends Controller
                     'id' => $variant->id,
                     'name' => $variant->name,
                     'images' => $variant->getMedia('variants')->map(function ($media) {
-                        return $media->getUrl();
+                        return $media->getUrl('thumb');
                     }),
                     'price' => $variant->price,
                     'product_id' => $variant->product_id,
