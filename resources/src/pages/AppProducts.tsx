@@ -67,7 +67,7 @@ const AppProducts = ({ products, categories }: ProductsProps) => {
                     </div>
                 ))}
             </div>
-            <ProductModal open={openModal} setOpen={setOpenModal} />
+            {selectedProduct && <ProductModal open={openModal} setOpen={setOpenModal} product={selectedProduct} />}
         </div>
     )
 }

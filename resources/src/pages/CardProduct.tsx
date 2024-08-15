@@ -1,3 +1,4 @@
+import formatCurrency from '../utils/format-currency'
 import { Product } from './AppProducts'
 
 type CardProductProps = {
@@ -6,18 +7,6 @@ type CardProductProps = {
 }
 
 const CardProduct = ({ product, onButtonClick }: CardProductProps) => {
-    const formatCurrency = (value: string) => {
-        const numberValue = parseFloat(value)
-        if (isNaN(numberValue)) {
-            return 'Invalid price'
-        }
-
-        return `$${numberValue.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        })}`
-    }
-
     return (
         <div key={product.id} className='group relative'>
             <div className='aspect-h-4 aspect-w-3 overflow-hidden rounded-lg bg-gray-100'>
