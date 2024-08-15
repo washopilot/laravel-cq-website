@@ -47,6 +47,8 @@ class ProductsController extends Controller
                     'images' => $variant->getMedia('variants')->map(function ($media) {
                         return $media->getUrl();
                     }),
+                    'price' => $variant->price,
+                    'product_id' => $variant->product_id,
                 ];
             }),
 

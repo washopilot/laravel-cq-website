@@ -1,11 +1,18 @@
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Fragment, useState } from 'react'
-import { Product } from '../interfaces/interfaces'
+import { Fragment } from 'react'
+import { Product, Variant } from '../interfaces/interfaces'
 import formatCurrency from '../utils/format-currency'
 
-type ProductModalProps = { open: boolean; setOpen: React.Dispatch<React.SetStateAction<boolean>>; product: Product }
+type ProductModalProps = {
+    open: boolean
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    product: Product
+    filteredVariants: Variant[]
+    setSelectedVariant: React.Dispatch<React.SetStateAction<Variant>>
+    selectedVariant: Variant
+}
 
 const productData = {
     name: 'Everyday Ruck Snack',
@@ -24,10 +31,14 @@ function classNames(...classes: string[]): string {
     return classes.filter(Boolean).join(' ')
 }
 
-const ProductModal = ({ open, setOpen, product }: ProductModalProps) => {
-    // const [open, setOpen] = useState(false)
-    const [selectedSize, setSelectedSize] = useState(productData.sizes[0])
-
+const ProductModal = ({
+    open,
+    setOpen,
+    product,
+    filteredVariants,
+    setSelectedVariant,
+    selectedVariant
+}: ProductModalProps) => {
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as='div' className='relative z-10' onClose={setOpen}>
@@ -66,8 +77,8 @@ const ProductModal = ({ open, setOpen, product }: ProductModalProps) => {
                                         <div className='sm:col-span-4 lg:col-span-5'>
                                             <div className='aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100'>
                                                 <img
-                                                    src={productData.imageSrc}
-                                                    alt={productData.imageAlt}
+                                                    src={selectedVariant.images[0]}
+                                                    alt={'imageAlt'}
                                                     className='object-cover object-center'
                                                 />
                                             </div>
@@ -91,7 +102,7 @@ const ProductModal = ({ open, setOpen, product }: ProductModalProps) => {
 
                                                 <div className='flex items-center'>
                                                     <p className='text-lg text-gray-900 sm:text-xl'>
-                                                        {formatCurrency(product.price)}
+                                                        {formatCurrency(selectedVariant.price)}
                                                     </p>
 
                                                     <div className='ml-4 border-l border-gray-300 pl-4'>
@@ -137,15 +148,17 @@ const ProductModal = ({ open, setOpen, product }: ProductModalProps) => {
                                                 <form>
                                                     <div className='sm:flex sm:justify-between'>
                                                         {/* Size selector */}
-                                                        <RadioGroup value={selectedSize} onChange={setSelectedSize}>
+                                                        <RadioGroup
+                                                            value={selectedVariant}
+                                                            onChange={setSelectedVariant}>
                                                             <RadioGroup.Label className='block text-sm font-medium text-gray-700'>
-                                                                Size
+                                                                Variants
                                                             </RadioGroup.Label>
                                                             <div className='mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                                                                {productData.sizes.map((size) => (
+                                                                {filteredVariants.map((size) => (
                                                                     <RadioGroup.Option
                                                                         as='div'
-                                                                        key={size.name}
+                                                                        key={size.id}
                                                                         value={size}
                                                                         className={({ active }) =>
                                                                             classNames(
@@ -163,7 +176,7 @@ const ProductModal = ({ open, setOpen, product }: ProductModalProps) => {
                                                                                 <RadioGroup.Description
                                                                                     as='p'
                                                                                     className='mt-1 text-sm text-gray-500'>
-                                                                                    {size.description}
+                                                                                    {'Lorem ipsum dolor sit amet.'}
                                                                                 </RadioGroup.Description>
                                                                                 <div
                                                                                     className={classNames(

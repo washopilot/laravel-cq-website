@@ -1,24 +1,31 @@
 import { useState } from 'react'
-import { Category, Product, Variants } from '../interfaces/interfaces'
+import { Category, Product, Variant } from '../interfaces/interfaces'
 import CardProduct from './CardProduct'
 import ProductModal from './ProductModal'
 
 interface ProductsProps {
     products: Product[]
     categories: Category[]
-    variants: Variants[]
+    variants: Variant[]
 }
 
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
+    const [filteredVariants, setFilteredVariants] = useState<Variant[]>(null!)
     const [openModal, setOpenModal] = useState(false)
+    const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
+
     const handleProductClick = (product: Product) => {
+        const temp_variants = variants.filter((variant) => variant.product_id === product.id)
+
         setSelectedProduct(product)
+        setFilteredVariants(temp_variants)
+        setSelectedVariant(temp_variants[0])
         setOpenModal(true)
     }
 
     products.sort((a, b) => a.order_column - b.order_column)
-    // console.log(variants)
+    console.log(variants)
 
     const productsByCategory = categories.map((category) => {
         return {
@@ -53,7 +60,16 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     </div>
                 ))}
             </div>
-            {selectedProduct && <ProductModal open={openModal} setOpen={setOpenModal} product={selectedProduct} />}
+            {selectedProduct && (
+                <ProductModal
+                    open={openModal}
+                    setOpen={setOpenModal}
+                    product={selectedProduct}
+                    filteredVariants={filteredVariants}
+                    setSelectedVariant={setSelectedVariant}
+                    selectedVariant={selectedVariant}
+                />
+            )}
         </div>
     )
 }

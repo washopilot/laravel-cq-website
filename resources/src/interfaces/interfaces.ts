@@ -15,7 +15,7 @@ export interface Category {
     description: string
 }
 
-export interface Variants {
+export interface Variant {
     id: number
     name: string
     product_id: number
