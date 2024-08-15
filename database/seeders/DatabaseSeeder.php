@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    const string IMAGE_URL = "https://picsum.photos/200/300";
+    const string IMAGE_URL = "https://picsum.photos/300/400";
 
     public function run()
     {
