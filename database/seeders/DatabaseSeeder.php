@@ -25,14 +25,14 @@ class DatabaseSeeder extends Seeder
             Storage::deleteDirectory($directory);
         }
 
-        $categories = Category::factory(3)->create();
+        $categories = Category::factory(5)->create();
 
-        Product::factory(5)->create([
+        Product::factory(25)->create([
             'category_id' => function () use ($categories) {
                 return $categories->random()->id;
             },
         ])->each(function ($product) {
-            $variantCount = rand(0, 3);
+            $variantCount = rand(3, 3);
             Variant::factory($variantCount)->create(['product_id' => $product->id]);
         });
 

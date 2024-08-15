@@ -1,8 +1,8 @@
-import { Fragment, useState } from 'react'
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
-import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
-import { Product } from './AppProducts'
+import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Fragment, useState } from 'react'
+import { Product } from '../interfaces/interfaces'
 import formatCurrency from '../utils/format-currency'
 
 type ProductModalProps = { open: boolean; setOpen: React.Dispatch<React.SetStateAction<boolean>>; product: Product }

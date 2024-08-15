@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Inertia\Inertia;
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class ProductsController extends Controller
 {
@@ -13,6 +15,7 @@ class ProductsController extends Controller
     {
         $products = Product::all();
         $categories = Category::all();
+        $variants = Variant::all();
         Inertia::setRootView('products.home');
 
         return Inertia::render('AppProducts', [
@@ -37,6 +40,16 @@ class ProductsController extends Controller
                     'description' => $category->description,
                 ];
             }),
+            'variants' => $variants->map(function ($variant) {
+                return [
+                    'id' => $variant->id,
+                    'name' => $variant->name,
+                    'images' => $variant->getMedia('variants')->map(function ($media) {
+                        return $media->getUrl();
+                    }),
+                ];
+            }),
+
         ]);
 
     }

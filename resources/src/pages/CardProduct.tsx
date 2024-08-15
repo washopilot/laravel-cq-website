@@ -1,5 +1,5 @@
+import { Product } from '../interfaces/interfaces'
 import formatCurrency from '../utils/format-currency'
-import { Product } from './AppProducts'
 
 type CardProductProps = {
     product: Product

@@ -1,30 +1,15 @@
 import { useState } from 'react'
+import { Category, Product, Variants } from '../interfaces/interfaces'
 import CardProduct from './CardProduct'
 import ProductModal from './ProductModal'
-
-export interface Product {
-    id: number
-    name: string
-    description: string
-    price: string
-    is_visible: boolean
-    category_id: number
-    order_column: number
-    images: string[]
-}
-
-export interface Category {
-    id: number
-    name: string
-    description: string
-}
 
 interface ProductsProps {
     products: Product[]
     categories: Category[]
+    variants: Variants[]
 }
 
-const AppProducts = ({ products, categories }: ProductsProps) => {
+const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
     const [openModal, setOpenModal] = useState(false)
     const handleProductClick = (product: Product) => {
@@ -33,6 +18,7 @@ const AppProducts = ({ products, categories }: ProductsProps) => {
     }
 
     products.sort((a, b) => a.order_column - b.order_column)
+    // console.log(variants)
 
     const productsByCategory = categories.map((category) => {
         return {

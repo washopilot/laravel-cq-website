@@ -28,7 +28,7 @@ class Variant extends Model implements HasMedia
     protected $casts = [
         'id' => 'integer',
         'price' => 'decimal:2',
-        'category_id' => 'integer',
+        'product_id' => 'integer',
     ];
 
     public function product()
