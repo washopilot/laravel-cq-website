@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Category, Product, Variant } from '../interfaces/interfaces'
+import './app.css'
 import CardProduct from './CardProduct'
 import ProductModal from './ProductModal'
 
@@ -15,32 +16,32 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [openModal, setOpenModal] = useState(false)
     const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
 
+    const sortedProducts = useMemo(() => {
+        return [...products].sort((a, b) => a.order_column - b.order_column)
+    }, [products])
+
     const handleProductClick = (product: Product) => {
         const temp_variants = variants.filter((variant) => variant.product_id === product.id)
-
         setSelectedProduct(product)
         setFilteredVariants(temp_variants)
-        setSelectedVariant(temp_variants[0])
+        setSelectedVariant(temp_variants[0] || null)
         setOpenModal(true)
     }
 
-    products.sort((a, b) => a.order_column - b.order_column)
-    console.log(variants)
-
-    const productsByCategory = categories.map((category) => {
-        return {
+    const productsByCategory = useMemo(() => {
+        return categories.map((category) => ({
             ...category,
-            products: products.filter((product) => product.category_id === category.id)
-        }
-    })
+            products: sortedProducts.filter((product) => product.category_id === category.id)
+        }))
+    }, [categories, sortedProducts])
 
     return (
         <div className='bg-white'>
             <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 divide-y divide-gray-200'>
                 {productsByCategory.map(({ id, name, products }) => (
                     <div key={id} className='mb-10 py-5'>
-                        <div className='flex items-center justify-between space-x-4 '>
-                            <h2 className='text-xl font-medium text-gray-900'>{name}</h2>
+                        <div className='flex items-center justify-between space-x-4'>
+                            <h2 className='text-2xl font-medium text-gray-900'>{name}</h2>
                             <a
                                 href='#'
                                 className='whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500'>

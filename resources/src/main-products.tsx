@@ -1,7 +1,6 @@
 import { createInertiaApp } from '@inertiajs/inertia-react'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import './pages/app.css'
 
 createInertiaApp({
     id: 'products',
