@@ -10,13 +10,18 @@ RUN apt-get update && \
     unzip \
     libicu-dev \
     libbz2-dev \
+    libreadline-dev \
+    g++ \
+    libzip-dev \
     libpng-dev \
     libjpeg-dev \
-    libmcrypt-dev \
-    libreadline-dev \
     libfreetype6-dev \
-    g++ \
-    libzip-dev && \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libgd-dev \
+    jpegoptim optipng pngquant gifsicle \
+    libonig-dev \
+    libxml2-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -43,6 +48,8 @@ RUN docker-php-ext-install \
     # mbstring \
     pdo_mysql \
     zip && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install -j$(nproc) gd && \
     rm -rf /tmp/*
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \

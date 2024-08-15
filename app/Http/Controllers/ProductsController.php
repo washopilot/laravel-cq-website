@@ -29,7 +29,7 @@ class ProductsController extends Controller
                     'is_visible' => $product->is_visible,
                     'category_id' => $product->category_id,
                     'images' => $product->getMedia('products')->map(function ($media) {
-                        return $media->getUrl();
+                        return $media->getUrl('thumb');
                     }),
                 ];
             }),
