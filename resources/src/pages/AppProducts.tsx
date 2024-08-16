@@ -35,7 +35,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         }))
     }, [categories, sortedProducts])
 
-    console.log(productsByCategory)
+    // console.log(productsByCategory)
 
     return (
         <div className='bg-white'>
