@@ -4,7 +4,7 @@ import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { Product, Variant } from '../interfaces/interfaces'
-import formatCurrency from '../utils/format-currency'
+import AnimatedCurrency from './AnimatedCurrency'
 
 type ProductModalProps = {
     open: boolean
@@ -108,7 +108,8 @@ const ProductModal = ({
 
                                                 <div className='flex items-center'>
                                                     <p className='text-lg text-gray-900 sm:text-xl'>
-                                                        {formatCurrency(selectedVariant.price)}
+                                                        {/* {formatCurrency(selectedVariant.price)} */}
+                                                        <AnimatedCurrency value={Number(selectedVariant.price)} />
                                                     </p>
 
                                                     <div className='ml-4 border-l border-gray-300 pl-4'>
