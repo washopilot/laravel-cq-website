@@ -3,7 +3,7 @@ import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
-import { Product, Variant } from '../interfaces/interfaces'
+import { Product, Variant } from '../../interfaces/interfaces'
 import AnimatedCurrency from './AnimatedCurrency'
 
 type ProductModalProps = {

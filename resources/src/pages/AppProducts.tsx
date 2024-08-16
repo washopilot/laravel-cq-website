@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
-import CardProduct from './CardProduct'
-import ProductModal from './ProductModal'
+import CardProduct from './components/CardProduct'
+import ProductModal from './components/ProductModal'
+import { Link } from '@inertiajs/inertia-react'
 
 interface ProductsProps {
     products: Product[]
@@ -44,12 +45,12 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     <div key={id} className='mb-10 py-5'>
                         <div className='flex items-center justify-between space-x-4'>
                             <h2 className='text-2xl font-medium text-gray-900'>{name}</h2>
-                            <a
-                                href='#'
+                            <Link
+                                href='/products/show'
                                 className='whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500'>
                                 View all
                                 <span aria-hidden='true'> &rarr;</span>
-                            </a>
+                            </Link>
                         </div>
                         <div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
                             {products.map(

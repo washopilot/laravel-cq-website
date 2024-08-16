@@ -26,6 +26,11 @@ Route::get(
     [ProductsController::class, 'index']
 );
 
+Route::get(
+    '/products/show',
+    [ProductsController::class, 'show']
+);
+
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 
 

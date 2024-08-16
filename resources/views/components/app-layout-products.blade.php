@@ -11,26 +11,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
+    {{ $slot }}
 
 
-</head>
-
-
-<body class="stretched side-push-panel">
-
-
-    <div class="body-overlay"></div>
-
-    <!-- Document Wrapper
- ============================================= -->
-    <div id="wrapper" class="clearfix">
-
-        {{ $slot }}
-
-    </div><!-- #wrapper end -->
-
-
-
-</body>
+    </body>
 
 </html>

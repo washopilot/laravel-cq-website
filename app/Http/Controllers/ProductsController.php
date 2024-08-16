@@ -55,4 +55,14 @@ class ProductsController extends Controller
         ]);
 
     }
+    public function show()
+    {
+
+        Inertia::setRootView('products.home');
+
+        return Inertia::render('ShowProducts', [
+            'message' => 'HELLO WORD MF'
+        ]);
+
+    }
 }
