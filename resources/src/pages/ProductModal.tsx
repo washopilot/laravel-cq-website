@@ -1,6 +1,7 @@
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { Product, Variant } from '../interfaces/interfaces'
 import formatCurrency from '../utils/format-currency'
@@ -76,10 +77,15 @@ const ProductModal = ({
                                     <div className='grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8'>
                                         <div className='sm:col-span-4 lg:col-span-5'>
                                             <div className='aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100'>
-                                                <img
+                                                <motion.img
+                                                    key={selectedVariant.images[0]} // Cambia la clave para que framer-motion detecte cambios
                                                     src={selectedVariant.images[0]}
                                                     alt={'imageAlt'}
                                                     className='object-cover object-center'
+                                                    initial={{ opacity: 0, scale: 0.95 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    exit={{ opacity: 0, scale: 0.95 }}
+                                                    transition={{ duration: 0.5, ease: 'easeInOut' }}
                                                 />
                                             </div>
                                             <p className='absolute left-4 top-4 text-center sm:static sm:mt-6'>

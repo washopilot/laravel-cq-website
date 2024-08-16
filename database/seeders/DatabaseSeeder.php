@@ -27,12 +27,12 @@ class DatabaseSeeder extends Seeder
 
         $categories = Category::factory(3)->create();
 
-        Product::factory(4)->create([
+        Product::factory(10)->create([
             'category_id' => function () use ($categories) {
                 return $categories->random()->id;
             },
         ])->each(function ($product) {
-            $variantCount = rand(1, 2);
+            $variantCount = rand(1, 3);
             Variant::factory($variantCount)->create(['product_id' => $product->id]);
         });
 
