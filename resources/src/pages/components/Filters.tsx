@@ -1,19 +1,19 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useCallback, useMemo, useState } from 'react'
-import { filters } from '../AppProducts'
+import { FiltersType } from '../AppProducts'
 
-type SortOption = {
+type SortOptionType = {
     name: string
     href: string
     current: boolean
 }
 
 interface FiltersProps {
-    sortOptions: SortOption[]
-    setSortOptions: React.Dispatch<React.SetStateAction<SortOption[]>>
-    filters: filters
-    setFilters: React.Dispatch<React.SetStateAction<filters>>
+    sortOptions: SortOptionType[]
+    setSortOptions: React.Dispatch<React.SetStateAction<SortOptionType[]>>
+    filters: FiltersType
+    setFilters: React.Dispatch<React.SetStateAction<FiltersType>>
 }
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
@@ -48,7 +48,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
         )
     }, [])
 
-    const handleSortOptionChange = useCallback((selectedOption: SortOption) => {
+    const handleSortOptionChange = useCallback((selectedOption: SortOptionType) => {
         setSortOptions((prevOptions) =>
             prevOptions.map((option) => ({
                 ...option,

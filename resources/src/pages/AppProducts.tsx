@@ -7,7 +7,7 @@ import CardProduct from './components/CardProduct'
 import Filters from './components/Filters'
 import ProductModal from './components/ProductModal'
 
-export type filters = {
+export type FiltersType = {
     id: string
     name: string
     options: {
@@ -50,12 +50,33 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         ],
         [categories]
     )
-    const [filters, setFilters] = useState<filters>(initialFilters)
+    const [filters, setFilters] = useState<FiltersType>(initialFilters)
 
-    const sortedProducts = useMemo(() => {
+    const getCategoryIdBySlug = (slug: string, categories: Category[]): number | undefined => {
+        return categories.find((category) => category.slug === slug)?.id
+    }
+
+    const filterProductsByCategory = (products: Product[], filters: FiltersType, categories: Category[]): Product[] => {
+        const selectedCategoryValues =
+            filters
+                .find((filter) => filter.id === 'category')
+                ?.options.filter((option) => option.checked)
+                .map((option) => option.value) || []
+
+        const selectedCategoryIds = selectedCategoryValues.map((slug) => getCategoryIdBySlug(slug, categories))
+
+        return products.filter(
+            (product) => selectedCategoryIds.length === 0 || selectedCategoryIds.includes(product.category_id)
+        )
+    }
+
+    const filteredAndSortedProducts = useMemo(() => {
+        const filteredProducts = filterProductsByCategory(products, filters, categories)
+
         const selectedSortOption = sortOptions.find((option) => option.current)
-        if (!selectedSortOption) return products
-        const sorted = [...products]
+        if (!selectedSortOption) return filteredProducts
+
+        const sorted = [...filteredProducts]
         switch (selectedSortOption.name) {
             case 'Orden: Ascendente':
                 return sorted.sort((a, b) => (b.order_column ?? 0) - (a.order_column ?? 0))
@@ -68,7 +89,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
             default:
                 return sorted
         }
-    }, [products, sortOptions])
+    }, [products, filters, categories, sortOptions])
 
     const handleProductClick = useCallback(
         (product: Product) => {
@@ -111,7 +132,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                     className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
-                    {sortedProducts.map(
+                    {filteredAndSortedProducts.map(
                         (product, index) =>
                             product.is_visible && (
                                 <motion.div
