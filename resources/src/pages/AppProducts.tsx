@@ -12,16 +12,37 @@ interface ProductsProps {
     variants: Variant[]
 }
 
+const INITIAL_SORT_OPTIONS = [
+    { name: 'Orden: Ascendente', href: '#', current: false },
+    { name: 'Orden: Descendente', href: '#', current: true },
+    { name: 'Precio: Menor a Mayor', href: '#', current: false },
+    { name: 'Precio: Mayor a Menor', href: '#', current: false }
+]
+
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
     const [filteredVariants, setFilteredVariants] = useState<Variant[]>([])
     const [openModal, setOpenModal] = useState(false)
     const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
+    const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
 
-    const sortedProducts = useMemo(
-        () => products.slice().sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0)),
-        [products]
-    )
+    const sortedProducts = useMemo(() => {
+        const selectedSortOption = sortOptions.find((option) => option.current)
+        if (!selectedSortOption) return products
+        const sorted = [...products]
+        switch (selectedSortOption.name) {
+            case 'Orden: Ascendente':
+                return sorted.sort((a, b) => (b.order_column ?? 0) - (a.order_column ?? 0))
+            case 'Orden: Descendente':
+                return sorted.sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
+            case 'Precio: Menor a Mayor':
+                return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+            case 'Precio: Mayor a Menor':
+                return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+            default:
+                return sorted
+        }
+    }, [products, sortOptions])
 
     const handleProductClick = (product: Product) => {
         const tempVariants = variants
@@ -46,7 +67,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                 </p>
             </div>
 
-            <Filters categories={categories} />
+            <Filters categories={categories} sortOptions={sortOptions} setSortOptions={setSortOptions} />
 
             <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
                 <div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>

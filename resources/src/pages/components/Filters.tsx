@@ -3,14 +3,21 @@ import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useCallback, useMemo, useState } from 'react'
 import { Category } from '../../interfaces/interfaces'
 
-const INITIAL_SORT_OPTIONS = [
-    { name: 'Price: Low to High', href: '#', current: true },
-    { name: 'Price: High to Low', href: '#', current: false }
-]
+type SortOption = {
+    name: string
+    href: string
+    current: boolean
+}
+
+interface FiltersProps {
+    categories: Category[]
+    sortOptions: SortOption[]
+    setSortOptions: React.Dispatch<React.SetStateAction<SortOption[]>>
+}
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-const Filters = ({ categories }: { categories: Category[] }) => {
+const Filters = ({ categories, sortOptions, setSortOptions }: FiltersProps) => {
     const initialFilters = useMemo(
         () => [
             {
@@ -28,7 +35,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
     // console.log(initialFilters)
 
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-    const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
+
     const [filters, setFilters] = useState(initialFilters)
 
     const activeFilters = useMemo(() => filters[0].options.filter((option) => option.checked), [filters])
@@ -59,7 +66,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         )
     }, [])
 
-    const handleSortOptionChange = useCallback((selectedOption: (typeof INITIAL_SORT_OPTIONS)[0]) => {
+    const handleSortOptionChange = useCallback((selectedOption: SortOption) => {
         setSortOptions((prevOptions) =>
             prevOptions.map((option) => ({
                 ...option,
