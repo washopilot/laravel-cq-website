@@ -1,20 +1,7 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useCallback, useMemo, useState } from 'react'
-
-const INITIAL_FILTERS = [
-    {
-        id: 'category',
-        name: 'Category',
-        options: [
-            { value: 'new-arrivals', label: 'All New Arrivals', checked: false },
-            { value: 'tees', label: 'Tees', checked: false },
-            { value: 'objects', label: 'Objects', checked: true },
-            { value: 'sweatshirts', label: 'Sweatshirts', checked: true },
-            { value: 'pants-shorts', label: 'Pants & Shorts', checked: false }
-        ]
-    }
-]
+import { Category } from '../../interfaces/interfaces'
 
 const INITIAL_SORT_OPTIONS = [
     { name: 'Price: Low to High', href: '#', current: true },
@@ -23,10 +10,26 @@ const INITIAL_SORT_OPTIONS = [
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-const Filters = () => {
+const Filters = ({ categories }: { categories: Category[] }) => {
+    const initialFilters = useMemo(
+        () => [
+            {
+                id: 'category',
+                name: 'Category',
+                options: categories.map((category) => ({
+                    value: category.slug,
+                    label: category.name,
+                    checked: true
+                }))
+            }
+        ],
+        [categories]
+    )
+    console.log(initialFilters)
+
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
-    const [filters, setFilters] = useState(INITIAL_FILTERS)
+    const [filters, setFilters] = useState(initialFilters)
 
     const activeFilters = useMemo(() => filters[0].options.filter((option) => option.checked), [filters])
 

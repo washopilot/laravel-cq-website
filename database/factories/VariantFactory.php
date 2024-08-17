@@ -24,7 +24,7 @@ class VariantFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Variant_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
+            'name' => 'Var_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
             'price' => $this->faker->randomFloat(2, 0, 999999.99),
             'product_id' => Product::factory(),
         ];

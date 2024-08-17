@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProductResource\Pages;
 use App\Filament\Resources\ProductResource\RelationManagers\VariantsRelationManager;
 use App\Models\Product;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -15,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use App\Filament\Resources\ProductResource\Widgets\ProductStats;
-
+use Illuminate\Support\Str;
+use Closure;
 
 class ProductResource extends Resource
 {
@@ -31,11 +33,19 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\Select::make('category_id')
                     ->label('Category')
-                    ->options(\App\Models\Category::all()->pluck('name', 'id'))
+                    ->options(Category::all()->pluck('name', 'id'))
                     ->searchable()
                     ->required(),
                 Forms\Components\TextInput::make('name')
-                    ->required(),
+                    ->lazy()
+                    ->required()
+                    ->afterStateUpdated(function (Closure $set, $state) {
+                        $set('slug', Str::slug($state));
+                    }),
+                Forms\Components\TextInput::make('slug')
+                    ->disabled()
+                    ->required()
+                    ->unique(Product::class, 'slug', ignoreRecord: true),
                 SpatieMediaLibraryFileUpload::make('images')
                     ->collection('products')
                     ->multiple(false),
@@ -45,8 +55,10 @@ class ProductResource extends Resource
                     ->numeric()
                     ->required(),
                 Forms\Components\Toggle::make('is_visible')
-                    ->required(),
-            ]);
+                    ->required()
+                    ->default(true),
+            ])
+        ;
     }
 
     public static function table(Table $table): Table
@@ -58,6 +70,7 @@ class ProductResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
+                    ->color('primary')
                     ->sortable(),
                 SpatieMediaLibraryImageColumn::make('images')
                     ->collection('products')
@@ -71,7 +84,9 @@ class ProductResource extends Resource
                 Tables\Columns\IconColumn::make('is_visible')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
             ])
             ->reorderable('order_column')
             ->defaultSort('order_column')
@@ -109,4 +124,6 @@ class ProductResource extends Resource
             VariantsRelationManager::class,
         ];
     }
+
+
 }

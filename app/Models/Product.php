@@ -32,6 +32,7 @@ class Product extends Model implements HasMedia
         'price',
         'is_visible',
         'category_id',
+        'slug'
     ];
 
     /**

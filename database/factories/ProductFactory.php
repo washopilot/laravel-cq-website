@@ -28,10 +28,11 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Product_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
+            'name' => $name = 'Prod_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
+            'slug' => Str::slug($name),
             'description' => $this->faker->text,
             'price' => $this->faker->randomFloat(2, 0, 999999.99),
-            'is_visible' => $this->faker->boolean,
+            'is_visible' => true,
             'category_id' => Category::factory(),
         ];
     }

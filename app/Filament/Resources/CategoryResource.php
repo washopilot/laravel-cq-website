@@ -12,6 +12,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
+use Closure;
 
 class CategoryResource extends Resource
 {
@@ -26,9 +28,16 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required(),
+                    ->lazy()
+                    ->required()
+                    ->afterStateUpdated(function (Closure $set, $state) {
+                        $set('slug', Str::slug($state));
+                    }),
+                Forms\Components\TextInput::make('slug')
+                    ->disabled()
+                    ->required()
+                    ->unique(Category::class, 'slug', ignoreRecord: true),
+                Forms\Components\Textarea::make('description')->required(),
             ]);
     }
 
@@ -42,7 +51,9 @@ class CategoryResource extends Resource
                     ->wrap()
                     ->columnSpan(2),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->toggleable()
+                    ->toggledHiddenByDefault(),
             ])
             ->filters([
                 //

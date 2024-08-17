@@ -24,7 +24,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Category_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
+            'name' => $name = 'Cat_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
+            'slug' => Str::slug($name),
             'description' => $this->faker->text,
         ];
     }

@@ -23,6 +23,7 @@ class ProductsController extends Controller
                 return [
                     'id' => $product->id,
                     'name' => $product->name,
+                    'slug' => $product->slug,
                     'order_column' => $product->order_column,
                     'description' => $product->description,
                     'price' => $product->price,
@@ -37,6 +38,7 @@ class ProductsController extends Controller
                 return [
                     'id' => $category->id,
                     'name' => $category->name,
+                    'slug' => $category->slug,
                     'description' => $category->description,
                 ];
             }),

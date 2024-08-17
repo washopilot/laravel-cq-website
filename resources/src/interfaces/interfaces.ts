@@ -1,6 +1,7 @@
 export interface Product {
     id: number
     name: string
+    slug: string
     description: string
     price: string
     is_visible: boolean
@@ -12,6 +13,7 @@ export interface Product {
 export interface Category {
     id: number
     name: string
+    slug: string
     description: string
 }
 
