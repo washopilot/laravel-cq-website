@@ -14,36 +14,36 @@ interface ProductsProps {
 
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
-    const [filteredVariants, setFilteredVariants] = useState<Variant[]>(null!)
+    const [filteredVariants, setFilteredVariants] = useState<Variant[]>([])
     const [openModal, setOpenModal] = useState(false)
     const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
 
-    const sortedProducts = useMemo(() => {
-        return [...products].sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
-    }, [products])
+    const sortedProducts = useMemo(
+        () => products.slice().sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0)),
+        [products]
+    )
 
     const handleProductClick = (product: Product) => {
-        const temp_variants = variants
+        const tempVariants = variants
             .filter((variant) => variant.product_id === product.id)
             .sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
+
         setSelectedProduct(product)
-        setFilteredVariants(temp_variants)
-        setSelectedVariant(temp_variants[0] || null)
+        setFilteredVariants(tempVariants)
+        setSelectedVariant(tempVariants[0] || null)
         setOpenModal(true)
     }
 
     return (
         <div className='bg-white'>
-            <div className='bg-white'>
-                <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
-                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-                        <Link href='/products/show'>Workspace sale</Link>
-                    </h1>
-                    <p className='mt-4 max-w-xl text-sm text-gray-700'>
-                        Our thoughtfully designed workspace objects are crafted in limited runs. Improve your
-                        productivity and organization with these sale items before we run out.
-                    </p>
-                </div>
+            <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+                <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
+                    <Link href='/products/show'>Workspace sale</Link>
+                </h1>
+                <p className='mt-4 max-w-xl text-sm text-gray-700'>
+                    Our thoughtfully designed workspace objects are crafted in limited runs. Improve your productivity
+                    and organization with these sale items before we run out.
+                </p>
             </div>
 
             <Filters categories={categories} />
