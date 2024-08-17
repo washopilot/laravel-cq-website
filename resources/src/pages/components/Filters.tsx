@@ -1,8 +1,8 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useCallback, useMemo, useState } from 'react'
 
-const FILTERS = [
+const INITIAL_FILTERS = [
     {
         id: 'category',
         name: 'Category',
@@ -16,46 +16,36 @@ const FILTERS = [
     }
 ]
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
+const INITIAL_SORT_OPTIONS = [
+    { name: 'Price: Low to High', href: '#', current: true },
+    { name: 'Price: High to Low', href: '#', current: false }
+]
+
+const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
 const Filters = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-    const [sortOptions, setSortOptions] = useState([
-        { name: 'Price: Low to High', href: '#', current: true },
-        { name: 'Price: High to Low', href: '#', current: false }
-    ])
-    const [filters, setFilters] = useState(FILTERS)
-    const [activeFilters, setActiveFilters] = useState<{ value: string; label: string }[]>([])
+    const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
+    const [filters, setFilters] = useState(INITIAL_FILTERS)
 
-    useEffect(() => {
-        const newActiveFilters = filters[0].options
-            .filter((option) => option.checked)
-            .map(({ value, label }) => ({ value, label }))
-        setActiveFilters(newActiveFilters)
-    }, [filters])
+    const activeFilters = useMemo(() => filters[0].options.filter((option) => option.checked), [filters])
 
-    const handleCheckboxChange = (sectionId: string, optionIdx: number) => {
+    const handleCheckboxChange = useCallback((sectionId: string, optionIdx: number) => {
         setFilters((prevFilters) =>
-            prevFilters.map((section) => {
-                if (section.id === sectionId) {
-                    const updatedOptions = section.options.map((option, idx) => {
-                        if (idx === optionIdx) {
-                            return { ...option, checked: !option.checked }
-                        }
-                        return option
-                    })
-                    return { ...section, options: updatedOptions }
-                }
-                return section
-            })
+            prevFilters.map((section) =>
+                section.id === sectionId
+                    ? {
+                          ...section,
+                          options: section.options.map((option, idx) =>
+                              idx === optionIdx ? { ...option, checked: !option.checked } : option
+                          )
+                      }
+                    : section
+            )
         )
-    }
+    }, [])
 
-    const handleRemoveFilter = (filterValue: string) => {
-        setActiveFilters((prevFilters) => prevFilters.filter((filter) => filter.value !== filterValue))
-
+    const handleRemoveFilter = useCallback((filterValue: string) => {
         setFilters((prevFilters) =>
             prevFilters.map((section) => ({
                 ...section,
@@ -64,7 +54,16 @@ const Filters = () => {
                 )
             }))
         )
-    }
+    }, [])
+
+    const handleSortOptionChange = useCallback((selectedOption: (typeof INITIAL_SORT_OPTIONS)[0]) => {
+        setSortOptions((prevOptions) =>
+            prevOptions.map((option) => ({
+                ...option,
+                current: option === selectedOption
+            }))
+        )
+    }, [])
 
     return (
         <>
@@ -191,15 +190,7 @@ const Filters = () => {
                                                 {({ active }) => (
                                                     <button
                                                         type='button'
-                                                        onClick={() => {
-                                                            setSortOptions((prevOptions) =>
-                                                                prevOptions.map((o) =>
-                                                                    o === option
-                                                                        ? { ...o, current: true }
-                                                                        : { ...o, current: false }
-                                                                )
-                                                            )
-                                                        }}
+                                                        onClick={() => handleSortOptionChange(option)}
                                                         className={classNames(
                                                             option.current
                                                                 ? 'font-medium text-gray-900'
