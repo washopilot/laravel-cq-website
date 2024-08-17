@@ -4,6 +4,7 @@ import './app.css'
 import CardProduct from './components/CardProduct'
 import ProductModal from './components/ProductModal'
 import { Link } from '@inertiajs/inertia-react'
+import Filters from './components/Filters'
 
 interface ProductsProps {
     products: Product[]
@@ -40,6 +41,18 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
 
     return (
         <div className='bg-white'>
+            <div className='bg-white'>
+                <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>Workspace sale</h1>
+                    <p className='mt-4 max-w-xl text-sm text-gray-700'>
+                        Our thoughtfully designed workspace objects are crafted in limited runs. Improve your
+                        productivity and organization with these sale items before we run out.
+                    </p>
+                </div>
+            </div>
+
+            <Filters />
+
             <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 divide-y divide-gray-200'>
                 {productsByCategory.map(({ id, name, products }) => (
                     <div key={id} className='mb-10 py-5'>
@@ -67,6 +80,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     </div>
                 ))}
             </div>
+
             {selectedProduct && (
                 <ProductModal
                     open={openModal}
