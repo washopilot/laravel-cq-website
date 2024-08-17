@@ -7,6 +7,16 @@ import CardProduct from './components/CardProduct'
 import Filters from './components/Filters'
 import ProductModal from './components/ProductModal'
 
+export type filters = {
+    id: string
+    name: string
+    options: {
+        value: string
+        label: string
+        checked: boolean
+    }[]
+}[]
+
 interface ProductsProps {
     products: Product[]
     categories: Category[]
@@ -26,6 +36,21 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [openModal, setOpenModal] = useState(false)
     const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
     const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
+    const initialFilters = useMemo(
+        () => [
+            {
+                id: 'category',
+                name: 'Category',
+                options: categories.map((category) => ({
+                    value: category.slug,
+                    label: category.name,
+                    checked: true
+                }))
+            }
+        ],
+        [categories]
+    )
+    const [filters, setFilters] = useState<filters>(initialFilters)
 
     const sortedProducts = useMemo(() => {
         const selectedSortOption = sortOptions.find((option) => option.current)
@@ -71,7 +96,12 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                 </p>
             </div>
 
-            <Filters categories={categories} sortOptions={sortOptions} setSortOptions={setSortOptions} />
+            <Filters
+                sortOptions={sortOptions}
+                setSortOptions={setSortOptions}
+                filters={filters}
+                setFilters={setFilters}
+            />
 
             <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
                 <motion.div

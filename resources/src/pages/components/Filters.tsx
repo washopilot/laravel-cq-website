@@ -1,7 +1,7 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useCallback, useMemo, useState } from 'react'
-import { Category } from '../../interfaces/interfaces'
+import { filters } from '../AppProducts'
 
 type SortOption = {
     name: string
@@ -10,34 +10,16 @@ type SortOption = {
 }
 
 interface FiltersProps {
-    categories: Category[]
     sortOptions: SortOption[]
     setSortOptions: React.Dispatch<React.SetStateAction<SortOption[]>>
+    filters: filters
+    setFilters: React.Dispatch<React.SetStateAction<filters>>
 }
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-const Filters = ({ categories, sortOptions, setSortOptions }: FiltersProps) => {
-    const initialFilters = useMemo(
-        () => [
-            {
-                id: 'category',
-                name: 'Category',
-                options: categories.map((category) => ({
-                    value: category.slug,
-                    label: category.name,
-                    checked: true
-                }))
-            }
-        ],
-        [categories]
-    )
-    // console.log(initialFilters)
-
+const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersProps) => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
-    const [filters, setFilters] = useState(initialFilters)
-
     const activeFilters = useMemo(() => filters[0].options.filter((option) => option.checked), [filters])
 
     const handleCheckboxChange = useCallback((sectionId: string, optionIdx: number) => {
