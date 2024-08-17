@@ -19,7 +19,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
 
     const sortedProducts = useMemo(() => {
-        return [...products].sort((a, b) => a.order_column - b.order_column)
+        return [...products].sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
     }, [products])
 
     const handleProductClick = (product: Product) => {
@@ -30,20 +30,13 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         setOpenModal(true)
     }
 
-    const productsByCategory = useMemo(() => {
-        return categories.map((category) => ({
-            ...category,
-            products: sortedProducts.filter((product) => product.category_id === category.id)
-        }))
-    }, [categories, sortedProducts])
-
-    // console.log(productsByCategory)
-
     return (
         <div className='bg-white'>
             <div className='bg-white'>
                 <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
-                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>Workspace sale</h1>
+                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
+                        <Link href='/products/show'>Workspace sale</Link>
+                    </h1>
                     <p className='mt-4 max-w-xl text-sm text-gray-700'>
                         Our thoughtfully designed workspace objects are crafted in limited runs. Improve your
                         productivity and organization with these sale items before we run out.
@@ -53,32 +46,19 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
 
             <Filters />
 
-            <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 divide-y divide-gray-200'>
-                {productsByCategory.map(({ id, name, products }) => (
-                    <div key={id} className='mb-10 py-5'>
-                        <div className='flex items-center justify-between space-x-4'>
-                            <h2 className='text-2xl font-medium text-gray-900'>{name}</h2>
-                            <Link
-                                href='/products/show'
-                                className='whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500'>
-                                View all
-                                <span aria-hidden='true'> &rarr;</span>
-                            </Link>
-                        </div>
-                        <div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
-                            {products.map(
-                                (product) =>
-                                    product.is_visible && (
-                                        <CardProduct
-                                            key={product.id}
-                                            product={product}
-                                            onButtonClick={() => handleProductClick(product)}
-                                        />
-                                    )
-                            )}
-                        </div>
-                    </div>
-                ))}
+            <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
+                <div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
+                    {sortedProducts.map(
+                        (product) =>
+                            product.is_visible && (
+                                <CardProduct
+                                    key={product.id}
+                                    product={product}
+                                    onButtonClick={() => handleProductClick(product)}
+                                />
+                            )
+                    )}
+                </div>
             </div>
 
             {selectedProduct && (

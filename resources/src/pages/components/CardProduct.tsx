@@ -9,7 +9,7 @@ type CardProductProps = {
 const CardProduct = ({ product, onButtonClick }: CardProductProps) => {
     return (
         <div key={product.id} className='group relative'>
-            <div className='aspect-h-[3.5] aspect-w-3 overflow-hidden rounded-lg bg-gray-100'>
+            <div className='aspect-h-3 aspect-w-3 overflow-hidden rounded-lg bg-gray-100'>
                 <img
                     src={product.images[0]}
                     alt={'imageAlt'}
