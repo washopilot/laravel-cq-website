@@ -2,14 +2,6 @@ import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useState } from 'react'
 
-const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Newest', href: '#', current: false },
-    { name: 'Price: Low to High', href: '#', current: false },
-    { name: 'Price: High to Low', href: '#', current: false }
-]
-
 const filters = [
     {
         id: 'category',
@@ -56,6 +48,10 @@ function classNames(...classes: string[]) {
 
 const Filters = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [sortOptions, setSortOptions] = useState([
+        { name: 'Price: Low to High', href: '#', current: true },
+        { name: 'Price: High to Low', href: '#', current: false }
+    ])
 
     return (
         <>
@@ -180,17 +176,26 @@ const Filters = () => {
                                         {sortOptions.map((option) => (
                                             <Menu.Item key={option.name}>
                                                 {({ active }) => (
-                                                    <a
-                                                        href={option.href}
+                                                    <button
+                                                        type='button'
+                                                        onClick={() => {
+                                                            setSortOptions((prevOptions) =>
+                                                                prevOptions.map((o) =>
+                                                                    o === option
+                                                                        ? { ...o, current: true }
+                                                                        : { ...o, current: false }
+                                                                )
+                                                            )
+                                                        }}
                                                         className={classNames(
                                                             option.current
                                                                 ? 'font-medium text-gray-900'
                                                                 : 'text-gray-500',
                                                             active ? 'bg-gray-100' : '',
-                                                            'block px-4 py-2 text-sm'
+                                                            'block px-4 py-2 text-sm w-full text-left'
                                                         )}>
                                                         {option.name}
-                                                    </a>
+                                                    </button>
                                                 )}
                                             </Menu.Item>
                                         ))}

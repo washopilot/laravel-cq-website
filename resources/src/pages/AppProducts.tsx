@@ -1,10 +1,10 @@
+import { Link } from '@inertiajs/inertia-react'
 import { useMemo, useState } from 'react'
 import { Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
-import ProductModal from './components/ProductModal'
-import { Link } from '@inertiajs/inertia-react'
 import Filters from './components/Filters'
+import ProductModal from './components/ProductModal'
 
 interface ProductsProps {
     products: Product[]
