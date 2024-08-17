@@ -1,8 +1,8 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
-const filters = [
+const FILTERS = [
     {
         id: 'category',
         name: 'Category',
@@ -10,37 +10,11 @@ const filters = [
             { value: 'new-arrivals', label: 'All New Arrivals', checked: false },
             { value: 'tees', label: 'Tees', checked: false },
             { value: 'objects', label: 'Objects', checked: true },
-            { value: 'sweatshirts', label: 'Sweatshirts', checked: false },
+            { value: 'sweatshirts', label: 'Sweatshirts', checked: true },
             { value: 'pants-shorts', label: 'Pants & Shorts', checked: false }
-        ]
-    },
-    {
-        id: 'color',
-        name: 'Color',
-        options: [
-            { value: 'white', label: 'White', checked: false },
-            { value: 'beige', label: 'Beige', checked: false },
-            { value: 'blue', label: 'Blue', checked: false },
-            { value: 'brown', label: 'Brown', checked: false },
-            { value: 'green', label: 'Green', checked: false },
-            { value: 'purple', label: 'Purple', checked: false }
-        ]
-    },
-    {
-        id: 'sizes',
-        name: 'Sizes',
-        options: [
-            { value: 'xs', label: 'XS', checked: false },
-            { value: 's', label: 'S', checked: false },
-            { value: 'm', label: 'M', checked: false },
-            { value: 'l', label: 'L', checked: false },
-            { value: 'xl', label: 'XL', checked: false },
-            { value: '2xl', label: '2XL', checked: false }
         ]
     }
 ]
-
-const activeFilters = [{ value: 'objects', label: 'Objects' }]
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -52,6 +26,45 @@ const Filters = () => {
         { name: 'Price: Low to High', href: '#', current: true },
         { name: 'Price: High to Low', href: '#', current: false }
     ])
+    const [filters, setFilters] = useState(FILTERS)
+    const [activeFilters, setActiveFilters] = useState<{ value: string; label: string }[]>([])
+
+    useEffect(() => {
+        const newActiveFilters = filters[0].options
+            .filter((option) => option.checked)
+            .map(({ value, label }) => ({ value, label }))
+        setActiveFilters(newActiveFilters)
+    }, [filters])
+
+    const handleCheckboxChange = (sectionId: string, optionIdx: number) => {
+        setFilters((prevFilters) =>
+            prevFilters.map((section) => {
+                if (section.id === sectionId) {
+                    const updatedOptions = section.options.map((option, idx) => {
+                        if (idx === optionIdx) {
+                            return { ...option, checked: !option.checked }
+                        }
+                        return option
+                    })
+                    return { ...section, options: updatedOptions }
+                }
+                return section
+            })
+        )
+    }
+
+    const handleRemoveFilter = (filterValue: string) => {
+        setActiveFilters((prevFilters) => prevFilters.filter((filter) => filter.value !== filterValue))
+
+        setFilters((prevFilters) =>
+            prevFilters.map((section) => ({
+                ...section,
+                options: section.options.map((option) =>
+                    option.value === filterValue ? { ...option, checked: false } : option
+                )
+            }))
+        )
+    }
 
     return (
         <>
@@ -220,7 +233,7 @@ const Filters = () => {
                                                 <span>{section.name}</span>
                                                 {sectionIdx === 0 ? (
                                                     <span className='ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700'>
-                                                        1
+                                                        {section.options.filter((option) => option.checked).length}
                                                     </span>
                                                 ) : null}
                                                 <ChevronDownIcon
@@ -239,23 +252,28 @@ const Filters = () => {
                                                 leaveTo='transform opacity-0 scale-95'>
                                                 <Popover.Panel className='absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none'>
                                                     <form className='space-y-4'>
-                                                        {section.options.map((option, optionIdx) => (
-                                                            <div key={option.value} className='flex items-center'>
-                                                                <input
-                                                                    id={`filter-${section.id}-${optionIdx}`}
-                                                                    name={`${section.id}[]`}
-                                                                    defaultValue={option.value}
-                                                                    type='checkbox'
-                                                                    defaultChecked={option.checked}
-                                                                    className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                                                />
-                                                                <label
-                                                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                                                    className='ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900'>
-                                                                    {option.label}
-                                                                </label>
-                                                            </div>
-                                                        ))}
+                                                        {section.options.map((option, optionIdx) => {
+                                                            return (
+                                                                <div key={option.value} className='flex items-center'>
+                                                                    <input
+                                                                        id={`filter-${section.id}-${optionIdx}`}
+                                                                        name={`${section.id}[]`}
+                                                                        defaultValue={option.value}
+                                                                        type='checkbox'
+                                                                        defaultChecked={option.checked}
+                                                                        onChange={() =>
+                                                                            handleCheckboxChange(section.id, optionIdx)
+                                                                        }
+                                                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                                                    />
+                                                                    <label
+                                                                        htmlFor={`filter-${section.id}-${optionIdx}`}
+                                                                        className='ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900'>
+                                                                        {option.label}
+                                                                    </label>
+                                                                </div>
+                                                            )
+                                                        })}
                                                     </form>
                                                 </Popover.Panel>
                                             </Transition>
@@ -286,6 +304,7 @@ const Filters = () => {
                                         <span>{activeFilter.label}</span>
                                         <button
                                             type='button'
+                                            onClick={() => handleRemoveFilter(activeFilter.value)}
                                             className='ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
                                             <span className='sr-only'>Remove filter for {activeFilter.label}</span>
                                             <svg
