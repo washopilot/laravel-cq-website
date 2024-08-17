@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/inertia-react'
-import { useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
+import { useCallback, useMemo, useState } from 'react'
 import { Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
@@ -44,16 +45,19 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         }
     }, [products, sortOptions])
 
-    const handleProductClick = (product: Product) => {
-        const tempVariants = variants
-            .filter((variant) => variant.product_id === product.id)
-            .sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
+    const handleProductClick = useCallback(
+        (product: Product) => {
+            const tempVariants = variants
+                .filter((variant) => variant.product_id === product.id)
+                .sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
 
-        setSelectedProduct(product)
-        setFilteredVariants(tempVariants)
-        setSelectedVariant(tempVariants[0] || null)
-        setOpenModal(true)
-    }
+            setSelectedProduct(product)
+            setFilteredVariants(tempVariants)
+            setSelectedVariant(tempVariants[0] || null)
+            setOpenModal(true)
+        },
+        [variants]
+    )
 
     return (
         <div className='bg-white'>
@@ -70,18 +74,29 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
             <Filters categories={categories} sortOptions={sortOptions} setSortOptions={setSortOptions} />
 
             <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
-                <div className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
+                <motion.div
+                    key={sortedProducts.map((product) => product.id).join(',')}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
                     {sortedProducts.map(
-                        (product) =>
+                        (product, index) =>
                             product.is_visible && (
-                                <CardProduct
+                                <motion.div
                                     key={product.id}
-                                    product={product}
-                                    onButtonClick={() => handleProductClick(product)}
-                                />
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{
+                                        duration: 0.3,
+                                        delay: index * 0.1
+                                    }}>
+                                    <CardProduct product={product} onButtonClick={() => handleProductClick(product)} />
+                                </motion.div>
                             )
                     )}
-                </div>
+                </motion.div>
             </div>
 
             {selectedProduct && (
