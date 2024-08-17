@@ -23,7 +23,9 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     }, [products])
 
     const handleProductClick = (product: Product) => {
-        const temp_variants = variants.filter((variant) => variant.product_id === product.id)
+        const temp_variants = variants
+            .filter((variant) => variant.product_id === product.id)
+            .sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
         setSelectedProduct(product)
         setFilteredVariants(temp_variants)
         setSelectedVariant(temp_variants[0] || null)

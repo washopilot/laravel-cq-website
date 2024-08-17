@@ -39,8 +39,8 @@ class Variant extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(200)
-            ->height(300)
+            ->width(300)
+            ->height(400)
             ->sharpen(10);
     }
 

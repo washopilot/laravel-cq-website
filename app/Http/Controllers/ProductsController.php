@@ -51,6 +51,7 @@ class ProductsController extends Controller
                     }),
                     'price' => $variant->price,
                     'product_id' => $variant->product_id,
+                    'order_column' => $variant->order_column,
                 ];
             }),
 

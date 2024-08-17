@@ -25,7 +25,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         ],
         [categories]
     )
-    console.log(initialFilters)
+    // console.log(initialFilters)
 
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)

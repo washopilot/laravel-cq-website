@@ -23,4 +23,5 @@ export interface Variant {
     product_id: number
     price: string
     images: string[]
+    order_column: number
 }
