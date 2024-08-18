@@ -2,7 +2,9 @@ import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import 'react-var-ui/dist/index.css'
+import THREE from 'three'
 import { GLTF } from 'three-stdlib'
+
 import { HDRI_FILES, MODELS, PAINT_PALETTE } from './Models'
 import VarUICustom, { valuesCustomType } from './VarUICustom'
 
@@ -32,7 +34,6 @@ interface IModelProps {
 const App = () => {
     const [fireCapture, setFireCapture] = useState(false)
     const fireCaptureScreen = () => setFireCapture(true)
-    const controlsRef = useRef<any>()
 
     const elements = Object.keys(MODELS)
         .map((value) => MODELS[value].nodes)
@@ -48,16 +49,6 @@ const App = () => {
         toggle: true,
         selectAmbiente: HDRI_FILES[4].path
     })
-
-    // useEffect(() => {
-    //     if (controlsRef.current) {
-    //         controlsRef.current.addEventListener('change', () => {
-    //             const { position, rotation } = controlsRef.current.object
-    //             console.log('Camera Position:', position)
-    //             console.log('Camera Rotation:', rotation)
-    //         })
-    //     }
-    // }, [])
 
     return (
         <>
@@ -77,11 +68,7 @@ const App = () => {
                         backgroundToggle={values.toggle}
                         backgroundFile={values.selectAmbiente}
                     />
-                    <OrbitControls
-                        // ref={controlsRef}
-                        maxPolarAngle={(2 * Math.PI) / 3}
-                        minPolarAngle={(1 * Math.PI) / 3}
-                    />
+                    <OrbitControls maxPolarAngle={(2 * Math.PI) / 3} minPolarAngle={(1 * Math.PI) / 3} />
                 </Canvas>
             </Suspense>
             <VarUICustom
