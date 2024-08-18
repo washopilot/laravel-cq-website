@@ -109,7 +109,9 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Layout({ children, cart }: { children: React.ReactNode; cart: CartItem[] }) {
+type LayoutProps = { children: React.ReactNode; cart: CartItem[]; handleOnClickCart: () => void }
+
+export default function Layout({ children, cart, handleOnClickCart }: LayoutProps) {
     return (
         <div className='bg-gray-50'>
             <header className='relative bg-white'>
@@ -299,7 +301,10 @@ export default function Layout({ children, cart }: { children: React.ReactNode; 
 
                                     {/* Cart */}
                                     <div className='ml-4 flow-root lg:ml-8'>
-                                        <a href='#' className='group -m-2 flex items-center p-2'>
+                                        <a
+                                            href='#'
+                                            className='group -m-2 flex items-center p-2'
+                                            onClick={handleOnClickCart}>
                                             <ShoppingBagIcon
                                                 className='h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
                                                 aria-hidden='true'

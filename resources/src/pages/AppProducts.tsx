@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { CartItem, Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
+import Cart from './components/Cart'
 import Filters from './components/Filters'
 import Layout from './components/Layout'
 import ProductModal from './components/ProductModal'
@@ -62,6 +63,11 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     )
     const [filters, setFilters] = useState<FiltersType>(initialFilters)
     const [cart, setCart] = useState<CartItem[]>(getCart())
+    const [openCart, setOpenCart] = useState(false)
+
+    const handleOnClickCart = () => {
+        setOpenCart(true)
+    }
 
     useEffect(() => {
         saveCart(cart)
@@ -138,7 +144,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     )
 
     return (
-        <Layout cart={cart}>
+        <Layout cart={cart} handleOnClickCart={handleOnClickCart}>
             <div className='bg-white'>
                 <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
                     <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
@@ -200,6 +206,8 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                         handleAddToCart={handleAddToCart}
                     />
                 )}
+
+                <Cart openCart={openCart} setOpenCart={setOpenCart} />
             </div>
         </Layout>
     )
