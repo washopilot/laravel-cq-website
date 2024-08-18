@@ -74,20 +74,36 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         // console.log(cart)
     }, [cart])
 
-    const addToCart = (variant_id: number, quantity: number = 1) => {
+    const addToCart = (variant: Variant, quantity: number = 1) => {
+        const product = products.find((p) => p.id === variant.product_id)
+        if (!product) return // Si no se encuentra el producto, no hace nada.
+
         setCart((prevCart) => {
-            const existingItemIndex = prevCart.findIndex((item) => item.variant_id === variant_id)
+            const existingItemIndex = prevCart.findIndex((item) => item.id === variant.id)
             if (existingItemIndex > -1) {
                 return prevCart.map((item, index) =>
                     index === existingItemIndex ? { ...item, quantity: item.quantity + quantity } : item
                 )
             }
-            return [...prevCart, { variant_id, quantity }]
+            return [
+                ...prevCart,
+                {
+                    quantity,
+                    id: variant.id,
+                    name: variant.name,
+                    color: product.name,
+                    price: variant.price,
+                    imageSrc: variant.images[0]
+                }
+            ]
         })
     }
 
     const handleAddToCart = (variant_id: number) => {
-        addToCart(variant_id, 1)
+        const variant = variants.find((v) => v.id === variant_id)
+        if (!variant) return
+
+        addToCart(variant, 1)
     }
 
     const getCategoryIdBySlug = (slug: string, categories: Category[]): number | undefined => {
@@ -207,7 +223,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     />
                 )}
 
-                <Cart openCart={openCart} setOpenCart={setOpenCart} />
+                <Cart openCart={openCart} setOpenCart={setOpenCart} products={cart} />
             </div>
         </Layout>
     )
