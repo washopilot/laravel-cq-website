@@ -5,6 +5,7 @@ import { Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
 import Filters from './components/Filters'
+import Layout from './components/Layout'
 import ProductModal from './components/ProductModal'
 
 export type FiltersType = {
@@ -110,64 +111,69 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     )
 
     return (
-        <div className='bg-white'>
-            <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
-                <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-                    <Link href='/products/show'>Workspace sale</Link>
-                </h1>
-                <p className='mt-4 max-w-xl text-sm text-gray-700'>
-                    Our thoughtfully designed workspace objects are crafted in limited runs. Improve your productivity
-                    and organization with these sale items before we run out.
-                </p>
-            </div>
+        <Layout>
+            <div className='bg-white'>
+                <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
+                        <Link href='/products/show'>Workspace sale</Link>
+                    </h1>
+                    <p className='mt-4 max-w-xl text-sm text-gray-700'>
+                        Our thoughtfully designed workspace objects are crafted in limited runs. Improve your
+                        productivity and organization with these sale items before we run out.
+                    </p>
+                </div>
 
-            <Filters
-                sortOptions={sortOptions}
-                setSortOptions={setSortOptions}
-                filters={filters}
-                setFilters={setFilters}
-            />
-
-            <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
-                <motion.div
-                    key={JSON.stringify({
-                        sortOptions: sortOptions.find((option) => option.current),
-                        filters
-                    })}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
-                    {filteredAndSortedProducts.map(
-                        (product, index) =>
-                            product.is_visible && (
-                                <motion.div
-                                    key={product.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        duration: 0.3,
-                                        delay: index * 0.1
-                                    }}>
-                                    <CardProduct product={product} onButtonClick={() => handleProductClick(product)} />
-                                </motion.div>
-                            )
-                    )}
-                </motion.div>
-            </div>
-
-            {selectedProduct && (
-                <ProductModal
-                    open={openModal}
-                    setOpen={setOpenModal}
-                    product={selectedProduct}
-                    filteredVariants={filteredVariants}
-                    setSelectedVariant={setSelectedVariant}
-                    selectedVariant={selectedVariant}
+                <Filters
+                    sortOptions={sortOptions}
+                    setSortOptions={setSortOptions}
+                    filters={filters}
+                    setFilters={setFilters}
                 />
-            )}
-        </div>
+
+                <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
+                    <motion.div
+                        key={JSON.stringify({
+                            sortOptions: sortOptions.find((option) => option.current),
+                            filters
+                        })}
+                        layout
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
+                        {filteredAndSortedProducts.map(
+                            (product, index) =>
+                                product.is_visible && (
+                                    <motion.div
+                                        key={product.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: 0.3,
+                                            delay: index * 0.1
+                                        }}>
+                                        <CardProduct
+                                            product={product}
+                                            onButtonClick={() => handleProductClick(product)}
+                                        />
+                                    </motion.div>
+                                )
+                        )}
+                    </motion.div>
+                </div>
+
+                {selectedProduct && (
+                    <ProductModal
+                        open={openModal}
+                        setOpen={setOpenModal}
+                        product={selectedProduct}
+                        filteredVariants={filteredVariants}
+                        setSelectedVariant={setSelectedVariant}
+                        selectedVariant={selectedVariant}
+                    />
+                )}
+            </div>
+        </Layout>
     )
 }
 
