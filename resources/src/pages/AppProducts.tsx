@@ -63,6 +63,10 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                 ?.options.filter((option) => option.checked)
                 .map((option) => option.value) || []
 
+        if (selectedCategoryValues.length === 0) {
+            return []
+        }
+
         const selectedCategoryIds = selectedCategoryValues.map((slug) => getCategoryIdBySlug(slug, categories))
 
         return products.filter(
@@ -126,7 +130,10 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
 
             <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
                 <motion.div
-                    key={sortOptions.find((option) => option.current)?.name || 'default'}
+                    key={JSON.stringify({
+                        sortOptions: sortOptions.find((option) => option.current),
+                        filters
+                    })}
                     layout
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
