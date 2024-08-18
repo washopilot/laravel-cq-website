@@ -162,7 +162,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                         <Menu as='div' className='relative inline-block text-left'>
                             <div>
                                 <Menu.Button className='group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900'>
-                                    Sort
+                                    ORDENAR POR
                                     <ChevronDownIcon
                                         className='-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
                                         aria-hidden='true'
@@ -207,7 +207,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                             type='button'
                             className='inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden'
                             onClick={() => setMobileFiltersOpen(true)}>
-                            Filters
+                            Filtros
                         </button>
 
                         <div className='hidden sm:block'>
@@ -275,7 +275,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                 <div className='bg-gray-100'>
                     <div className='mx-auto max-w-7xl px-4 py-3 sm:flex sm:items-center sm:px-6 lg:px-8'>
                         <h3 className='text-sm font-medium text-gray-500'>
-                            Filters
+                            Filtros
                             <span className='sr-only'>, active</span>
                         </h3>
 

@@ -13,6 +13,7 @@ type ProductModalProps = {
     filteredVariants: Variant[]
     setSelectedVariant: React.Dispatch<React.SetStateAction<Variant>>
     selectedVariant: Variant
+    handleAddToCart: (variant_id: number) => void
 }
 
 const productData = {
@@ -38,7 +39,8 @@ const ProductModal = ({
     product,
     filteredVariants,
     setSelectedVariant,
-    selectedVariant
+    selectedVariant,
+    handleAddToCart
 }: ProductModalProps) => {
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -215,8 +217,12 @@ const ProductModal = ({
                                                     <div className='mt-6'>
                                                         <button
                                                             type='submit'
+                                                            onClick={(event) => {
+                                                                event.preventDefault()
+                                                                return handleAddToCart(selectedVariant.id)
+                                                            }}
                                                             className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50'>
-                                                            Add to bag
+                                                            Añadir a pedido
                                                         </button>
                                                     </div>
                                                     <div className='mt-6 text-center'>

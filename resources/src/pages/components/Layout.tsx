@@ -1,6 +1,7 @@
 import { Popover, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
+import { CartItem } from '../../interfaces/interfaces'
 
 const navigation = {
     categories: [
@@ -108,7 +109,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children, cart }: { children: React.ReactNode; cart: CartItem[] }) {
     return (
         <div className='bg-gray-50'>
             <header className='relative bg-white'>
@@ -304,7 +305,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                                 aria-hidden='true'
                                             />
                                             <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-                                                0
+                                                {cart.reduce((sum, item) => sum + item.quantity, 0)}
                                             </span>
                                             <span className='sr-only'>items in cart, view bag</span>
                                         </a>

@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
-import { useCallback, useMemo, useState } from 'react'
-import { Category, Product, Variant } from '../interfaces/interfaces'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { CartItem, Category, Product, Variant } from '../interfaces/interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
 import Filters from './components/Filters'
@@ -31,6 +31,15 @@ const INITIAL_SORT_OPTIONS = [
     { name: 'Precio: Mayor a Menor', href: '#', current: false }
 ]
 
+const getCart = (): CartItem[] => {
+    const savedCart = localStorage.getItem('shoppingCart')
+    return savedCart ? JSON.parse(savedCart) : []
+}
+
+const saveCart = (cart: CartItem[]) => {
+    localStorage.setItem('shoppingCart', JSON.stringify(cart))
+}
+
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
     const [filteredVariants, setFilteredVariants] = useState<Variant[]>([])
@@ -41,7 +50,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         () => [
             {
                 id: 'category',
-                name: 'Category',
+                name: 'POR CATEGORÍA',
                 options: categories.map((category) => ({
                     value: category.slug,
                     label: category.name,
@@ -52,6 +61,28 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         [categories]
     )
     const [filters, setFilters] = useState<FiltersType>(initialFilters)
+    const [cart, setCart] = useState<CartItem[]>(getCart())
+
+    useEffect(() => {
+        saveCart(cart)
+        // console.log(cart)
+    }, [cart])
+
+    const addToCart = (variant_id: number, quantity: number = 1) => {
+        setCart((prevCart) => {
+            const existingItemIndex = prevCart.findIndex((item) => item.variant_id === variant_id)
+            if (existingItemIndex > -1) {
+                return prevCart.map((item, index) =>
+                    index === existingItemIndex ? { ...item, quantity: item.quantity + quantity } : item
+                )
+            }
+            return [...prevCart, { variant_id, quantity }]
+        })
+    }
+
+    const handleAddToCart = (variant_id: number) => {
+        addToCart(variant_id, 1)
+    }
 
     const getCategoryIdBySlug = (slug: string, categories: Category[]): number | undefined => {
         return categories.find((category) => category.slug === slug)?.id
@@ -67,9 +98,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         if (selectedCategoryValues.length === 0) {
             return []
         }
-
         const selectedCategoryIds = selectedCategoryValues.map((slug) => getCategoryIdBySlug(slug, categories))
-
         return products.filter(
             (product) => selectedCategoryIds.length === 0 || selectedCategoryIds.includes(product.category_id)
         )
@@ -77,10 +106,8 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
 
     const filteredAndSortedProducts = useMemo(() => {
         const filteredProducts = filterProductsByCategory(products, filters, categories)
-
         const selectedSortOption = sortOptions.find((option) => option.current)
         if (!selectedSortOption) return filteredProducts
-
         const sorted = [...filteredProducts]
         switch (selectedSortOption.name) {
             case 'Orden: Ascendente':
@@ -111,7 +138,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     )
 
     return (
-        <Layout>
+        <Layout cart={cart}>
             <div className='bg-white'>
                 <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
                     <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
@@ -170,6 +197,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                         filteredVariants={filteredVariants}
                         setSelectedVariant={setSelectedVariant}
                         selectedVariant={selectedVariant}
+                        handleAddToCart={handleAddToCart}
                     />
                 )}
             </div>

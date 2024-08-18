@@ -25,3 +25,8 @@ export interface Variant {
     images: string[]
     order_column: number
 }
+
+export interface CartItem {
+    quantity: number
+    variant_id: number
+}
