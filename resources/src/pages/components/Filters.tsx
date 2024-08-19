@@ -60,7 +60,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
     return (
         <>
             <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-                <Dialog as='div' className='relative z-40 sm:hidden' onClose={setMobileFiltersOpen}>
+                <Dialog as='div' className='relative z-50 sm:hidden' onClose={setMobileFiltersOpen}>
                     <Transition.Child
                         as={Fragment}
                         enter='transition-opacity ease-linear duration-300'
