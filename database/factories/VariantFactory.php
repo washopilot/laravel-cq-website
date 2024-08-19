@@ -25,7 +25,7 @@ class VariantFactory extends Factory
     {
         return [
             'name' => 'Var_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
-            'price' => $this->faker->randomFloat(2, 0, 999999.99),
+            'price' => $this->faker->randomFloat(2, 0, 999.99),
             'product_id' => Product::factory(),
         ];
     }

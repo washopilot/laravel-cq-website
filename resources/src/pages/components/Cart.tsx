@@ -4,6 +4,7 @@ import { Fragment } from 'react'
 import { CartItem } from '../../interfaces/interfaces'
 import formatCurrency from '../../utils/format-currency'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
+import AnimatedCurrency from './AnimatedCurrency'
 
 type CartProps = {
     openCart: boolean
@@ -77,12 +78,14 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                                                 <a href={'#'}>{product.name}</a>
                                                                             </h3>
                                                                             <p className='ml-4'>
-                                                                                {formatCurrency(
-                                                                                    (
-                                                                                        parseFloat(product.price) *
-                                                                                        product.quantity
-                                                                                    ).toString()
-                                                                                )}
+                                                                                {
+                                                                                    <AnimatedCurrency
+                                                                                        value={
+                                                                                            parseFloat(product.price) *
+                                                                                            product.quantity
+                                                                                        }
+                                                                                    />
+                                                                                }
                                                                             </p>
                                                                         </div>
                                                                         <p className='mt-1 text-sm text-gray-500'>
@@ -142,18 +145,18 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                         </div>
 
                                         <div className='border-t border-gray-200 px-4 py-6 sm:px-6'>
-                                            <div className='flex justify-between text-base font-medium text-gray-900'>
+                                            <div className='flex justify-between text-lg font-medium text-gray-900'>
                                                 <p>Subtotal</p>
                                                 <p>
-                                                    {formatCurrency(
-                                                        products
-                                                            .reduce((total, item) => {
+                                                    {
+                                                        <AnimatedCurrency
+                                                            value={products.reduce((total, item) => {
                                                                 const itemPrice = parseFloat(item.price)
                                                                 const itemTotal = itemPrice * item.quantity
                                                                 return total + itemTotal
-                                                            }, 0)
-                                                            .toString()
-                                                    )}
+                                                            }, 0)}
+                                                        />
+                                                    }
                                                 </p>
                                             </div>
                                             <p className='mt-0.5 text-sm text-gray-500'>

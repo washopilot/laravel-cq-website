@@ -31,7 +31,7 @@ class ProductFactory extends Factory
             'name' => $name = 'Prod_' . str_pad(self::$counter++, 3, '0', STR_PAD_LEFT),
             'slug' => Str::slug($name),
             'description' => $this->faker->text,
-            'price' => $this->faker->randomFloat(2, 0, 999999.99),
+            'price' => $this->faker->randomFloat(2, 0, 999.99),
             'is_visible' => true,
             'category_id' => Category::factory(),
         ];
