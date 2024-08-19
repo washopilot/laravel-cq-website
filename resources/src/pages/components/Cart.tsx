@@ -3,14 +3,17 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Fragment } from 'react'
 import { CartItem } from '../../interfaces/interfaces'
 import formatCurrency from '../../utils/format-currency'
+import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 
 type CartProps = {
     openCart: boolean
     setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
     products: CartItem[]
+    updateProductQuantity: (id: number, newQuantity: number) => void
+    removeProduct: (id: number) => void
 }
 
-export default function Cart({ openCart, setOpenCart, products }: CartProps) {
+export default function Cart({ openCart, setOpenCart, products, updateProductQuantity, removeProduct }: CartProps) {
     return (
         <Transition.Root show={openCart} as={Fragment}>
             <Dialog as='div' className='relative z-50' onClose={setOpenCart}>
@@ -87,15 +90,46 @@ export default function Cart({ openCart, setOpenCart, products }: CartProps) {
                                                                         </p>
                                                                     </div>
                                                                     <div className='flex flex-1 items-end justify-between text-sm'>
-                                                                        <p className='text-gray-500'>
-                                                                            Qty {product.quantity}
-                                                                        </p>
+                                                                        <div className='flex items-center'>
+                                                                            <button
+                                                                                onClick={() =>
+                                                                                    updateProductQuantity(
+                                                                                        product.id,
+                                                                                        Math.max(
+                                                                                            product.quantity - 1,
+                                                                                            1
+                                                                                        )
+                                                                                    )
+                                                                                }
+                                                                                className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-l-md focus:outline-none'>
+                                                                                <MinusIcon className='h-5 w-4' />
+                                                                            </button>
+                                                                            <input
+                                                                                type='text'
+                                                                                value={product.quantity}
+                                                                                readOnly
+                                                                                className='w-12 text-center bg-white border-t border-b border-gray-300 text-gray-900 px-0 py-0'
+                                                                            />
+                                                                            <button
+                                                                                onClick={() =>
+                                                                                    updateProductQuantity(
+                                                                                        product.id,
+                                                                                        product.quantity + 1
+                                                                                    )
+                                                                                }
+                                                                                className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-r-md focus:outline-none'>
+                                                                                <PlusIcon className='h-5 w-4' />
+                                                                            </button>
+                                                                        </div>
 
                                                                         <div className='flex'>
                                                                             <button
+                                                                                onClick={() =>
+                                                                                    removeProduct(product.id)
+                                                                                }
                                                                                 type='button'
                                                                                 className='font-medium text-indigo-600 hover:text-indigo-500'>
-                                                                                Remove
+                                                                                Eliminar
                                                                             </button>
                                                                         </div>
                                                                     </div>

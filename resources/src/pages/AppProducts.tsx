@@ -106,6 +106,16 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
         addToCart(variant, 1)
     }
 
+    const updateProductQuantity = (id: number, newQuantity: number) => {
+        setCart((prevCart) =>
+            prevCart.map((product) => (product.id === id ? { ...product, quantity: newQuantity } : product))
+        )
+    }
+
+    const removeProduct = (id: number) => {
+        setCart((prevCart) => prevCart.filter((product) => product.id !== id))
+    }
+
     const getCategoryIdBySlug = (slug: string, categories: Category[]): number | undefined => {
         return categories.find((category) => category.slug === slug)?.id
     }
@@ -223,7 +233,13 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     />
                 )}
 
-                <Cart openCart={openCart} setOpenCart={setOpenCart} products={cart} />
+                <Cart
+                    openCart={openCart}
+                    setOpenCart={setOpenCart}
+                    products={cart}
+                    updateProductQuantity={updateProductQuantity}
+                    removeProduct={removeProduct}
+                />
             </div>
         </Layout>
     )
