@@ -1,9 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { Fragment } from 'react'
 import { CartItem } from '../../interfaces/interfaces'
-import formatCurrency from '../../utils/format-currency'
-import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import AnimatedCurrency from './AnimatedCurrency'
 
 type CartProps = {
