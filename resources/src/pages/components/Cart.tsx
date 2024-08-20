@@ -113,13 +113,14 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                                                         )
                                                                                     }
                                                                                     className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-l-md focus:outline-none'>
-                                                                                    <MinusIcon className='h-5 w-4' />
+                                                                                    <MinusIcon className='h-3 w-3' />
                                                                                 </button>
                                                                                 <input
+                                                                                    disabled
                                                                                     type='text'
                                                                                     value={product.quantity}
                                                                                     readOnly
-                                                                                    className='w-12 text-center bg-white border-t border-b border-gray-300 text-gray-900 px-0 py-0'
+                                                                                    className='text-xs w-10 text-center bg-white border-y-2 border-gray-300 text-gray-900 px-0 py-0'
                                                                                 />
                                                                                 <button
                                                                                     onClick={() =>
@@ -129,7 +130,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                                                         )
                                                                                     }
                                                                                     className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-r-md focus:outline-none'>
-                                                                                    <PlusIcon className='h-5 w-4' />
+                                                                                    <PlusIcon className='h-3 w-3' />
                                                                                 </button>
                                                                             </div>
 

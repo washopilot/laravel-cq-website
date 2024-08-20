@@ -172,13 +172,13 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     return (
         <Layout cart={cart} handleOnClickCart={handleOnClickCart}>
             <div className='bg-white'>
-                <div className='mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8'>
-                    <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-                        <Link href='/products/show'>Workspace sale</Link>
+                <div className='mx-auto w-full px-4 pt-48 md:pt-32 pb-16 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-black to-gray-900'>
+                    <h1 className='text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500'>
+                        <Link href='/products/show'>Nuestro catálogo</Link>
                     </h1>
-                    <p className='mt-4 max-w-xl text-sm text-gray-700'>
-                        Our thoughtfully designed workspace objects are crafted in limited runs. Improve your
-                        productivity and organization with these sale items before we run out.
+                    <p className='mt-4 max-w-xl text-sm text-white'>
+                        Eleva tu espacio con nuestros muebles metálicos de edición limitada: perchas, góndolas y más.
+                        Diseñados para combinar funcionalidad y estilo en cualquier entorno.
                     </p>
                 </div>
 
