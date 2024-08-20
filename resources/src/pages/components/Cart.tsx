@@ -26,7 +26,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                     leave='ease-in-out duration-500'
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'>
-                    <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
+                    <div className='fixed inset-0 bg-gray-500 bg-opacity-75 backdrop-blur-sm transition-opacity' />
                 </Transition.Child>
 
                 <div className='fixed inset-0 overflow-hidden'>

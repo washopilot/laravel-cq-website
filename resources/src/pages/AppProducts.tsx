@@ -172,7 +172,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     return (
         <Layout cart={cart} handleOnClickCart={handleOnClickCart}>
             <div className='bg-white'>
-                <div className='mx-auto w-full px-4 pt-48 md:pt-32 pb-16 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-black to-gray-900'>
+                <div className='mx-auto w-full px-4 pt-48 md:pt-32 pb-16 sm:px-6 md:px-32 lg:px-40 bg-gradient-to-b from-gray-900 via-black to-gray-900'>
                     <h1 className='text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500'>
                         <Link href='/products/show'>Nuestro catálogo</Link>
                     </h1>

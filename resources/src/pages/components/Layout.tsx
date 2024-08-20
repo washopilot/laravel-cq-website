@@ -74,8 +74,8 @@ const navigation = {
         }
     ],
     other: [
-        { name: 'Company', href: '#' },
-        { name: 'Stores', href: '#' }
+        { name: 'Ir a Inicio', href: '/' }
+        // { name: 'Stores', href: '#' }
     ]
 }
 
@@ -132,20 +132,16 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                             <div className='flex h-16 items-center justify-between'>
                                 {/* Logo */}
                                 <div className='flex flex-1'>
-                                    <a href='#'>
+                                    <a href='/'>
                                         <span className='sr-only'>Your Company</span>
-                                        <img
-                                            className='h-8 w-auto'
-                                            src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-                                            alt=''
-                                        />
+                                        <img className='h-14 w-auto' src='/assets/images/logo/CQ-LOGO.png' alt='alt' />
                                     </a>
                                 </div>
 
                                 {/* Flyout menus */}
                                 <Popover.Group className='absolute inset-x-0 bottom-0 sm:static sm:flex-1 sm:self-stretch'>
                                     <div className='flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0'>
-                                        {navigation.categories.map((category, categoryIdx) => (
+                                        {/* {navigation.categories.map((category, categoryIdx) => (
                                             <Popover key={categoryIdx} className='flex'>
                                                 {({ open }) => (
                                                     <>
@@ -170,7 +166,7 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                                             leaveFrom='opacity-100'
                                                             leaveTo='opacity-0'>
                                                             <Popover.Panel className='absolute inset-x-0 top-full text-gray-500 sm:text-sm'>
-                                                                {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                                                                * Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow *
                                                                 <div
                                                                     className='absolute inset-0 top-1/2 bg-white shadow'
                                                                     aria-hidden='true'
@@ -290,7 +286,7 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                                     </>
                                                 )}
                                             </Popover>
-                                        ))}
+                                        ))} */}
 
                                         {navigation.other.map((item) => (
                                             <a
@@ -305,10 +301,10 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
 
                                 <div className='flex flex-1 items-center justify-end'>
                                     {/* Search */}
-                                    <a href='#' className='p-2 text-gray-400 hover:text-gray-500'>
+                                    {/* <a href='#' className='p-2 text-gray-400 hover:text-gray-500'>
                                         <span className='sr-only'>Search</span>
                                         <MagnifyingGlassIcon className='h-6 w-6' aria-hidden='true' />
-                                    </a>
+                                    </a> */}
 
                                     {/* Cart */}
                                     <div className='ml-4 flow-root lg:ml-8'>
