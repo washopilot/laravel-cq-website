@@ -46,7 +46,7 @@ const saveCart = (cart: CartItem[]) => {
     localStorage.setItem('shoppingCart', JSON.stringify(cart))
 }
 
-const AppProductsContext = createContext<AppProductsContextType | undefined>(undefined)
+const AppProductsContext = createContext<AppProductsContextType | null>(null)
 
 export const AppProductsProvider = ({ products, categories, variants, children }: AppProviderProps) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
@@ -206,8 +206,8 @@ export const AppProductsProvider = ({ products, categories, variants, children }
 
 export const useAppProductsContext = () => {
     const context = useContext(AppProductsContext)
-    if (context === undefined) {
-        throw new Error('useAppContext must be used within an AppProvider')
+    if (!context) {
+        throw new Error('useAppProductsContext must be used within an AppProductsProvider')
     }
     return context
 }
