@@ -172,7 +172,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     return (
         <Layout cart={cart} handleOnClickCart={handleOnClickCart}>
             <div className='bg-white'>
-                <div className='mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8'>
+                <div className='mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8'>
                     <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
                         <Link href='/products/show'>Workspace sale</Link>
                     </h1>
@@ -199,7 +199,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className='mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
+                        className='mt-6 grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
                         {filteredAndSortedProducts.map(
                             (product, index) =>
                                 product.is_visible && (

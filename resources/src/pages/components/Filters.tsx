@@ -131,7 +131,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                                                         onChange={() =>
                                                                             handleCheckboxChange(section.id, optionIdx)
                                                                         }
-                                                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                                                        className='h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500'
                                                                     />
                                                                     <label
                                                                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -250,7 +250,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                                                         onChange={() =>
                                                                             handleCheckboxChange(section.id, optionIdx)
                                                                         }
-                                                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                                                        className='h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500'
                                                                     />
                                                                     <label
                                                                         htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -286,12 +286,12 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                 {activeFilters.map((activeFilter) => (
                                     <span
                                         key={activeFilter.value}
-                                        className='m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900'>
+                                        className='m-1 inline-flex items-center rounded-full border border-gray-200 bg-orange-800 py-1.5 pl-3 pr-2 text-sm font-medium text-white'>
                                         <span>{activeFilter.label}</span>
                                         <button
                                             type='button'
                                             onClick={() => handleRemoveFilter(activeFilter.value)}
-                                            className='ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500'>
+                                            className='ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 bg-gray-100 text-slate-800 hover:bg-gray-200 hover:text-gray-500'>
                                             <span className='sr-only'>Remove filter for {activeFilter.label}</span>
                                             <svg
                                                 className='h-2 w-2'

@@ -1,5 +1,5 @@
 import { Dialog, RadioGroup, Transition } from '@headlessui/react'
-import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/20/solid'
+import { CheckIcon } from '@heroicons/react/20/solid'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
@@ -44,7 +44,7 @@ const ProductModal = ({
 }: ProductModalProps) => {
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as='div' className='relative z-10' onClose={setOpen}>
+            <Dialog as='div' className='relative z-50' onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter='ease-out duration-300'
@@ -53,7 +53,7 @@ const ProductModal = ({
                     leave='ease-in duration-200'
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'>
-                    <div className='fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block backdrop-blur' />
+                    <div className='fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block' />
                 </Transition.Child>
 
                 <div className='fixed inset-0 z-10 overflow-y-auto'>
@@ -90,13 +90,13 @@ const ProductModal = ({
                                                     transition={{ duration: 0.5, ease: 'easeInOut' }}
                                                 />
                                             </div>
-                                            <p className='absolute left-4 top-4 text-center sm:static sm:mt-6'>
+                                            {/* <p className='absolute left-4 top-4 text-center sm:static sm:mt-6'>
                                                 <a
                                                     href={productData.href}
-                                                    className='font-medium text-indigo-600 hover:text-indigo-500'>
+                                                    className='font-medium text-orange-600 hover:text-orange-500'>
                                                     View full details
                                                 </a>
-                                            </p>
+                                            </p> */}
                                         </div>
                                         <div className='sm:col-span-8 lg:col-span-7'>
                                             <h2 className='text-2xl font-bold text-gray-900 sm:pr-12'>
@@ -116,7 +116,7 @@ const ProductModal = ({
                                                     <div className='ml-4 border-l border-gray-300 pl-4'>
                                                         <h4 className='sr-only'>Reviews</h4>
                                                         <div className='flex items-center'>
-                                                            <div className='flex items-center'>
+                                                            {/* <div className='flex items-center'>
                                                                 {[0, 1, 2, 3, 4].map((rating) => (
                                                                     <StarIcon
                                                                         key={rating}
@@ -132,7 +132,7 @@ const ProductModal = ({
                                                             </div>
                                                             <p className='sr-only'>
                                                                 {productData.rating} out of 5 stars
-                                                            </p>
+                                                            </p> */}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -143,7 +143,7 @@ const ProductModal = ({
                                                         aria-hidden='true'
                                                     />
                                                     <p className='ml-2 font-medium text-gray-500'>
-                                                        In stock and ready to ship
+                                                        En stock y listo para entrega
                                                     </p>
                                                 </div>
                                             </section>
@@ -170,7 +170,7 @@ const ProductModal = ({
                                                                         value={size}
                                                                         className={({ active }) =>
                                                                             classNames(
-                                                                                active ? 'ring-2 ring-indigo-500' : '',
+                                                                                active ? 'ring-2 ring-slate-950' : '',
                                                                                 'relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none'
                                                                             )
                                                                         }>
@@ -190,7 +190,7 @@ const ProductModal = ({
                                                                                     className={classNames(
                                                                                         active ? 'border' : 'border-2',
                                                                                         checked
-                                                                                            ? 'border-indigo-500'
+                                                                                            ? 'border-slate-500'
                                                                                             : 'border-transparent',
                                                                                         'pointer-events-none absolute -inset-px rounded-lg'
                                                                                     )}
@@ -203,7 +203,7 @@ const ProductModal = ({
                                                             </div>
                                                         </RadioGroup>
                                                     </div>
-                                                    <div className='mt-4 flex'>
+                                                    {/* <div className='mt-4 flex'>
                                                         <a
                                                             href='#'
                                                             className='group flex text-sm text-gray-500 hover:text-gray-700'>
@@ -213,7 +213,7 @@ const ProductModal = ({
                                                                 aria-hidden='true'
                                                             />
                                                         </a>
-                                                    </div>
+                                                    </div> */}
                                                     <div className='mt-6'>
                                                         <button
                                                             type='submit'
@@ -221,7 +221,7 @@ const ProductModal = ({
                                                                 event.preventDefault()
                                                                 return handleAddToCart(selectedVariant.id)
                                                             }}
-                                                            className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50'>
+                                                            className='flex w-full items-center justify-center rounded-md border border-transparent bg-orange-800 px-8 py-3 text-base font-medium text-white hover:bg-orange-900 focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 focus:ring-offset-gray-50 transform transition-transform duration-200 active:scale-90'>
                                                             Añadir a pedido
                                                         </button>
                                                     </div>
@@ -232,7 +232,7 @@ const ProductModal = ({
                                                                 aria-hidden='true'
                                                             />
                                                             <span className='text-gray-500 group-hover:text-gray-700'>
-                                                                Lifetime Guarantee
+                                                                Producto garantizado
                                                             </span>
                                                         </a>
                                                     </div>

@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { CartItem } from '../../interfaces/interfaces'
 import AnimatedCurrency from './AnimatedCurrency'
@@ -60,84 +61,93 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                             <div className='mt-8'>
                                                 <div className='flow-root'>
                                                     <ul role='list' className='-my-6 divide-y divide-gray-200'>
-                                                        {products.map((product) => (
-                                                            <li key={product.id} className='flex py-6'>
-                                                                <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
-                                                                    <img
-                                                                        src={product.imageSrc}
-                                                                        alt={'product.imageAlt'}
-                                                                        className='h-full w-full object-cover object-center'
-                                                                    />
-                                                                </div>
+                                                        <AnimatePresence>
+                                                            {products.map((product) => (
+                                                                <motion.li
+                                                                    key={product.id}
+                                                                    initial={{ opacity: 0, scale: 0.5 }}
+                                                                    animate={{ opacity: 1, scale: 1 }}
+                                                                    exit={{ opacity: 0, scale: 0.5 }}
+                                                                    transition={{ duration: 0.2 }}
+                                                                    className='flex py-6'>
+                                                                    <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
+                                                                        <img
+                                                                            src={product.imageSrc}
+                                                                            alt={'product.imageAlt'}
+                                                                            className='h-full w-full object-cover object-center'
+                                                                        />
+                                                                    </div>
 
-                                                                <div className='ml-4 flex flex-1 flex-col'>
-                                                                    <div>
-                                                                        <div className='flex justify-between text-base font-medium text-gray-900'>
-                                                                            <h3>
-                                                                                <a href={'#'}>{product.name}</a>
-                                                                            </h3>
-                                                                            <p className='ml-4'>
-                                                                                {
-                                                                                    <AnimatedCurrency
-                                                                                        value={
-                                                                                            parseFloat(product.price) *
-                                                                                            product.quantity
-                                                                                        }
-                                                                                    />
-                                                                                }
+                                                                    <div className='ml-4 flex flex-1 flex-col'>
+                                                                        <div>
+                                                                            <div className='flex justify-between text-base font-medium text-gray-900'>
+                                                                                <h3>
+                                                                                    <a href={'#'}>{product.name}</a>
+                                                                                </h3>
+                                                                                <p className='ml-4'>
+                                                                                    {
+                                                                                        <AnimatedCurrency
+                                                                                            value={
+                                                                                                parseFloat(
+                                                                                                    product.price
+                                                                                                ) * product.quantity
+                                                                                            }
+                                                                                        />
+                                                                                    }
+                                                                                </p>
+                                                                            </div>
+                                                                            <p className='mt-1 text-sm text-gray-500'>
+                                                                                {product.color}
                                                                             </p>
                                                                         </div>
-                                                                        <p className='mt-1 text-sm text-gray-500'>
-                                                                            {product.color}
-                                                                        </p>
-                                                                    </div>
-                                                                    <div className='flex flex-1 items-end justify-between text-sm'>
-                                                                        <div className='flex items-center'>
-                                                                            <button
-                                                                                onClick={() =>
-                                                                                    updateProductQuantity(
-                                                                                        product.id,
-                                                                                        Math.max(
-                                                                                            product.quantity - 1,
-                                                                                            1
+                                                                        <div className='flex flex-1 items-end justify-between text-sm'>
+                                                                            <div className='flex items-center'>
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        updateProductQuantity(
+                                                                                            product.id,
+                                                                                            Math.max(
+                                                                                                product.quantity - 1,
+                                                                                                1
+                                                                                            )
                                                                                         )
-                                                                                    )
-                                                                                }
-                                                                                className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-l-md focus:outline-none'>
-                                                                                <MinusIcon className='h-5 w-4' />
-                                                                            </button>
-                                                                            <input
-                                                                                type='text'
-                                                                                value={product.quantity}
-                                                                                readOnly
-                                                                                className='w-12 text-center bg-white border-t border-b border-gray-300 text-gray-900 px-0 py-0'
-                                                                            />
-                                                                            <button
-                                                                                onClick={() =>
-                                                                                    updateProductQuantity(
-                                                                                        product.id,
-                                                                                        product.quantity + 1
-                                                                                    )
-                                                                                }
-                                                                                className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-r-md focus:outline-none'>
-                                                                                <PlusIcon className='h-5 w-4' />
-                                                                            </button>
-                                                                        </div>
+                                                                                    }
+                                                                                    className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-l-md focus:outline-none'>
+                                                                                    <MinusIcon className='h-5 w-4' />
+                                                                                </button>
+                                                                                <input
+                                                                                    type='text'
+                                                                                    value={product.quantity}
+                                                                                    readOnly
+                                                                                    className='w-12 text-center bg-white border-t border-b border-gray-300 text-gray-900 px-0 py-0'
+                                                                                />
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        updateProductQuantity(
+                                                                                            product.id,
+                                                                                            product.quantity + 1
+                                                                                        )
+                                                                                    }
+                                                                                    className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-r-md focus:outline-none'>
+                                                                                    <PlusIcon className='h-5 w-4' />
+                                                                                </button>
+                                                                            </div>
 
-                                                                        <div className='flex'>
-                                                                            <button
-                                                                                onClick={() =>
-                                                                                    removeProduct(product.id)
-                                                                                }
-                                                                                type='button'
-                                                                                className='font-medium text-indigo-600 hover:text-indigo-500'>
-                                                                                Eliminar
-                                                                            </button>
+                                                                            <div className='flex'>
+                                                                                <button
+                                                                                    onClick={() =>
+                                                                                        removeProduct(product.id)
+                                                                                    }
+                                                                                    type='button'
+                                                                                    className='font-medium text-orange-600 hover:text-orange-500'>
+                                                                                    Eliminar
+                                                                                </button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </li>
-                                                        ))}
+                                                                </motion.li>
+                                                            ))}
+                                                        </AnimatePresence>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -164,7 +174,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                             <div className='mt-6'>
                                                 <a
                                                     href='#'
-                                                    className='flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'>
+                                                    className='flex items-center justify-center rounded-md border border-transparent bg-orange-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-900'>
                                                     Procesar Pedido
                                                 </a>
                                             </div>
@@ -173,7 +183,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                     o
                                                     <button
                                                         type='button'
-                                                        className='font-medium text-indigo-600 hover:text-indigo-500'
+                                                        className='font-medium text-orange-600 hover:text-orange-500'
                                                         onClick={() => setOpenCart(false)}>
                                                         &nbsp;Continuar Comprando
                                                         <span aria-hidden='true'> &rarr;</span>

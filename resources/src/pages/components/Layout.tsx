@@ -1,6 +1,7 @@
 import { Popover, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
-import { Fragment } from 'react'
+import { motion } from 'framer-motion'
+import { Fragment, useEffect, useState } from 'react'
 import { CartItem } from '../../interfaces/interfaces'
 
 const navigation = {
@@ -112,6 +113,16 @@ function classNames(...classes: string[]) {
 type LayoutProps = { children: React.ReactNode; cart: CartItem[]; handleOnClickCart: () => void }
 
 export default function Layout({ children, cart, handleOnClickCart }: LayoutProps) {
+    const [isAnimating, setIsAnimating] = useState(false)
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            setIsAnimating(true)
+            const timeout = setTimeout(() => setIsAnimating(false), 100)
+            return () => clearTimeout(timeout)
+        }
+    }, [cart])
+
     return (
         <div className='bg-gray-50'>
             <header className='relative bg-white'>
@@ -305,10 +316,14 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                             href='#'
                                             className='group -m-2 flex items-center p-2'
                                             onClick={handleOnClickCart}>
-                                            <ShoppingBagIcon
-                                                className='h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
-                                                aria-hidden='true'
-                                            />
+                                            <motion.div
+                                                animate={isAnimating ? { scale: 1.7 } : { scale: 1 }}
+                                                transition={{ type: 'spring', stiffness: 300, damping: 10 }}>
+                                                <ShoppingBagIcon
+                                                    className='h-9 w-9 flex-shrink-0 text-orange-500 group-hover:text-orange-600 '
+                                                    aria-hidden='true'
+                                                />
+                                            </motion.div>
                                             <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
                                                 {cart.reduce((sum, item) => sum + item.quantity, 0)}
                                             </span>
