@@ -3,7 +3,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
-import { CartItem } from '../../interfaces/interfaces'
+import { CartItem } from '../../types-and-interfaces'
 import AnimatedCurrency from './AnimatedCurrency'
 
 type CartProps = {

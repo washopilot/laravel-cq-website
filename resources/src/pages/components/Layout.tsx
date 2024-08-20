@@ -1,8 +1,8 @@
-import { Popover, Transition } from '@headlessui/react'
-import { MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
+import { Popover } from '@headlessui/react'
+import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
-import { Fragment, useEffect, useState } from 'react'
-import { CartItem } from '../../interfaces/interfaces'
+import { useEffect, useState } from 'react'
+import { CartItem } from '../../types-and-interfaces'
 
 const navigation = {
     categories: [

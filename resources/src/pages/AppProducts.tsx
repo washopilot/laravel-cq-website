@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
-import { Category, Product, Variant } from '../interfaces/interfaces'
+import { Category, Product, Variant } from '../types-and-interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
 import Cart from './components/Cart'

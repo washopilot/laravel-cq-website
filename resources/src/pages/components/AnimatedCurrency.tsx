@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const AnimatedCurrency = ({ value }: { value: number }) => {
     const [displayValue, setDisplayValue] = useState(0)

@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { CartItem, Category, FiltersType, Product, Variant } from '../../interfaces/interfaces'
+import { CartItem, Category, FiltersType, Product, Variant } from '../../types-and-interfaces'
 
 type AppProviderProps = {
     products: Product[]

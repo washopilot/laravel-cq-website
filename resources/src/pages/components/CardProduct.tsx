@@ -1,4 +1,4 @@
-import { Product } from '../../interfaces/interfaces'
+import { Product } from '../../types-and-interfaces'
 import formatCurrency from '../../utils/format-currency'
 
 type CardProductProps = {
