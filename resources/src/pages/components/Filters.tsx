@@ -1,13 +1,22 @@
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { Fragment, useCallback, useMemo, useState } from 'react'
-import { FiltersType } from '../AppProducts'
 
 type SortOptionType = {
     name: string
     href: string
     current: boolean
 }
+
+type FiltersType = {
+    id: string
+    name: string
+    options: {
+        value: string
+        label: string
+        checked: boolean
+    }[]
+}[]
 
 interface FiltersProps {
     sortOptions: SortOptionType[]

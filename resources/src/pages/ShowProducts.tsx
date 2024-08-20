@@ -1,5 +1,5 @@
-import './app.css'
 import { Link } from '@inertiajs/inertia-react'
+import './app.css'
 
 const AppProducts = ({ message }: { message: string }) => {
     return (
