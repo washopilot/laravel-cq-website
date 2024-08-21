@@ -16,7 +16,6 @@ class ProductsController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $variants = Variant::all();
-        Inertia::setRootView('products.home');
 
         return Inertia::render('AppProducts', [
             'products' => $products->map(function ($product) {
@@ -58,13 +57,26 @@ class ProductsController extends Controller
         ]);
 
     }
-    public function show()
+
+    public function checkout(Request $request)
     {
+        if ($request->isMethod('post')) {
+            $cartItems = json_decode($request->input('cartItems'), true);
 
-        Inertia::setRootView('products.home');
+            $request->session()->put('cartItems', $cartItems);
 
-        return Inertia::render('ShowProducts', [
-            'message' => 'HELLO WORD MF'
+            return redirect()->route('checkout');
+        }
+
+        $cartItems = $request->session()->get('cartItems', []);
+
+        // $request->session()->forget('cartItems');
+
+        // Debugbar::addMessage($cartItems);
+
+        return Inertia::render('Checkout', [
+            'cartItems' => $cartItems,
+            'message' => 'Your checkout details are displayed here!',
         ]);
 
     }

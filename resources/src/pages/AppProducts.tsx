@@ -113,7 +113,7 @@ const MainProductsComponent = () => {
                 <Cart
                     openCart={openCart}
                     setOpenCart={setOpenCart}
-                    products={cart}
+                    cart={cart}
                     updateProductQuantity={updateProductQuantity}
                     removeProduct={removeProduct}
                 />

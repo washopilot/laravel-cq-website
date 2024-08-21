@@ -5,16 +5,17 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { CartItem } from '../../types-and-interfaces'
 import AnimatedCurrency from './AnimatedCurrency'
+import { Inertia, Method } from '@inertiajs/inertia'
 
 type CartProps = {
     openCart: boolean
     setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
-    products: CartItem[]
+    cart: CartItem[]
     updateProductQuantity: (id: number, newQuantity: number) => void
     removeProduct: (id: number) => void
 }
 
-export default function Cart({ openCart, setOpenCart, products, updateProductQuantity, removeProduct }: CartProps) {
+export default function Cart({ openCart, setOpenCart, cart, updateProductQuantity, removeProduct }: CartProps) {
     return (
         <Transition.Root show={openCart} as={Fragment}>
             <Dialog as='div' className='relative z-50' onClose={setOpenCart}>
@@ -62,7 +63,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                 <div className='flow-root'>
                                                     <ul role='list' className='-my-6 divide-y divide-gray-200'>
                                                         <AnimatePresence>
-                                                            {products.map((product) => (
+                                                            {cart.map((product) => (
                                                                 <motion.li
                                                                     key={product.id}
                                                                     initial={{ opacity: 0, scale: 0.5 }}
@@ -160,7 +161,7 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                 <p>
                                                     {
                                                         <AnimatedCurrency
-                                                            value={products.reduce((total, item) => {
+                                                            value={cart.reduce((total, item) => {
                                                                 const itemPrice = parseFloat(item.price)
                                                                 const itemTotal = itemPrice * item.quantity
                                                                 return total + itemTotal
@@ -173,11 +174,23 @@ export default function Cart({ openCart, setOpenCart, products, updateProductQua
                                                 Shipping and taxes calculated at checkout.
                                             </p>
                                             <div className='mt-6'>
-                                                <a
-                                                    href='#'
-                                                    className='flex items-center justify-center rounded-md border border-transparent bg-orange-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-900'>
+                                                <button
+                                                    onClick={() =>
+                                                        Inertia.visit('checkout', {
+                                                            method: Method.POST,
+                                                            data: {
+                                                                cartItems: JSON.stringify(cart)
+                                                            }
+                                                        })
+                                                    }
+                                                    className={`w-full flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm ${
+                                                        cart.length === 0
+                                                            ? 'bg-gray-400 cursor-not-allowed'
+                                                            : 'bg-orange-800 hover:bg-orange-900'
+                                                    }`}
+                                                    disabled={cart.length === 0}>
                                                     Procesar Pedido
-                                                </a>
+                                                </button>
                                             </div>
                                             <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
                                                 <p>

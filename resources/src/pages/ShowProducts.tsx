@@ -1,11 +1,11 @@
 import { Link } from '@inertiajs/inertia-react'
 import './app.css'
 
-const AppProducts = ({ message }: { message: string }) => {
+const ShowProducts = ({ message }: { message: string }) => {
     return (
         <div className='bg-white'>
             <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 divide-y divide-gray-200'>
-                <Link href='/products'>
+                <Link href='/checkout'>
                     <h1>{message}</h1>
                 </Link>
             </div>
@@ -13,4 +13,4 @@ const AppProducts = ({ message }: { message: string }) => {
     )
 }
 
-export default AppProducts
+export default ShowProducts

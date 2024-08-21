@@ -26,10 +26,13 @@ Route::get(
     [ProductsController::class, 'index']
 );
 
-Route::get(
+Route::inertia(
     '/products/show',
-    [ProductsController::class, 'show']
+    'ShowProducts',
+    ['message' => 'There is again']
 );
+
+Route::match(['get', 'post'], '/checkout', [ProductsController::class, 'checkout'])->name('checkout');
 
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 
