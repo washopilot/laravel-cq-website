@@ -106,9 +106,9 @@ const footerNavigation = {
     ]
 }
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes: string[]) {
+//     return classes.filter(Boolean).join(' ')
+// }
 
 type LayoutProps = { children: React.ReactNode; cart: CartItem[]; handleOnClickCart: () => void }
 
