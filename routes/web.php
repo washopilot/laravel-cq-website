@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::get(
     '/products',
     [ProductsController::class, 'index']
-);
+)->name('index');
 
 Route::inertia(
     '/products/show',
@@ -32,7 +32,7 @@ Route::inertia(
     ['message' => 'There is again']
 );
 
-Route::match(['get', 'post'], '/checkout', [ProductsController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [ProductsController::class, 'checkout'])->name('checkout');
 
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 

@@ -60,22 +60,10 @@ class ProductsController extends Controller
 
     public function checkout(Request $request)
     {
-        if ($request->isMethod('post')) {
-            $cartItems = json_decode($request->input('cartItems'), true);
 
-            $request->session()->put('cartItems', $cartItems);
-
-            return redirect()->route('checkout');
-        }
-
-        $cartItems = $request->session()->get('cartItems', []);
-
-        // $request->session()->forget('cartItems');
-
-        // Debugbar::addMessage($cartItems);
+        Debugbar::info($request);
 
         return Inertia::render('Checkout', [
-            'cartItems' => $cartItems,
             'message' => 'Your checkout details are displayed here!',
         ]);
 

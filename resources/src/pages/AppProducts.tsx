@@ -7,7 +7,7 @@ import Cart from './components/Cart'
 import Filters from './components/Filters'
 import Layout from './components/Layout'
 import ProductModal from './components/ProductModal'
-import { AppProductsProvider, useAppProductsContext } from './context/AppContext'
+import { AppProductsProvider, useAppProductsContext } from './context/AppProductContext'
 
 interface ProductsProps {
     products: Product[]

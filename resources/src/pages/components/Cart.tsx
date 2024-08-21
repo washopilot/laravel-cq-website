@@ -98,7 +98,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                                                 </p>
                                                                             </div>
                                                                             <p className='mt-1 text-sm text-gray-500'>
-                                                                                {product.color}
+                                                                                {product.product}
                                                                             </p>
                                                                         </div>
                                                                         <div className='flex flex-1 items-end justify-between text-sm'>
@@ -177,10 +177,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                 <button
                                                     onClick={() =>
                                                         Inertia.visit('checkout', {
-                                                            method: Method.POST,
-                                                            data: {
-                                                                cartItems: JSON.stringify(cart)
-                                                            }
+                                                            method: Method.GET
                                                         })
                                                     }
                                                     className={`w-full flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm ${

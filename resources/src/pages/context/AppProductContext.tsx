@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { CartItem, Category, FiltersType, Product, Variant } from '../../types-and-interfaces'
+import getValidatedCart from '../../utils/validate-storage'
 
 type AppProviderProps = {
     products: Product[]
@@ -37,11 +38,6 @@ const INITIAL_SORT_OPTIONS = [
     { name: 'Precio: Mayor a Menor', href: '#', current: false }
 ]
 
-const getCart = (): CartItem[] => {
-    const savedCart = localStorage.getItem('shoppingCart')
-    return savedCart ? JSON.parse(savedCart) : []
-}
-
 const saveCart = (cart: CartItem[]) => {
     localStorage.setItem('shoppingCart', JSON.stringify(cart))
 }
@@ -69,7 +65,8 @@ export const AppProductsProvider = ({ products, categories, variants, children }
         [categories]
     )
     const [filters, setFilters] = useState<FiltersType>(initialFilters)
-    const [cart, setCart] = useState<CartItem[]>(getCart())
+
+    const [cart, setCart] = useState<CartItem[]>(getValidatedCart())
     const [openCart, setOpenCart] = useState(false)
 
     const handleOnClickCart = () => {
@@ -98,7 +95,7 @@ export const AppProductsProvider = ({ products, categories, variants, children }
                     quantity,
                     id: variant.id,
                     name: variant.name,
-                    color: product.name,
+                    product: product.name,
                     price: variant.price,
                     imageSrc: variant.images[0]
                 }

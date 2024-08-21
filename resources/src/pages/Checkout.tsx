@@ -1,5 +1,7 @@
 import { Link } from '@inertiajs/inertia-react'
+import { useEffect, useState } from 'react'
 import { CartItem } from '../types-and-interfaces'
+import getValidatedCart from '../utils/validate-storage'
 
 const products = [
     {
@@ -15,7 +17,13 @@ const products = [
     // More products...
 ]
 
-export default function Checkout({ message, cartItems }: { message: string; cartItems: CartItem[] }) {
+export default function Checkout({ message }: { message: string }) {
+    const [cartItems, setCartItems] = useState<CartItem[]>([])
+
+    useEffect(() => {
+        setCartItems(getValidatedCart())
+    }, [])
+
     return (
         <div className='bg-white'>
             {/* Background color split screen for large screens */}
@@ -47,7 +55,7 @@ export default function Checkout({ message, cartItems }: { message: string; cart
                                     />
                                     <div className='flex-auto space-y-1'>
                                         <h3 className='text-white'>{product.name}</h3>
-                                        <p>{product.color}</p>
+                                        <p>{product.product}</p>
                                         {/* <p>{product.size}</p> */}
                                     </div>
                                     <p className='flex-none text-base font-medium text-white'>{product.price}</p>
