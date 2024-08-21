@@ -1,4 +1,5 @@
 import { createInertiaApp } from '@inertiajs/inertia-react'
+import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
@@ -11,7 +12,9 @@ createInertiaApp({
     setup({ el, App, props }) {
         createRoot(el).render(
             <React.StrictMode>
-                <App {...props} />
+                <AnimatePresence mode='wait'>
+                    <App {...props} />
+                </AnimatePresence>
             </React.StrictMode>
         )
     }

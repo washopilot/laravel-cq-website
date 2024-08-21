@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/inertia-react'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { CartItem } from '../types-and-interfaces'
 import getValidatedCart from '../utils/validate-storage'
@@ -25,7 +26,12 @@ export default function Checkout({ message }: { message: string }) {
     }, [])
 
     return (
-        <div className='bg-white'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className='bg-white'>
             {/* Background color split screen for large screens */}
             <div className='fixed left-0 top-0 hidden h-full w-1/2 bg-white lg:block' aria-hidden='true' />
             <div className='fixed right-0 top-0 hidden h-full w-1/2 bg-indigo-900 lg:block' aria-hidden='true' />
@@ -274,6 +280,6 @@ export default function Checkout({ message }: { message: string }) {
                     </form>
                 </section>
             </div>
-        </div>
+        </motion.div>
     )
 }

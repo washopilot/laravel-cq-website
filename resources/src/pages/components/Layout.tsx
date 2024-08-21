@@ -124,7 +124,12 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
     }, [cart])
 
     return (
-        <div className='bg-gray-50'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className='bg-gray-50'>
             <header className='relative bg-white'>
                 <nav aria-label='Top' className='fixed top-0 w-full z-50 bg-white border-b border-gray-200'>
                     <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
@@ -433,6 +438,6 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                     </div>
                 </footer>
             </div>
-        </div>
+        </motion.div>
     )
 }
