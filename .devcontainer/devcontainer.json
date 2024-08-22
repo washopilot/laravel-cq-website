@@ -47,7 +47,6 @@
             "extensions": [
                 "dsznajder.es7-react-js-snippets",
                 "mikestead.dotenv",
-                "DEVSENSE.phptools-vscode",
                 "onecentlin.laravel-extension-pack",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "donjayamanne.githistory",
@@ -55,7 +54,11 @@
                 "yy0931.vscode-sqlite3-editor",
                 "redhat.vscode-yaml",
                 "WallabyJs.console-ninja",
-                "bradlc.vscode-tailwindcss"
+                "bradlc.vscode-tailwindcss",
+                "bmewburn.vscode-intelephense-client",
+                "MehediDracula.php-namespace-resolver",
+                "hakcorp.php-awesome-snippets",
+                "austenc.laravel-blade-spacer"
             ]
         }
     },
