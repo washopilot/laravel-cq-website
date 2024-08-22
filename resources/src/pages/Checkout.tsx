@@ -2,28 +2,20 @@ import { Link } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { CartItem } from '../types-and-interfaces'
+import formatCurrency from '../utils/format-currency'
 import getValidatedCart from '../utils/validate-storage'
 
-const products = [
-    {
-        id: 1,
-        name: 'High Wall Tote',
-        href: '#',
-        price: '$210.00',
-        color: 'White and black',
-        size: '15L',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-07-product-01.jpg',
-        imageAlt: 'Front of zip tote bag with white canvas, white handles, and black drawstring top.'
-    }
-    // More products...
-]
-
 export default function Checkout({ message }: { message: string }) {
-    const [cartItems, setCartItems] = useState<CartItem[]>([])
+    const [cartItems, setCartItems] = useState<CartItem[]>(getValidatedCart)
+    const [subtotal, setSubtotal] = useState(0)
 
     useEffect(() => {
-        setCartItems(getValidatedCart())
-    }, [])
+        const calculatedSubtotal = cartItems.reduce((total, item) => {
+            const itemTotal = item.quantity * parseFloat(item.price)
+            return total + parseFloat(itemTotal.toFixed(2))
+        }, 0)
+        setSubtotal(parseFloat(calculatedSubtotal.toFixed(2)))
+    }, [cartItems])
 
     return (
         <motion.div
@@ -47,8 +39,13 @@ export default function Checkout({ message }: { message: string }) {
                         </h2>
 
                         <dl>
-                            <dt className='text-sm font-medium'>Amount due</dt>
-                            <dd className='mt-1 text-3xl font-bold tracking-tight text-white'>$232.00</dd>
+                            <dt className='text-sm font-medium'>Monto</dt>
+                            <dd className='mt-1 text-3xl font-bold tracking-tight text-white'>
+                                {formatCurrency((subtotal + subtotal * 0.15).toString())}
+                            </dd>
+                            <dd className='text-right text-white underline underline-offset-8 pb-2'>
+                                <Link href='/products'>&#x2190; Regresar a la tienda</Link>
+                            </dd>
                         </dl>
 
                         <ul role='list' className='divide-y divide-white divide-opacity-10 text-sm font-medium'>
@@ -64,7 +61,9 @@ export default function Checkout({ message }: { message: string }) {
                                         <p>{product.product}</p>
                                         {/* <p>{product.size}</p> */}
                                     </div>
-                                    <p className='flex-none text-base font-medium text-white'>{product.price}</p>
+                                    <p className='flex-none text-base font-medium text-white'>
+                                        {formatCurrency((parseFloat(product.price) * product.quantity).toString())}
+                                    </p>
                                 </li>
                             ))}
                         </ul>
@@ -72,22 +71,22 @@ export default function Checkout({ message }: { message: string }) {
                         <dl className='space-y-6 border-t border-white border-opacity-10 pt-6 text-sm font-medium'>
                             <div className='flex items-center justify-between'>
                                 <dt>Subtotal</dt>
-                                <dd>$570.00</dd>
+                                <dd>{formatCurrency(subtotal.toString())}</dd>
                             </div>
 
-                            <div className='flex items-center justify-between'>
+                            {/* <div className='flex items-center justify-between'>
                                 <dt>Shipping</dt>
                                 <dd>$25.00</dd>
-                            </div>
+                            </div> */}
 
                             <div className='flex items-center justify-between'>
-                                <dt>Taxes</dt>
-                                <dd>$47.60</dd>
+                                <dt>{'IVA (15%)'}</dt>
+                                <dd>{formatCurrency((subtotal * 0.15).toString())}</dd>
                             </div>
 
                             <div className='flex items-center justify-between border-t border-white border-opacity-10 pt-6 text-white'>
                                 <dt className='text-base'>Total</dt>
-                                <dd className='text-base'>$642.60</dd>
+                                <dd className='text-base'>{formatCurrency((subtotal + subtotal * 0.15).toString())}</dd>
                             </div>
                         </dl>
                     </div>

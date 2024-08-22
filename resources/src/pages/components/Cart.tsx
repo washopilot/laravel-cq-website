@@ -1,11 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
+import { Inertia, Method } from '@inertiajs/inertia'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { CartItem } from '../../types-and-interfaces'
 import AnimatedCurrency from './AnimatedCurrency'
-import { Inertia, Method } from '@inertiajs/inertia'
 
 type CartProps = {
     openCart: boolean
@@ -162,9 +162,8 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                     {
                                                         <AnimatedCurrency
                                                             value={cart.reduce((total, item) => {
-                                                                const itemPrice = parseFloat(item.price)
-                                                                const itemTotal = itemPrice * item.quantity
-                                                                return total + itemTotal
+                                                                const itemTotal = item.quantity * parseFloat(item.price)
+                                                                return total + parseFloat(itemTotal.toFixed(2))
                                                             }, 0)}
                                                         />
                                                     }
