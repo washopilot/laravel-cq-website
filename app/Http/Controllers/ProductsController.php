@@ -7,7 +7,7 @@ use App\Models\Variant;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Inertia\Inertia;
-use Barryvdh\Debugbar\Facade as Debugbar;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -56,10 +56,9 @@ class ProductsController extends Controller
             }),
 
         ]);
-
     }
 
-    public function checkout(Request $request)
+    public function checkout()
     {
 
         // Debugbar::info($request);
@@ -67,12 +66,10 @@ class ProductsController extends Controller
         return Inertia::render('Checkout', [
             // 'message' => 'Your checkout details are displayed here!',
         ]);
-
     }
 
     public function processOrder(Request $request)
     {
-        // Validación de datos
         $validator = Validator::make($request->all(), [
             'fullName' => 'required|string|max:255',
             'phoneNumber' => 'required|string|max:20',
@@ -85,11 +82,23 @@ class ProductsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Mostrar datos en Debugbar
-        // Debugbar::info($validator);
+        $trackingId = '51547878755545848512';
 
-        // Lógica para procesar el pedido
-        return redirect()->route('index');
+        return redirect()->route('order.show', ['tracking_id' => $trackingId])->with([
+            'send' => 'success'
+        ]);
+    }
 
+    public function showOrder($tracking_id, Request $request)
+    {
+        $send = session('send', null);
+        session()->forget('send');
+
+        Debugbar::info(session()->all());
+
+        return Inertia::render('Order', [
+            'send' => $send,
+            'tracking_id' => $tracking_id
+        ]);
     }
 }

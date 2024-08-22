@@ -36,14 +36,6 @@ Route::get('/checkout', [ProductsController::class, 'checkout'])->name('checkout
 
 Route::post('/process-order', [ProductsController::class, 'processOrder'])->name('order.process');
 
+Route::get('/order/{tracking_id}', [ProductsController::class, 'showOrder'])->name('order.show');
+
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
-
-
-
-
-
-
-
-
-
-

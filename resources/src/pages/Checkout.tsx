@@ -59,7 +59,7 @@ export default function Checkout() {
                             <dd className='mt-1 text-3xl font-bold tracking-tight text-white'>
                                 {formatCurrency((subtotal + subtotal * 0.15).toString())}
                             </dd>
-                            <dd className='text-right text-white underline underline-offset-8 pb-2'>
+                            <dd className='text-right text-white underline underline-offset-8 pb-6'>
                                 <Link href='/products'>&#x2190; Regresar a la tienda</Link>
                             </dd>
                         </dl>
