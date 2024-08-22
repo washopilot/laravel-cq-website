@@ -1,6 +1,8 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useContext } from 'react'
 import { CartItem, Category, FiltersType, Product, Variant } from '../../types-and-interfaces'
-import getValidatedCart from '../../utils/validate-storage'
+import useCart from '../hooks/useCart'
+import useFilters from '../hooks/useFilters'
+import useProductModal from '../hooks/useProductModal'
 
 type AppProviderProps = {
     products: Product[]
@@ -38,139 +40,26 @@ const INITIAL_SORT_OPTIONS = [
     { name: 'Precio: Mayor a Menor', href: '#', current: false }
 ]
 
-const saveCart = (cart: CartItem[]) => {
-    localStorage.setItem('shoppingCart', JSON.stringify(cart))
-}
-
 const AppProductsContext = createContext<AppProductsContextType>(null!)
 
 export const AppProductsProvider = ({ products, categories, variants, children }: AppProviderProps) => {
-    const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
-    const [filteredVariants, setFilteredVariants] = useState<Variant[]>([])
-    const [openModal, setOpenModal] = useState(false)
-    const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
-    const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
-    const initialFilters = useMemo(
-        () => [
-            {
-                id: 'category',
-                name: 'POR CATEGORÍA',
-                options: categories.map((category) => ({
-                    value: category.slug,
-                    label: category.name,
-                    checked: true
-                }))
-            }
-        ],
-        [categories]
-    )
-    const [filters, setFilters] = useState<FiltersType>(initialFilters)
+    const {
+        selectedProduct,
+        handleProductClick,
+        filteredVariants,
+        openModal,
+        setOpenModal,
+        selectedVariant,
+        setSelectedVariant
+    } = useProductModal(variants)
 
-    const [cart, setCart] = useState<CartItem[]>(getValidatedCart())
-    const [openCart, setOpenCart] = useState(false)
+    const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
+        useCart(products, variants)
 
-    const handleOnClickCart = () => {
-        setOpenCart(true)
-    }
-
-    useEffect(() => {
-        saveCart(cart)
-        // console.log(cart)
-    }, [cart])
-
-    const addToCart = (variant: Variant, quantity: number = 1) => {
-        const product = products.find((p) => p.id === variant.product_id)
-        if (!product) return // Si no se encuentra el producto, no hace nada.
-
-        setCart((prevCart) => {
-            const existingItemIndex = prevCart.findIndex((item) => item.id === variant.id)
-            if (existingItemIndex > -1) {
-                return prevCart.map((item, index) =>
-                    index === existingItemIndex ? { ...item, quantity: item.quantity + quantity } : item
-                )
-            }
-            return [
-                ...prevCart,
-                {
-                    quantity,
-                    id: variant.id,
-                    name: variant.name,
-                    product: product.name,
-                    price: variant.price,
-                    imageSrc: variant.images[0]
-                }
-            ]
-        })
-    }
-
-    const handleAddToCart = (variant_id: number) => {
-        const variant = variants.find((v) => v.id === variant_id)
-        if (!variant) return
-
-        addToCart(variant, 1)
-    }
-
-    const updateProductQuantity = (id: number, newQuantity: number) => {
-        setCart((prevCart) =>
-            prevCart.map((product) => (product.id === id ? { ...product, quantity: newQuantity } : product))
-        )
-    }
-
-    const removeProduct = (id: number) => {
-        setCart((prevCart) => prevCart.filter((product) => product.id !== id))
-    }
-
-    const getCategoryIdBySlug = (slug: string, categories: Category[]): number | undefined => {
-        return categories.find((category) => category.slug === slug)?.id
-    }
-
-    const filterProductsByCategory = (products: Product[], filters: FiltersType, categories: Category[]): Product[] => {
-        const selectedCategoryValues =
-            filters
-                .find((filter) => filter.id === 'category')
-                ?.options.filter((option) => option.checked)
-                .map((option) => option.value) || []
-
-        if (selectedCategoryValues.length === 0) {
-            return []
-        }
-        const selectedCategoryIds = selectedCategoryValues.map((slug) => getCategoryIdBySlug(slug, categories))
-        return products.filter(
-            (product) => selectedCategoryIds.length === 0 || selectedCategoryIds.includes(product.category_id)
-        )
-    }
-
-    const filteredAndSortedProducts = useMemo(() => {
-        const filteredProducts = filterProductsByCategory(products, filters, categories)
-        const selectedSortOption = sortOptions.find((option) => option.current)
-        if (!selectedSortOption) return filteredProducts
-        const sorted = [...filteredProducts]
-        switch (selectedSortOption.name) {
-            case 'Orden: Ascendente':
-                return sorted.sort((a, b) => (b.order_column ?? 0) - (a.order_column ?? 0))
-            case 'Orden: Descendente':
-                return sorted.sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
-            case 'Precio: Menor a Mayor':
-                return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-            case 'Precio: Mayor a Menor':
-                return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-            default:
-                return sorted
-        }
-    }, [products, filters, categories, sortOptions])
-
-    const handleProductClick = useCallback(
-        (product: Product) => {
-            const tempVariants = variants
-                .filter((variant) => variant.product_id === product.id)
-                .sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
-
-            setSelectedProduct(product)
-            setFilteredVariants(tempVariants)
-            setSelectedVariant(tempVariants[0] || null)
-            setOpenModal(true)
-        },
-        [variants]
+    const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
+        categories,
+        products,
+        INITIAL_SORT_OPTIONS
     )
 
     return (

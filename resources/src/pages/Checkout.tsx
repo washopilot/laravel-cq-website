@@ -105,7 +105,7 @@ export default function Checkout({ message }: { message: string }) {
                             <div>
                                 <Link href='/products'>
                                     <h1>{message}</h1>
-                                    <h1>{JSON.stringify(cartItems)}</h1>
+                                    {/* <h1>{JSON.stringify(cartItems)}</h1> */}
                                 </Link>
                                 <h3 id='contact-info-heading' className='text-lg font-medium text-gray-900'>
                                     Contact information
