@@ -7,7 +7,9 @@ import Cart from './components/Cart'
 import Filters from './components/Filters'
 import Layout from './components/Layout'
 import ProductModal from './components/ProductModal'
-import { AppProductsProvider, useAppProductsContext } from './context/AppProductContext'
+import useCart from './hooks/useCart'
+import useFilters from './hooks/useFilters'
+import useProductModal from './hooks/useProductModal'
 
 interface ProductsProps {
     products: Product[]
@@ -16,35 +18,23 @@ interface ProductsProps {
 }
 
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
-    return (
-        <AppProductsProvider products={products} categories={categories} variants={variants}>
-            <MainProductsComponent />
-        </AppProductsProvider>
+    const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
+        categories,
+        products
     )
-}
 
-const MainProductsComponent = () => {
     const {
-        cart,
-        updateProductQuantity,
-        removeProduct,
         selectedProduct,
         handleProductClick,
         filteredVariants,
         openModal,
         setOpenModal,
         selectedVariant,
-        setSelectedVariant,
-        filters,
-        setFilters,
-        sortOptions,
-        setSortOptions,
-        filteredAndSortedProducts,
-        openCart,
-        setOpenCart,
-        handleOnClickCart,
-        handleAddToCart
-    } = useAppProductsContext()
+        setSelectedVariant
+    } = useProductModal(variants)
+
+    const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
+        useCart(products, variants)
 
     return (
         <Layout cart={cart} handleOnClickCart={handleOnClickCart}>

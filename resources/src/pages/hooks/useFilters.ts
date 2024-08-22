@@ -1,15 +1,14 @@
 import { useMemo, useState } from 'react'
 import { Category, FiltersType, Product } from '../../types-and-interfaces'
 
-const useFilters = (
-    categories: Category[],
-    products: Product[],
-    INITIAL_SORT_OPTIONS: {
-        name: string
-        href: string
-        current: boolean
-    }[]
-) => {
+const INITIAL_SORT_OPTIONS = [
+    { name: 'Orden: Ascendente', href: '#', current: false },
+    { name: 'Orden: Descendente', href: '#', current: true },
+    { name: 'Precio: Menor a Mayor', href: '#', current: false },
+    { name: 'Precio: Mayor a Menor', href: '#', current: false }
+]
+
+const useFilters = (categories: Category[], products: Product[]) => {
     const [sortOptions, setSortOptions] = useState(INITIAL_SORT_OPTIONS)
     const initialFilters = useMemo(
         () => [
