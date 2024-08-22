@@ -34,6 +34,8 @@ Route::inertia(
 
 Route::get('/checkout', [ProductsController::class, 'checkout'])->name('checkout');
 
+Route::post('/process-order', [ProductsController::class, 'processOrder'])->name('order.process');
+
 // Route::post('send-form', [ContactFormController::class, 'send'])->name('contact.send');
 
 

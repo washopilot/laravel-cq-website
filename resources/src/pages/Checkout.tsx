@@ -23,14 +23,14 @@ export default function Checkout() {
 
         const formData = new FormData(e.currentTarget)
         const data = {
-            nombreCompleto: formData.get('full-name') as string,
-            numeroTelefono: formData.get('phone-number') as string,
-            direccion: formData.get('address') as string,
+            fullName: formData.get('full-name') as string,
+            phoneNumber: formData.get('phone-number') as string,
+            address: formData.get('address') as string,
             cartItems: JSON.stringify(cartItems),
             subtotal
         }
 
-        Inertia.post('/ruta-deseada', data)
+        Inertia.post('/process-order', data)
     }
 
     return (
@@ -121,9 +121,7 @@ export default function Checkout() {
                                 <h3 className='text-lg font-medium text-gray-900'>Información de contacto</h3>
 
                                 <div className='mt-6'>
-                                    <label
-                                        htmlFor='nombre-completo'
-                                        className='block text-sm font-medium text-gray-700'>
+                                    <label htmlFor='full-name' className='block text-sm font-medium text-gray-700'>
                                         Nombre completo
                                     </label>
                                     <div className='mt-1'>
@@ -140,9 +138,7 @@ export default function Checkout() {
                                 </div>
 
                                 <div className='mt-6'>
-                                    <label
-                                        htmlFor='numero-telefono'
-                                        className='block text-sm font-medium text-gray-700'>
+                                    <label htmlFor='phone-number' className='block text-sm font-medium text-gray-700'>
                                         Número de teléfono
                                     </label>
                                     <div className='mt-1'>
@@ -162,7 +158,7 @@ export default function Checkout() {
                                 </div>
 
                                 <div className='mt-6'>
-                                    <label htmlFor='direccion' className='block text-sm font-medium text-gray-700'>
+                                    <label htmlFor='address' className='block text-sm font-medium text-gray-700'>
                                         Dirección
                                     </label>
                                     <div className='mt-1'>
@@ -177,6 +173,20 @@ export default function Checkout() {
                                             defaultValue='Av. Siempre Viva 742' // Datos de prueba
                                         />
                                     </div>
+                                </div>
+
+                                {/* Checkbox requerido */}
+                                <div className='mt-6 flex items-center'>
+                                    <input
+                                        type='checkbox'
+                                        id='confirm-data'
+                                        name='confirm-data'
+                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                        required
+                                    />
+                                    <label htmlFor='confirm-data' className='ml-2 block text-sm text-gray-900'>
+                                        Confirmo que estos datos son correctos
+                                    </label>
                                 </div>
                             </div>
 

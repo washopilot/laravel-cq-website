@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Inertia\Inertia;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
 {
@@ -61,11 +62,34 @@ class ProductsController extends Controller
     public function checkout(Request $request)
     {
 
-        Debugbar::info($request);
+        // Debugbar::info($request);
 
         return Inertia::render('Checkout', [
             // 'message' => 'Your checkout details are displayed here!',
         ]);
+
+    }
+
+    public function processOrder(Request $request)
+    {
+        // Validación de datos
+        $validator = Validator::make($request->all(), [
+            'fullName' => 'required|string|max:255',
+            'phoneNumber' => 'required|string|max:20',
+            'address' => 'required|string|max:255',
+            'cartItems' => 'required|string',
+            'subtotal' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Mostrar datos en Debugbar
+        // Debugbar::info($validator);
+
+        // Lógica para procesar el pedido
+        return redirect()->route('index');
 
     }
 }
