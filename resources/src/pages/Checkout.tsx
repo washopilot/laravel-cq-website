@@ -1,3 +1,4 @@
+import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -5,7 +6,7 @@ import { CartItem } from '../types-and-interfaces'
 import formatCurrency from '../utils/format-currency'
 import getValidatedCart from '../utils/validate-storage'
 
-export default function Checkout({ message }: { message: string }) {
+export default function Checkout() {
     const [cartItems, setCartItems] = useState<CartItem[]>(getValidatedCart)
     const [subtotal, setSubtotal] = useState(0)
 
@@ -16,6 +17,21 @@ export default function Checkout({ message }: { message: string }) {
         }, 0)
         setSubtotal(parseFloat(calculatedSubtotal.toFixed(2)))
     }, [cartItems])
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        const formData = new FormData(e.currentTarget)
+        const data = {
+            nombreCompleto: formData.get('full-name') as string,
+            numeroTelefono: formData.get('phone-number') as string,
+            direccion: formData.get('address') as string,
+            cartItems: JSON.stringify(cartItems),
+            subtotal
+        }
+
+        Inertia.post('/ruta-deseada', data)
+    }
 
     return (
         <motion.div
@@ -93,177 +109,73 @@ export default function Checkout({ message }: { message: string }) {
                 </section>
 
                 <section
-                    aria-labelledby='payment-and-shipping-heading'
+                    aria-labelledby='informacion-contacto-heading'
                     className='py-16 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:w-full lg:max-w-lg lg:pb-24 lg:pt-0'>
-                    <h2 id='payment-and-shipping-heading' className='sr-only'>
-                        Payment and shipping details
+                    <h2 id='informacion-contacto-heading' className='sr-only'>
+                        Información de contacto
                     </h2>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='mx-auto max-w-2xl px-4 lg:max-w-none lg:px-0'>
                             <div>
-                                <Link href='/products'>
-                                    <h1>{message}</h1>
-                                    {/* <h1>{JSON.stringify(cartItems)}</h1> */}
-                                </Link>
-                                <h3 id='contact-info-heading' className='text-lg font-medium text-gray-900'>
-                                    Contact information
-                                </h3>
+                                <h3 className='text-lg font-medium text-gray-900'>Información de contacto</h3>
 
                                 <div className='mt-6'>
-                                    <label htmlFor='email-address' className='block text-sm font-medium text-gray-700'>
-                                        Email address
+                                    <label
+                                        htmlFor='nombre-completo'
+                                        className='block text-sm font-medium text-gray-700'>
+                                        Nombre completo
                                     </label>
                                     <div className='mt-1'>
                                         <input
-                                            type='email'
-                                            id='email-address'
-                                            name='email-address'
-                                            autoComplete='email'
+                                            type='text'
+                                            id='full-name'
+                                            name='full-name'
+                                            placeholder='Ingresa tu nombre completo'
                                             className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                            required
+                                            defaultValue='Juan Pérez' // Datos de prueba
                                         />
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className='mt-10'>
-                                <h3 className='text-lg font-medium text-gray-900'>Payment details</h3>
-
-                                <div className='mt-6 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4'>
-                                    <div className='col-span-3 sm:col-span-4'>
-                                        <label
-                                            htmlFor='card-number'
-                                            className='block text-sm font-medium text-gray-700'>
-                                            Card number
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                id='card-number'
-                                                name='card-number'
-                                                autoComplete='cc-number'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className='col-span-2 sm:col-span-3'>
-                                        <label
-                                            htmlFor='expiration-date'
-                                            className='block text-sm font-medium text-gray-700'>
-                                            Expiration date (MM/YY)
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                name='expiration-date'
-                                                id='expiration-date'
-                                                autoComplete='cc-exp'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor='cvc' className='block text-sm font-medium text-gray-700'>
-                                            CVC
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                name='cvc'
-                                                id='cvc'
-                                                autoComplete='csc'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
+                                <div className='mt-6'>
+                                    <label
+                                        htmlFor='numero-telefono'
+                                        className='block text-sm font-medium text-gray-700'>
+                                        Número de teléfono
+                                    </label>
+                                    <div className='mt-1'>
+                                        <input
+                                            type='tel'
+                                            id='phone-number'
+                                            name='phone-number'
+                                            placeholder='Ingresa tu número de teléfono'
+                                            autoComplete='tel'
+                                            pattern='[0-9]{10}'
+                                            title='Debe contener 10 dígitos'
+                                            className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                            required
+                                            defaultValue='1234567890' // Datos de prueba
+                                        />
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className='mt-10'>
-                                <h3 className='text-lg font-medium text-gray-900'>Shipping address</h3>
-
-                                <div className='mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-3'>
-                                    <div className='sm:col-span-3'>
-                                        <label htmlFor='address' className='block text-sm font-medium text-gray-700'>
-                                            Address
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                id='address'
-                                                name='address'
-                                                autoComplete='street-address'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor='city' className='block text-sm font-medium text-gray-700'>
-                                            City
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                id='city'
-                                                name='city'
-                                                autoComplete='address-level2'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor='region' className='block text-sm font-medium text-gray-700'>
-                                            State / Province
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                id='region'
-                                                name='region'
-                                                autoComplete='address-level1'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            htmlFor='postal-code'
-                                            className='block text-sm font-medium text-gray-700'>
-                                            Postal code
-                                        </label>
-                                        <div className='mt-1'>
-                                            <input
-                                                type='text'
-                                                id='postal-code'
-                                                name='postal-code'
-                                                autoComplete='postal-code'
-                                                className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className='mt-10'>
-                                <h3 className='text-lg font-medium text-gray-900'>Billing information</h3>
-
-                                <div className='mt-6 flex items-center'>
-                                    <input
-                                        id='same-as-shipping'
-                                        name='same-as-shipping'
-                                        type='checkbox'
-                                        defaultChecked
-                                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
-                                    />
-                                    <div className='ml-2'>
-                                        <label htmlFor='same-as-shipping' className='text-sm font-medium text-gray-900'>
-                                            Same as shipping information
-                                        </label>
+                                <div className='mt-6'>
+                                    <label htmlFor='direccion' className='block text-sm font-medium text-gray-700'>
+                                        Dirección
+                                    </label>
+                                    <div className='mt-1'>
+                                        <input
+                                            type='text'
+                                            id='address'
+                                            name='address'
+                                            placeholder='Ingresa tu dirección'
+                                            autoComplete='street-address'
+                                            className='block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+                                            required
+                                            defaultValue='Av. Siempre Viva 742' // Datos de prueba
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +184,7 @@ export default function Checkout({ message }: { message: string }) {
                                 <button
                                     type='submit'
                                     className='rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50'>
-                                    Pay now
+                                    Procesar pedido
                                 </button>
                             </div>
                         </div>

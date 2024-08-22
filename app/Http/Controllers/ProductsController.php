@@ -64,7 +64,7 @@ class ProductsController extends Controller
         Debugbar::info($request);
 
         return Inertia::render('Checkout', [
-            'message' => 'Your checkout details are displayed here!',
+            // 'message' => 'Your checkout details are displayed here!',
         ]);
 
     }
