@@ -11,6 +11,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http; // Asegúrate de importar Http
 
 class ProductsController extends Controller
 {
@@ -98,9 +99,36 @@ class ProductsController extends Controller
             'status' => 0,
         ]);
 
-        return redirect()->route('order.show', ['tracking_id' => $order->tracking_id])->with([
-            'send' => 'success'
+        // Preparar el mensaje
+        // $messageText = "Hola, tu pedido ha sido creado. Puedes ver los detalles aquí: " . route('order.show', ['tracking_id' => $order->tracking_id]);
+        $messageText = "Hola, tu pedido ha sido creado. Puedes ver los detalles aquí: " . "https://www.tusitio.com/order/pLj9gOZjSrQbQ0UvmDIk";
+
+        // Enviar el mensaje a través de la API de Evolution
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'apikey' => 'vi478fxrifkqb679z6fa' // Reemplaza con tu API key
+        ])->post('http://api:8081/message/sendText/fercho', [
+            'number' => '593967896544@s.whatsapp.net',
+            'options' => [
+                'delay' => 1200,
+                'presence' => 'composing'
+            ],
+            'textMessage' => [
+                'text' => $messageText
+            ]
         ]);
+
+        // Comprobar la respuesta
+        if ($response->successful()) {
+            return redirect()->route('order.show', ['tracking_id' => $order->tracking_id])->with([
+                'send' => 'success'
+            ]);
+        } else {
+            // Manejar el error si la solicitud a la API falla
+            return redirect()->route('order.show', ['tracking_id' => $order->tracking_id])->withErrors([
+                'send' => 'Error al enviar el mensaje de WhatsApp'
+            ]);
+        }
     }
 
     public function showOrder($tracking_id)
