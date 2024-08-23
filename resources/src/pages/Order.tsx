@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { CartItem, OrderType } from '../types-and-interfaces'
 import formatCurrency from '../utils/format-currency'
 
@@ -11,7 +12,12 @@ const ProcessOrder = ({ send, tracking_id, order }: { send: string; tracking_id:
     }
 
     return (
-        <div className='bg-white'>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className='bg-white'>
             <div className='mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8'>
                 <div className='max-w-xl'>
                     {send == 'success' ? (
@@ -144,7 +150,7 @@ const ProcessOrder = ({ send, tracking_id, order }: { send: string; tracking_id:
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
