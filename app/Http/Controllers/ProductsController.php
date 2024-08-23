@@ -89,7 +89,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    public function showOrder($tracking_id, Request $request)
+    public function showOrder($tracking_id)
     {
         $send = session('send', null);
         session()->forget('send');
