@@ -57,8 +57,7 @@ class ProductResource extends Resource
                 Forms\Components\Toggle::make('is_visible')
                     ->required()
                     ->default(true),
-            ])
-        ;
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -75,7 +74,8 @@ class ProductResource extends Resource
                 SpatieMediaLibraryImageColumn::make('images')
                     ->collection('products')
                     ->size(50),
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50)
                     ->wrap(),
@@ -124,6 +124,4 @@ class ProductResource extends Resource
             VariantsRelationManager::class,
         ];
     }
-
-
 }

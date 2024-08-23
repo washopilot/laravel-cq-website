@@ -9,6 +9,8 @@ use App\Models\Product;
 use Inertia\Inertia;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Order;
+use Illuminate\Support\Str;
 
 class ProductsController extends Controller
 {
@@ -82,23 +84,35 @@ class ProductsController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $trackingId = '51547878755545848512';
+        do {
+            $trackingId = Str::random(20);
+        } while (Order::where('tracking_id', $trackingId)->exists());
 
-        return redirect()->route('order.show', ['tracking_id' => $trackingId])->with([
+        $order = Order::create([
+            'tracking_id' => $trackingId,
+            'fullName' => $request->input('fullName'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'address' => $request->input('address'),
+            'cartItems' => $request->input('cartItems'),
+            'subtotal' => $request->input('subtotal'),
+            'status' => 0,
+        ]);
+
+        return redirect()->route('order.show', ['tracking_id' => $order->tracking_id])->with([
             'send' => 'success'
         ]);
     }
 
     public function showOrder($tracking_id)
     {
+        $order = Order::where('tracking_id', $tracking_id)->firstOrFail();
         $send = session('send', null);
         session()->forget('send');
 
-        Debugbar::info(session()->all());
-
         return Inertia::render('Order', [
             'send' => $send,
-            'tracking_id' => $tracking_id
+            'tracking_id' => $tracking_id,
+            'order' => $order, // Pasar los detalles de la orden a la vista
         ]);
     }
 }
