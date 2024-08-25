@@ -8,10 +8,10 @@ import AnimatedCurrency from './AnimatedCurrency'
 
 type ProductModalProps = {
     open: boolean
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: (open: boolean) => void
     product: Product
     filteredVariants: Variant[]
-    setSelectedVariant: React.Dispatch<React.SetStateAction<Variant>>
+    setSelectedVariant: (variant: Variant) => void
     selectedVariant: Variant
     handleAddToCart: (variant_id: number) => void
 }

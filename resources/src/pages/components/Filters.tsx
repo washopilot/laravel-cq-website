@@ -11,9 +11,9 @@ type SortOptionType = {
 
 interface FiltersProps {
     sortOptions: SortOptionType[]
-    setSortOptions: React.Dispatch<React.SetStateAction<SortOptionType[]>>
+    setSortOptions: (sortOptions: React.SetStateAction<SortOptionType[]>) => void
     filters: FiltersType
-    setFilters: React.Dispatch<React.SetStateAction<FiltersType>>
+    setFilters: (filters: React.SetStateAction<FiltersType>) => void
 }
 
 const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')

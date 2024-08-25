@@ -9,7 +9,7 @@ import AnimatedCurrency from './AnimatedCurrency'
 
 type CartProps = {
     openCart: boolean
-    setOpenCart: React.Dispatch<React.SetStateAction<boolean>>
+    setOpenCart: (openCart: boolean) => void
     cart: CartItem[]
     updateProductQuantity: (id: number, newQuantity: number) => void
     removeProduct: (id: number) => void

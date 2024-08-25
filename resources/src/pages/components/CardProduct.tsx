@@ -3,7 +3,7 @@ import formatCurrency from '../../utils/format-currency'
 
 type CardProductProps = {
     product: Product
-    onButtonClick: React.MouseEventHandler<HTMLButtonElement>
+    onButtonClick: () => void
 }
 
 const CardProduct = ({ product, onButtonClick }: CardProductProps) => {
