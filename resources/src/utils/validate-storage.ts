@@ -1,7 +1,7 @@
 import { CartItem } from '../types-and-interfaces'
 
 // Define the validation function for a single CartItem
-const isValidCartItem = (item: any): item is CartItem => {
+const isValidCartItem = (item: CartItem) => {
     return (
         typeof item.id === 'number' &&
         typeof item.quantity === 'number' &&
