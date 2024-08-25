@@ -16,19 +16,6 @@ type ProductModalProps = {
     handleAddToCart: (variant_id: number) => void
 }
 
-const productData = {
-    name: 'Everyday Ruck Snack',
-    price: '$220',
-    rating: 3.9,
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-03-detail.jpg',
-    imageAlt: 'Interior of light green canvas bag with padded laptop sleeve and internal organization pouch.',
-    sizes: [
-        { name: '18L', description: 'Perfect for a reasonable amount of snacks.' },
-        { name: '20L', description: 'Enough room for a serious amount of snacks.' }
-    ]
-}
-
 function classNames(...classes: string[]): string {
     return classes.filter(Boolean).join(' ')
 }

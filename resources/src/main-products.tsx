@@ -18,4 +18,4 @@ createInertiaApp({
             </React.StrictMode>
         )
     }
-}).then((r) => {})
+}).then(() => {})

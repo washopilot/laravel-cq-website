@@ -7,7 +7,7 @@ import formatCurrency from '../utils/format-currency'
 import getValidatedCart from '../utils/validate-storage'
 
 export default function Checkout() {
-    const [cartItems, setCartItems] = useState<CartItem[]>(getValidatedCart)
+    const [cartItems] = useState<CartItem[]>(getValidatedCart)
     const [subtotal, setSubtotal] = useState(0)
 
     useEffect(() => {

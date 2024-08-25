@@ -1,6 +1,6 @@
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import 'react-var-ui/dist/index.css'
 import THREE from 'three'
 import { GLTF } from 'three-stdlib'
