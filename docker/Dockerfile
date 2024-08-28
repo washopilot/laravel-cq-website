@@ -81,4 +81,6 @@ CMD \
     npm ci -d && npm run build && \
     composer install --prefer-dist --no-progress --no-suggest && \
     composer clear-cache && \
+    rm public/storage && \
+    php artisan storage:link && \
     apache2-foreground

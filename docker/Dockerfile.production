@@ -1,0 +1,37 @@
+FROM php:8.3-apache-bookworm AS production
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git zip curl sudo unzip \
+    libicu-dev libbz2-dev libreadline-dev g++ libzip-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev libjpeg62-turbo-dev \
+    jpegoptim optipng pngquant gifsicle libonig-dev libxml2-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY docker/php/laravel.ini /usr/local/etc/php/conf.d/laravel.ini
+
+RUN docker-php-ext-install bz2 intl iconv bcmath opcache calendar exif pdo_mysql zip && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install -j$(nproc) gd && \
+    rm -rf /tmp/*
+
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
+    sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf && \
+    a2enmod rewrite headers
+
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+
+ARG uid
+RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
+    mkdir -p /home/devuser/.composer && \
+    chown -R devuser:devuser /home/devuser
+
+USER devuser
+
+CMD \
+    composer install --no-dev --optimize-autoloader --no-interaction --no-progress && \
+    composer clear-cache && \
+    rm public/storage && \
+    php artisan storage:link && \
+    apache2-foreground

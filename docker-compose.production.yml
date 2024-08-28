@@ -1,0 +1,39 @@
+services:
+    php:
+        build:
+            context: .
+            target: production
+            dockerfile: docker/Dockerfile.production
+            args:
+                uid: ${WWWUSER}
+        environment:
+            - APACHE_RUN_USER=#${WWWUSER}
+            - APACHE_RUN_GROUP=#${WWWUSER}
+        ports:
+            - '8080:80'
+        networks:
+            - internal
+        volumes:
+            - ./:/var/www/html:rw
+        restart: unless-stopped
+        healthcheck:
+            test: ['CMD', 'curl', '-f', 'http://localhost:80']
+            interval: 30s
+            retries: 3
+            start_period: 30s
+            timeout: 10s
+        depends_on:
+            npm:
+                condition: service_completed_successfully
+    npm:
+        image: node:20-alpine
+        volumes:
+            - ./:/var/www/html
+        working_dir: /var/www/html
+        command: /bin/sh -c "npm ci -d && npm run build && rm -rf node_modules"
+        user: node:node
+
+networks:
+    internal:
+        name: laravel-net
+        driver: bridge
