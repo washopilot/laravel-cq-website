@@ -131,7 +131,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                                                         onChange={() =>
                                                                             handleCheckboxChange(section.id, optionIdx)
                                                                         }
-                                                                        className='h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500'
+                                                                        className='h-4 w-4 rounded border-gray-300 text-slate-800 focus:ring-slate-700'
                                                                     />
                                                                     <label
                                                                         htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -152,7 +152,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                     </div>
                 </Dialog>
             </Transition.Root>
-            <section aria-labelledby='filter-heading' className='pt-2'>
+            <section aria-labelledby='filter-heading' className='pt-2 sticky top-14 z-10 max-sm:top-28'>
                 <h2 id='filter-heading' className='sr-only'>
                     Filters
                 </h2>
@@ -191,7 +191,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                                                 ? 'font-medium text-gray-900'
                                                                 : 'text-gray-500',
                                                             active ? 'bg-gray-100' : '',
-                                                            'block px-4 py-2 text-sm w-full text-left hover:bg-orange-200'
+                                                            'block px-4 py-2 text-sm w-full text-left hover:bg-slate-200'
                                                         )}>
                                                         {option.name}
                                                     </button>
@@ -250,7 +250,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                                                         onChange={() =>
                                                                             handleCheckboxChange(section.id, optionIdx)
                                                                         }
-                                                                        className='h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500'
+                                                                        className='h-4 w-4 rounded border-gray-300 text-slate-600 focus:ring-slate-500'
                                                                     />
                                                                     <label
                                                                         htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -286,7 +286,7 @@ const Filters = ({ sortOptions, setSortOptions, filters, setFilters }: FiltersPr
                                 {activeFilters.map((activeFilter) => (
                                     <span
                                         key={activeFilter.value}
-                                        className='m-1 inline-flex items-center rounded-full border border-gray-200 bg-orange-800 py-1.5 pl-3 pr-2 text-sm font-medium text-white'>
+                                        className='m-1 inline-flex items-center rounded-full border border-gray-200 bg-slate-700 py-1.5 pl-3 pr-2 text-sm font-medium text-white'>
                                         <span>{activeFilter.label}</span>
                                         <button
                                             type='button'

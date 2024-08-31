@@ -16,7 +16,7 @@ const CardProduct = ({ product, onButtonClick }: CardProductProps) => {
                     className='object-cover object-center group-hover:scale-110 duration-500'
                 />
                 <div className='flex items-end p-4 opacity-0 group-hover:opacity-100 duration-100' aria-hidden='true'>
-                    <div className='w-full rounded-md bg-opacity-0 px-4 py-2 text-center text-sm font-bold text-orange-100 backdrop-blur-xl border-2'>
+                    <div className='w-full rounded-md bg-black bg-opacity-70 px-4 py-2 text-center text-sm font-bold text-orange-100 backdrop-blur-sm border-0'>
                         VER PRODUCTO
                     </div>
                 </div>

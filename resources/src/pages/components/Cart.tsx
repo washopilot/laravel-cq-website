@@ -113,7 +113,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                                                             )
                                                                                         )
                                                                                     }
-                                                                                    className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-l-md focus:outline-none'>
+                                                                                    className='bg-[#c79c43] text-black hover:bg-[#e9b650] px-3 py-1 rounded-l-md focus:outline-none'>
                                                                                     <MinusIcon className='h-3 w-3' />
                                                                                 </button>
                                                                                 <input
@@ -121,7 +121,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                                                     type='text'
                                                                                     value={product.quantity}
                                                                                     readOnly
-                                                                                    className='text-xs w-10 text-center bg-white border-y-2 border-gray-300 text-gray-900 px-0 py-0'
+                                                                                    className='text-xs font-bold w-10 text-center bg-white border-y-2 border-[#c79c43] text-gray-900 px-0 py-0'
                                                                                 />
                                                                                 <button
                                                                                     onClick={() =>
@@ -130,7 +130,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                                                             product.quantity + 1
                                                                                         )
                                                                                     }
-                                                                                    className='bg-gray-200 text-gray-600 hover:bg-gray-300 px-3 py-1 rounded-r-md focus:outline-none'>
+                                                                                    className='bg-[#c79c43] text-black hover:bg-[#e9b650] px-3 py-1 rounded-r-md focus:outline-none'>
                                                                                     <PlusIcon className='h-3 w-3' />
                                                                                 </button>
                                                                             </div>
@@ -141,7 +141,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                                                         removeProduct(product.id)
                                                                                     }
                                                                                     type='button'
-                                                                                    className='font-medium text-orange-600 hover:text-orange-500'>
+                                                                                    className='font-medium text-[#d8ac55] hover:text-[#836934]'>
                                                                                     Eliminar
                                                                                 </button>
                                                                             </div>
@@ -179,10 +179,10 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                             method: Method.GET
                                                         })
                                                     }
-                                                    className={`w-full flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm ${
+                                                    className={`w-full flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-black shadow-sm ${
                                                         cart.length === 0
                                                             ? 'bg-gray-400 cursor-not-allowed'
-                                                            : 'bg-orange-800 hover:bg-orange-900'
+                                                            : 'bg-[#c79c43] hover:bg-[#4d3c1a]'
                                                     }`}
                                                     disabled={cart.length === 0}>
                                                     Procesar Pedido
@@ -193,7 +193,7 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                                     o
                                                     <button
                                                         type='button'
-                                                        className='font-medium text-orange-600 hover:text-orange-500'
+                                                        className='font-medium text-[#c79c43] hover:text-[#4d3c1a]'
                                                         onClick={() => setOpenCart(false)}>
                                                         &nbsp;Continuar Comprando
                                                         <span aria-hidden='true'> &rarr;</span>

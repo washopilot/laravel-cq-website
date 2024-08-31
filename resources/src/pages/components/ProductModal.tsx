@@ -40,10 +40,10 @@ const ProductModal = ({
                     leave='ease-in duration-200'
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'>
-                    <div className='fixed inset-0 hidden bg-gray-500 bg-opacity-50 transition-opacity md:block' />
+                    <div className='fixed inset-0 hidden bg-gray-800 bg-opacity-50 transition-opacity md:block backdrop-blur-[2px]' />
                 </Transition.Child>
 
-                <div className='fixed inset-0 z-10 overflow-y-auto'>
+                <div className='fixed inset-0 z-10 overflow-y-auto bg-gray-800 bg-opacity-50 backdrop-blur-[2px]'>
                     <div className='flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4'>
                         <Transition.Child
                             as={Fragment}
@@ -53,8 +53,8 @@ const ProductModal = ({
                             leave='ease-in duration-200'
                             leaveFrom='opacity-100 translate-y-0 md:scale-100'
                             leaveTo='opacity-0 translate-y-4 md:translate-y-0 md:scale-95'>
-                            <Dialog.Panel className='flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl'>
-                                <div className='relative flex w-full items-center overflow-hidden bg-gray-200 px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded-lg'>
+                            <Dialog.Panel className='flex w-4/6 transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl'>
+                                <div className='relative flex w-full items-center overflow-hidden bg-gradient-to-b from-[#200606] to-[#000000] px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 rounded-lg'>
                                     <button
                                         type='button'
                                         className='absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8'
@@ -86,7 +86,7 @@ const ProductModal = ({
                                             </p> */}
                                         </div>
                                         <div className='sm:col-span-8 lg:col-span-7'>
-                                            <h2 className='text-2xl font-bold text-gray-900 sm:pr-12'>
+                                            <h2 className='text-2xl font-bold text-gray-300 sm:pr-12'>
                                                 {product.name}
                                             </h2>
 
@@ -96,7 +96,7 @@ const ProductModal = ({
                                                 </h3>
 
                                                 <div className='flex items-center'>
-                                                    <p className='text-lg text-gray-900 sm:text-xl'>
+                                                    <p className='text-lg text-gray-300 sm:text-xl'>
                                                         <AnimatedCurrency value={Number(selectedVariant.price)} />
                                                     </p>
 
@@ -129,7 +129,7 @@ const ProductModal = ({
                                                         className='h-5 w-5 flex-shrink-0 text-green-500'
                                                         aria-hidden='true'
                                                     />
-                                                    <p className='ml-2 font-medium text-gray-500'>
+                                                    <p className='ml-2 font-medium text-gray-300'>
                                                         En stock y listo para entrega
                                                     </p>
                                                 </div>
@@ -146,10 +146,10 @@ const ProductModal = ({
                                                         <RadioGroup
                                                             value={selectedVariant}
                                                             onChange={setSelectedVariant}>
-                                                            <RadioGroup.Label className='block text-sm font-medium text-gray-700'>
+                                                            <RadioGroup.Label className='block text-sm font-medium text-white'>
                                                                 Variants
                                                             </RadioGroup.Label>
-                                                            <div className='mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                                                            <div className='mt-1 grid grid-cols-2 gap-4 sm:grid-cols-2'>
                                                                 {filteredVariants.map((size) => (
                                                                     <RadioGroup.Option
                                                                         as='div'
@@ -157,7 +157,7 @@ const ProductModal = ({
                                                                         value={size}
                                                                         className={({ active }) =>
                                                                             classNames(
-                                                                                active ? 'ring-2 ring-slate-950' : '',
+                                                                                active ? 'ring-2 ring-white' : '',
                                                                                 'relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none'
                                                                             )
                                                                         }>
@@ -165,19 +165,19 @@ const ProductModal = ({
                                                                             <>
                                                                                 <RadioGroup.Label
                                                                                     as='p'
-                                                                                    className='text-base font-medium text-gray-900'>
+                                                                                    className='text-base font-medium text-white'>
                                                                                     {size.name}
                                                                                 </RadioGroup.Label>
-                                                                                <RadioGroup.Description
+                                                                                {/* <RadioGroup.Description
                                                                                     as='p'
-                                                                                    className='mt-1 text-sm text-gray-500'>
+                                                                                    className='mt-1 text-sm text-[gray-500]'>
                                                                                     {'Lorem ipsum dolor sit amet.'}
-                                                                                </RadioGroup.Description>
+                                                                                </RadioGroup.Description> */}
                                                                                 <div
                                                                                     className={classNames(
                                                                                         active ? 'border' : 'border-2',
                                                                                         checked
-                                                                                            ? 'border-slate-500'
+                                                                                            ? 'border-[#c79c43] border-4'
                                                                                             : 'border-transparent',
                                                                                         'pointer-events-none absolute -inset-px rounded-lg'
                                                                                     )}
@@ -208,7 +208,7 @@ const ProductModal = ({
                                                                 event.preventDefault()
                                                                 return handleAddToCart(selectedVariant.id)
                                                             }}
-                                                            className='flex w-full items-center justify-center rounded-md border border-transparent bg-orange-800 px-8 py-3 text-base font-medium text-white hover:bg-orange-900 focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 focus:ring-offset-gray-50 transform transition-transform duration-200 active:scale-90'>
+                                                            className='flex w-full items-center justify-center rounded-md border border-transparent bg-[#c79c43] px-8 py-3 text-base font-bold text-black hover:bg-[#775d28] focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 focus:ring-offset-gray-50 transform transition-transform duration-200 active:scale-90'>
                                                             Añadir a pedido
                                                         </button>
                                                     </div>

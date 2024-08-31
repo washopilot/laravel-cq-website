@@ -321,7 +321,7 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                                 animate={isAnimating ? { scale: 1.7 } : { scale: 1 }}
                                                 transition={{ type: 'spring', stiffness: 300, damping: 10 }}>
                                                 <ShoppingBagIcon
-                                                    className='h-9 w-9 flex-shrink-0 text-orange-500 group-hover:text-orange-600 '
+                                                    className='h-9 w-9 flex-shrink-0 text-[#c79c43] group-hover:text-[#1a150c] '
                                                     aria-hidden='true'
                                                 />
                                             </motion.div>
