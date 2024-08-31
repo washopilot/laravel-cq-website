@@ -131,9 +131,9 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
             transition={{ duration: 0.5 }}
             className='bg-gray-50'>
             <header className='relative bg-white'>
-                <nav aria-label='Top' className='fixed top-0 w-full z-50 bg-white border-b border-gray-200'>
+                <nav aria-label='Top' className='fixed top-0 w-full z-50 bg-[#c79c43]'>
                     <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-                        <div className='border-b border-gray-200 px-4 pb-14 sm:px-0 sm:pb-0'>
+                        <div className='px-4 pb-14 sm:px-0 sm:pb-0'>
                             <div className='flex h-16 items-center justify-between'>
                                 {/* Logo */}
                                 <div className='flex flex-1'>
@@ -297,7 +297,7 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                             <a
                                                 key={item.name}
                                                 href={item.href}
-                                                className='flex items-center text-sm font-medium text-gray-700 hover:text-gray-800'>
+                                                className='flex items-center text-sm text-back hover:text-white font-bold hover:underline hover:underline-offset-4'>
                                                 {item.name}
                                             </a>
                                         ))}
@@ -321,11 +321,11 @@ export default function Layout({ children, cart, handleOnClickCart }: LayoutProp
                                                 animate={isAnimating ? { scale: 1.7 } : { scale: 1 }}
                                                 transition={{ type: 'spring', stiffness: 300, damping: 10 }}>
                                                 <ShoppingBagIcon
-                                                    className='h-9 w-9 flex-shrink-0 text-[#c79c43] group-hover:text-[#1a150c] '
+                                                    className='h-9 w-9 flex-shrink-0 text-black group-hover:text-white'
                                                     aria-hidden='true'
                                                 />
                                             </motion.div>
-                                            <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
+                                            <span className='ml-2 text-sm font-bold text-black group-hover:text-white'>
                                                 {cart.reduce((sum, item) => sum + item.quantity, 0)}
                                             </span>
                                             <span className='sr-only'>items in cart, view bag</span>
