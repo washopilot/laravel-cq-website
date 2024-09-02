@@ -55,10 +55,10 @@
                 "redhat.vscode-yaml",
                 "WallabyJs.console-ninja",
                 "bradlc.vscode-tailwindcss",
-                "bmewburn.vscode-intelephense-client",
                 "MehediDracula.php-namespace-resolver",
                 "hakcorp.php-awesome-snippets",
-                "austenc.laravel-blade-spacer"
+                "austenc.laravel-blade-spacer",
+                "DEVSENSE.phptools-vscode"
             ]
         }
     },

@@ -3,5 +3,6 @@
     "editor.formatOnSave": true,
     "files.associations": {
         "*.css": "tailwindcss"
-    }
+    },
+    "php.version": "8.3"
 }
