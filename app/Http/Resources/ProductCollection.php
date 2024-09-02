@@ -14,15 +14,25 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return $this->collection->map->only(
-            'id',
-            'name',
-            'slug',
-            'order_column',
-            'description',
-            'price',
-            'is_visible',
-            // 'category_id'
-        );
+        return $this->collection->map(function ($product) {
+            // Incluye los campos existentes del producto
+            $productData = $product->only(
+                'id',
+                'name',
+                'slug',
+                'order_column',
+                'description',
+                'price',
+                'is_visible',
+                'category_id'
+            );
+
+            // Agrega el campo 'images' con las URLs de las imágenes
+            $productData['images'] = $product->getMedia('products')->map(function ($media) {
+                return $media->getUrl('thumb');
+            });
+
+            return $productData;
+        });
     }
 }

@@ -12,7 +12,7 @@ import useFilters from './hooks/useFilters'
 import useProductModal from './hooks/useProductModal'
 
 interface ProductsProps {
-    products: any
+    products: PaginatedData<Product>
     categories: Category[]
     variants: Variant[]
 }
@@ -23,7 +23,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
     //     products.data
     // )
 
-    console.log(products.data)
+    console.log(products)
 
     // const {
     //     selectedProduct,
@@ -59,7 +59,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                 /> */}
 
                 <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
-                    {/* <motion.div
+                    <motion.div
                         // key={1}
                         layout
                         initial={{ opacity: 0, y: 20 }}
@@ -81,7 +81,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                                     </motion.div>
                                 )
                         )}
-                    </motion.div> */}
+                    </motion.div>
                 </div>
 
                 {/* {selectedProduct && (

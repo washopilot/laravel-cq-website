@@ -19,50 +19,10 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        $variants = Variant::all();
-
         return Inertia::render('AppProducts', [
-            // 'products' => $products->map(function ($product) {
-            //     return [
-            //         'id' => $product->id,
-            //         'name' => $product->name,
-            //         'slug' => $product->slug,
-            //         'order_column' => $product->order_column,
-            //         'description' => $product->description,
-            //         'price' => $product->price,
-            //         'is_visible' => $product->is_visible,
-            //         'category_id' => $product->category_id,
-            //         'images' => $product->getMedia('products')->map(function ($media) {
-            //             return $media->getUrl('thumb');
-            //         }),
-            //     ];
-            // }),
             'products' => new ProductCollection(
                 Product::paginate(2)
             ),
-
-            'categories' => $categories->map(function ($category) {
-                return [
-                    'id' => $category->id,
-                    'name' => $category->name,
-                    'slug' => $category->slug,
-                    'description' => $category->description,
-                ];
-            }),
-            'variants' => $variants->map(function ($variant) {
-                return [
-                    'id' => $variant->id,
-                    'name' => $variant->name,
-                    'images' => $variant->getMedia('variants')->map(function ($media) {
-                        return $media->getUrl('thumb');
-                    }),
-                    'price' => $variant->price,
-                    'product_id' => $variant->product_id,
-                    'order_column' => $variant->order_column,
-                ];
-            }),
-
         ]);
     }
 
