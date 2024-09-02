@@ -12,31 +12,36 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http; // Asegúrate de importar Http
+use App\Http\Resources\ProductCollection;
+
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
         $categories = Category::all();
         $variants = Variant::all();
 
         return Inertia::render('AppProducts', [
-            'products' => $products->map(function ($product) {
-                return [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'slug' => $product->slug,
-                    'order_column' => $product->order_column,
-                    'description' => $product->description,
-                    'price' => $product->price,
-                    'is_visible' => $product->is_visible,
-                    'category_id' => $product->category_id,
-                    'images' => $product->getMedia('products')->map(function ($media) {
-                        return $media->getUrl('thumb');
-                    }),
-                ];
-            }),
+            // 'products' => $products->map(function ($product) {
+            //     return [
+            //         'id' => $product->id,
+            //         'name' => $product->name,
+            //         'slug' => $product->slug,
+            //         'order_column' => $product->order_column,
+            //         'description' => $product->description,
+            //         'price' => $product->price,
+            //         'is_visible' => $product->is_visible,
+            //         'category_id' => $product->category_id,
+            //         'images' => $product->getMedia('products')->map(function ($media) {
+            //             return $media->getUrl('thumb');
+            //         }),
+            //     ];
+            // }),
+            'products' => new ProductCollection(
+                Product::paginate(2)
+            ),
+
             'categories' => $categories->map(function ($category) {
                 return [
                     'id' => $category->id,

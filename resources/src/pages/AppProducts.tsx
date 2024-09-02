@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/inertia-react'
 import { motion } from 'framer-motion'
-import { Category, Product, Variant } from '../types-and-interfaces'
+import { Category, PaginatedData, Product, Variant } from '../types-and-interfaces'
 import './app.css'
 import CardProduct from './components/CardProduct'
 import Cart from './components/Cart'
@@ -12,29 +12,31 @@ import useFilters from './hooks/useFilters'
 import useProductModal from './hooks/useProductModal'
 
 interface ProductsProps {
-    products: Product[]
+    products: any
     categories: Category[]
     variants: Variant[]
 }
 
 const AppProducts = ({ products, categories, variants }: ProductsProps) => {
-    const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
-        categories,
-        products
-    )
+    // const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
+    //     categories,
+    //     products.data
+    // )
 
-    const {
-        selectedProduct,
-        handleProductClick,
-        filteredVariants,
-        openModal,
-        setOpenModal,
-        selectedVariant,
-        setSelectedVariant
-    } = useProductModal(variants)
+    console.log(products.data)
+
+    // const {
+    //     selectedProduct,
+    //     handleProductClick,
+    //     filteredVariants,
+    //     openModal,
+    //     setOpenModal,
+    //     selectedVariant,
+    //     setSelectedVariant
+    // } = useProductModal(variants)
 
     const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
-        useCart(products, variants)
+        useCart(products.data, variants)
 
     return (
         <Layout cart={cart} handleOnClickCart={handleOnClickCart}>
@@ -49,25 +51,22 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                     </p>
                 </div>
 
-                <Filters
+                {/* <Filters
                     sortOptions={sortOptions}
                     setSortOptions={setSortOptions}
                     filters={filters}
                     setFilters={setFilters}
-                />
+                /> */}
 
                 <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
-                    <motion.div
-                        key={JSON.stringify({
-                            sortOptions: sortOptions.find((option) => option.current),
-                            filters
-                        })}
+                    {/* <motion.div
+                        // key={1}
                         layout
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
                         className='mt-6 grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
-                        {filteredAndSortedProducts.map(
+                        {products.data.map(
                             (product, index) =>
                                 product.is_visible && (
                                     <motion.div
@@ -78,17 +77,14 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                                             duration: 0.3,
                                             delay: index * 0.1
                                         }}>
-                                        <CardProduct
-                                            product={product}
-                                            onButtonClick={() => handleProductClick(product)}
-                                        />
+                                        <CardProduct product={product} onButtonClick={() => null} />
                                     </motion.div>
                                 )
                         )}
-                    </motion.div>
+                    </motion.div> */}
                 </div>
 
-                {selectedProduct && (
+                {/* {selectedProduct && (
                     <ProductModal
                         open={openModal}
                         setOpen={setOpenModal}
@@ -98,7 +94,7 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                         selectedVariant={selectedVariant}
                         handleAddToCart={handleAddToCart}
                     />
-                )}
+                )} */}
 
                 <Cart
                     openCart={openCart}

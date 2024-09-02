@@ -11,7 +11,7 @@ const CardProduct = ({ product, onButtonClick }: CardProductProps) => {
         <div key={product.id} className='group relative'>
             <div className='aspect-h-3 aspect-w-3 overflow-hidden rounded-lg bg-gray-100'>
                 <img
-                    src={product.images[0]}
+                    src={'#'}
                     alt={'imageAlt'}
                     className='object-cover object-center group-hover:scale-110 duration-500'
                 />
