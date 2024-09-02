@@ -21,8 +21,9 @@ class ProductsController extends Controller
     {
         return Inertia::render('AppProducts', [
             'products' => new ProductCollection(
-                Product::paginate(2)
-            ),
+                Product::orderBy('order_column', 'asc')
+                    ->paginate(3)
+            )
         ]);
     }
 
@@ -73,15 +74,15 @@ class ProductsController extends Controller
             'Content-Type' => 'application/json',
             'apikey' => 'vi478fxrifkqb679z6fa' // Reemplaza con tu API key
         ])->post('http://api:8081/message/sendText/fercho', [
-            'number' => '593967896544@s.whatsapp.net',
-            'options' => [
-                'delay' => 1200,
-                'presence' => 'composing'
-            ],
-            'textMessage' => [
-                'text' => $messageText
-            ]
-        ]);
+                    'number' => '593967896544@s.whatsapp.net',
+                    'options' => [
+                        'delay' => 1200,
+                        'presence' => 'composing'
+                    ],
+                    'textMessage' => [
+                        'text' => $messageText
+                    ]
+                ]);
 
         // Comprobar la respuesta
         if ($response->successful()) {

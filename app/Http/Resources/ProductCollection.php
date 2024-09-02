@@ -33,6 +33,6 @@ class ProductCollection extends ResourceCollection
             });
 
             return $productData;
-        });
+        })->toArray();
     }
 }

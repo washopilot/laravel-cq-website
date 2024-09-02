@@ -1,4 +1,5 @@
-import { Link } from '@inertiajs/inertia-react'
+import { Link, usePage } from '@inertiajs/inertia-react'
+import { PageProps, Page } from '@inertiajs/inertia'
 import { motion } from 'framer-motion'
 import { Category, PaginatedData, Product, Variant } from '../types-and-interfaces'
 import './app.css'
@@ -11,19 +12,21 @@ import useCart from './hooks/useCart'
 import useFilters from './hooks/useFilters'
 import useProductModal from './hooks/useProductModal'
 
-interface ProductsProps {
+interface AppProductsProps extends PageProps {
     products: PaginatedData<Product>
-    categories: Category[]
+    // categories: Category[]
     variants: Variant[]
 }
 
-const AppProducts = ({ products, categories, variants }: ProductsProps) => {
+const AppProducts = () => {
+    const { products, variants } = usePage<Page<AppProductsProps>>().props
+
     // const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
     //     categories,
     //     products.data
     // )
 
-    console.log(products)
+    console.log(products.links)
 
     // const {
     //     selectedProduct,
@@ -59,8 +62,10 @@ const AppProducts = ({ products, categories, variants }: ProductsProps) => {
                 /> */}
 
                 <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
+                    {products.links.prev && <Link href={products.links.prev}>Previo</Link>}
+                    {products.links.next && <Link href={products.links.next}>Siguiente</Link>}
                     <motion.div
-                        // key={1}
+                        key={products.meta.current_page}
                         layout
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
