@@ -22,7 +22,7 @@ class ProductsController extends Controller
         return Inertia::render('AppProducts', [
             'products' => new ProductCollection(
                 Product::orderBy('order_column', 'asc')
-                    ->paginate(3)
+                    ->paginate(4)
             )
         ]);
     }

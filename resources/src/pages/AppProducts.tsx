@@ -11,6 +11,7 @@ import ProductModal from './components/ProductModal'
 import useCart from './hooks/useCart'
 import useFilters from './hooks/useFilters'
 import useProductModal from './hooks/useProductModal'
+import Pagination from './components/Pagination'
 
 interface AppProductsProps extends PageProps {
     products: PaginatedData<Product>
@@ -26,7 +27,7 @@ const AppProducts = () => {
     //     products.data
     // )
 
-    console.log(products.links)
+    // console.log(products.meta.links)
 
     // const {
     //     selectedProduct,
@@ -62,15 +63,15 @@ const AppProducts = () => {
                 /> */}
 
                 <div className='mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8'>
-                    {products.links.prev && <Link href={products.links.prev}>Previo</Link>}
-                    {products.links.next && <Link href={products.links.next}>Siguiente</Link>}
+                    {/* {products.links.prev && <Link href={products.links.prev}>Previo</Link>}
+                    {products.links.next && <Link href={products.links.next}>Siguiente</Link>} */}
                     <motion.div
                         key={products.meta.current_page}
                         layout
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
-                        className='mt-6 grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
+                        className='mt-6 pb-24 grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4'>
                         {products.data.map(
                             (product, index) =>
                                 product.is_visible && (
@@ -87,6 +88,7 @@ const AppProducts = () => {
                                 )
                         )}
                     </motion.div>
+                    <Pagination products={products} />
                 </div>
 
                 {/* {selectedProduct && (
