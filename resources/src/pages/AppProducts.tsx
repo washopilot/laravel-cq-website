@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/inertia-react'
-import { PageProps, Page } from '@inertiajs/inertia'
+import { Link, usePage } from '@inertiajs/react'
+import { PageProps } from '@inertiajs/core'
 import { motion } from 'framer-motion'
 import { Category, PaginatedData, Product, Variant } from '../types-and-interfaces'
 import './app.css'
@@ -20,7 +20,7 @@ interface AppProductsProps extends PageProps {
 }
 
 const AppProducts = () => {
-    const { products, variants } = usePage<Page<AppProductsProps>>().props
+    const { products, variants } = usePage<AppProductsProps>().props
 
     // const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
     //     categories,

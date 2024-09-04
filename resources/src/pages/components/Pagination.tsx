@@ -1,5 +1,5 @@
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
-import { Link } from '@inertiajs/inertia-react'
+import { Link } from '@inertiajs/react'
 import { PaginatedData, Product } from '../../types-and-interfaces'
 
 function classNames(...classes: string[]) {
