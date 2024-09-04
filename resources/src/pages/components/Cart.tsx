@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
-import { Inertia, Method } from '@inertiajs/inertia'
+import { router } from '@inertiajs/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
 import { CartItem } from '../../types-and-interfaces'
@@ -175,8 +175,8 @@ export default function Cart({ openCart, setOpenCart, cart, updateProductQuantit
                                             <div className='mt-6'>
                                                 <button
                                                     onClick={() =>
-                                                        Inertia.visit('checkout', {
-                                                            method: Method.GET
+                                                        router.visit('checkout', {
+                                                            method: 'get'
                                                         })
                                                     }
                                                     className={`w-full flex items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-black shadow-sm ${

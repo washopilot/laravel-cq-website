@@ -1,5 +1,4 @@
-import { Inertia } from '@inertiajs/inertia'
-import { Link } from '@inertiajs/inertia-react'
+import { Link, router } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { CartItem } from '../types-and-interfaces'
@@ -30,7 +29,7 @@ export default function Checkout() {
             subtotal
         }
 
-        Inertia.post('/process-order', data)
+        router.post('/process-order', data)
     }
 
     return (

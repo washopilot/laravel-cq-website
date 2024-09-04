@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/inertia-react'
+import { Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { Category, Product, Variant } from '../types-and-interfaces'
 import './app.css'
