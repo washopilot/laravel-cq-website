@@ -17,7 +17,7 @@ services:
             - ./:/var/www/html:rw
         restart: unless-stopped
         healthcheck:
-            test: [ 'CMD', 'curl', '-f', 'http://localhost:80' ]
+            test: ['CMD', 'curl', '-f', 'http://localhost:80']
             interval: 30s
             retries: 3
             start_period: 30s
@@ -37,5 +37,5 @@ services:
 
 networks:
     internal:
-        name: laravel-net
+        name: laravel-cq-net
         driver: bridge

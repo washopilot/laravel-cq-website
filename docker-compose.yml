@@ -25,5 +25,5 @@ services:
 
 networks:
     internal:
-        name: laravel-net
+        name: laravel-cq-net
         driver: bridge
