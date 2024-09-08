@@ -19,7 +19,21 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
-            'category_id' => $this->category_id
+            'category_id' => $this->category_id,
+            'images' => $this->getMedia('products')->map(function ($media) {
+                return $media->getUrl('thumb');
+            }),
+            'variants' => $this->variants->sortBy('order_column')->map(function ($variant) {
+                return [
+                    'id' => $variant->id,
+                    'name' => $variant->name,
+                    'price' => $variant->price,
+                    // Añade aquí otros campos que necesites
+                    'images' => $variant->getMedia('variants')->map(function ($media) {
+                        return $media->getUrl('thumb');
+                    }),
+                ];
+            }),
         ];
     }
 }
