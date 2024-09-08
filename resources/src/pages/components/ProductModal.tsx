@@ -1,19 +1,16 @@
-import { Dialog, RadioGroup, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { router } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import { Fragment } from 'react'
-import { Product, Variant } from '../../types-and-interfaces'
-import AnimatedCurrency from './AnimatedCurrency'
+import { Product } from '../../types-and-interfaces'
 
 type ProductModalProps = {
     open: boolean
-    setOpen: (open: boolean) => void
     product: Product
-    filteredVariants: Variant[]
-    setSelectedVariant: (variant: Variant) => void
-    selectedVariant: Variant
-    handleAddToCart: (variant_id: number) => void
+    closeModal: () => void
+    // handleAddToCart: (variant_id: number) => void
 }
 
 function classNames(...classes: string[]): string {
@@ -22,16 +19,15 @@ function classNames(...classes: string[]): string {
 
 const ProductModal = ({
     open,
-    setOpen,
     product,
-    filteredVariants,
-    setSelectedVariant,
-    selectedVariant,
-    handleAddToCart
+    // handleAddToCart
+    closeModal
 }: ProductModalProps) => {
+    // console.log(product)
+
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as='div' className='relative z-50' onClose={setOpen}>
+            <Dialog as='div' className='relative z-50' onClose={closeModal}>
                 <Transition.Child
                     as={Fragment}
                     enter='ease-out duration-300'
@@ -58,7 +54,7 @@ const ProductModal = ({
                                     <button
                                         type='button'
                                         className='absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8'
-                                        onClick={() => setOpen(false)}>
+                                        onClick={closeModal}>
                                         <span className='sr-only'>Close</span>
                                         <XMarkIcon className='h-6 w-6' aria-hidden='true' />
                                     </button>
@@ -67,8 +63,8 @@ const ProductModal = ({
                                         <div className='sm:col-span-4 lg:col-span-5'>
                                             <div className='aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100'>
                                                 <motion.img
-                                                    key={selectedVariant.images[0]} // Cambia la clave para que framer-motion detecte cambios
-                                                    src={selectedVariant.images[0]}
+                                                    // key={selectedVariant.images[0]} // Cambia la clave para que framer-motion detecte cambios
+                                                    // src={selectedVariant.images[0]}
                                                     alt={'imageAlt'}
                                                     className='object-cover object-center'
                                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -96,31 +92,13 @@ const ProductModal = ({
                                                 </h3>
 
                                                 <div className='flex items-center'>
-                                                    <p className='text-lg text-gray-300 sm:text-xl'>
+                                                    {/* <p className='text-lg text-gray-300 sm:text-xl'>
                                                         <AnimatedCurrency value={Number(selectedVariant.price)} />
-                                                    </p>
+                                                    </p> */}
 
                                                     <div className='ml-4 border-l border-gray-300 pl-4'>
                                                         <h4 className='sr-only'>Reviews</h4>
-                                                        <div className='flex items-center'>
-                                                            {/* <div className='flex items-center'>
-                                                                {[0, 1, 2, 3, 4].map((rating) => (
-                                                                    <StarIcon
-                                                                        key={rating}
-                                                                        className={classNames(
-                                                                            productData.rating > rating
-                                                                                ? 'text-yellow-400'
-                                                                                : 'text-gray-300',
-                                                                            'h-5 w-5 flex-shrink-0'
-                                                                        )}
-                                                                        aria-hidden='true'
-                                                                    />
-                                                                ))}
-                                                            </div>
-                                                            <p className='sr-only'>
-                                                                {productData.rating} out of 5 stars
-                                                            </p> */}
-                                                        </div>
+                                                        <div className='flex items-center'></div>
                                                     </div>
                                                 </div>
 
@@ -143,7 +121,7 @@ const ProductModal = ({
                                                 <form>
                                                     <div className='sm:flex sm:justify-between'>
                                                         {/* Size selector */}
-                                                        <RadioGroup
+                                                        {/* <RadioGroup
                                                             value={selectedVariant}
                                                             onChange={setSelectedVariant}>
                                                             <RadioGroup.Label className='block text-sm font-medium text-white'>
@@ -168,11 +146,6 @@ const ProductModal = ({
                                                                                     className='text-base font-medium text-white'>
                                                                                     {size.name}
                                                                                 </RadioGroup.Label>
-                                                                                {/* <RadioGroup.Description
-                                                                                    as='p'
-                                                                                    className='mt-1 text-sm text-[gray-500]'>
-                                                                                    {'Lorem ipsum dolor sit amet.'}
-                                                                                </RadioGroup.Description> */}
                                                                                 <div
                                                                                     className={classNames(
                                                                                         active ? 'border' : 'border-2',
@@ -188,7 +161,7 @@ const ProductModal = ({
                                                                     </RadioGroup.Option>
                                                                 ))}
                                                             </div>
-                                                        </RadioGroup>
+                                                        </RadioGroup> */}
                                                     </div>
                                                     {/* <div className='mt-4 flex'>
                                                         <a
@@ -204,10 +177,10 @@ const ProductModal = ({
                                                     <div className='mt-6'>
                                                         <button
                                                             type='submit'
-                                                            onClick={(event) => {
-                                                                event.preventDefault()
-                                                                return handleAddToCart(selectedVariant.id)
-                                                            }}
+                                                            // onClick={(event) => {
+                                                            //     event.preventDefault()
+                                                            //     return handleAddToCart(selectedVariant.id)
+                                                            // }}
                                                             className='flex w-full items-center justify-center rounded-md border border-transparent bg-[#c79c43] px-8 py-3 text-base font-bold text-black hover:bg-[#775d28] focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2 focus:ring-offset-gray-50 transform transition-transform duration-200 active:scale-90'>
                                                             Añadir a pedido
                                                         </button>

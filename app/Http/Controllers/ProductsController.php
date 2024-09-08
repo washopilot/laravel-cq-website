@@ -13,19 +13,35 @@ use App\Models\Order;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http; // Asegúrate de importar Http
 use App\Http\Resources\ProductCollection;
-
+use App\Http\Resources\ProductResource;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $page = $request->input('page', 1);
+        $products = Product::orderBy('order_column', 'asc')->paginate(4, ['*'], 'page', $page);
+
         return Inertia::render('AppProducts', [
-            'products' => new ProductCollection(
-                Product::orderBy('order_column', 'asc')
-                    ->paginate(4)
-            )
+            'products' => new ProductCollection($products),
+            'currentPage' => $page
         ]);
     }
+
+    public function show(Request $request, Product $product)
+    {
+        $page = $request->input('page', 1);
+        $products = Product::orderBy('order_column', 'asc')->paginate(4, ['*'], 'page', $page);
+        // Debugbar::info(new ProductResource($product));
+
+        return Inertia::render('AppProducts', [
+            'products' => new ProductCollection($products),
+            'product' => new ProductResource($product),
+            'currentPage' => $page,
+        ]);
+    }
+
+
 
     public function checkout()
     {

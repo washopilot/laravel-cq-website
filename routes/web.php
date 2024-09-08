@@ -26,11 +26,10 @@ Route::get(
     [ProductsController::class, 'index']
 )->name('index');
 
-Route::inertia(
-    '/products/show',
-    'ShowProducts',
-    ['message' => 'There is again']
-);
+Route::get(
+    '/products/{product}/show',
+    [ProductsController::class, 'show']
+)->name('products.show');
 
 Route::get('/checkout', [ProductsController::class, 'checkout'])->name('checkout');
 
