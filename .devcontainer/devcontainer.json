@@ -46,13 +46,11 @@
         "vscode": {
             "extensions": [
                 "dsznajder.es7-react-js-snippets",
-                "mikestead.dotenv",
                 "onecentlin.laravel-extension-pack",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "esbenp.prettier-vscode",
                 "yy0931.vscode-sqlite3-editor",
                 "redhat.vscode-yaml",
-                "WallabyJs.console-ninja",
                 "bradlc.vscode-tailwindcss",
                 "MehediDracula.php-namespace-resolver",
                 "hakcorp.php-awesome-snippets",
