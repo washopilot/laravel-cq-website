@@ -1,7 +1,5 @@
 FROM node:20-slim AS pnpm
-ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable pnpm
-
 COPY --chown=node:node . /app
 WORKDIR /app
 RUN --mount=type=cache,id=pnpm,target=${HOME}/.pnpm-store pnpm install --frozen-lockfile
