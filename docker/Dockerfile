@@ -57,9 +57,10 @@ ENV NVM_DIR /usr/local/nvm
 RUN mkdir -p $NVM_DIR && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash && \
     . $NVM_DIR/nvm.sh && \
-    nvm install 20.16 && \
-    nvm use 20.16 && \
-    nvm alias default 20.16 && \
+    nvm install 20 && \
+    nvm use 20 && \
+    nvm alias default 20 && \
+    nvm install-latest-npm && \
     ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/node" /usr/local/bin/node && \
     ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npm" /usr/local/bin/npm && \
     ln -s "$NVM_DIR/versions/node/$(nvm version)/bin/npx" /usr/local/bin/npx
