@@ -72,9 +72,9 @@ USER devuser
 ENV PNPM_STORE_DIR=${HOME}/.pnpm-store
 
 CMD \
-    # pnpm install --frozen-lockfile && pnpm run build && \
-    # composer install --prefer-dist --no-progress --no-suggest && \
-    # composer clear-cache && \
-    # rm -f public/storage && \
-    # php artisan storage:link && \
+    pnpm install --frozen-lockfile && rm -rf public/build && pnpm run build && \
+    composer install --prefer-dist --no-progress --no-suggest && \
+    composer clear-cache && \
+    rm -f public/storage && \
+    php artisan storage:link && \
     apache2-foreground

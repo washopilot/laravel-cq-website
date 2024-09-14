@@ -23,15 +23,16 @@ services:
             start_period: 30s
             timeout: 10s
         depends_on:
-            npm:
+            pnpm:
                 condition: service_completed_successfully
-    npm:
-        image: node:20-alpine
+    pnpm:
+        build:
+          context: .
+          target: pnpm
+          dockerfile: docker/Dockerfile.production
         volumes:
-            - ./:/var/www/html
-        working_dir: /var/www/html
-        command: /bin/sh -c "npm ci -d && npm run build && rm -rf node_modules"
-        user: node:node
+              - ./public:/app/public
+        command: /bin/sh -c "rm -rf app/public/build && pnpm run build"
         networks:
             - internal
 

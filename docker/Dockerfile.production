@@ -1,3 +1,12 @@
+FROM node:20-slim AS pnpm
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm
+
+COPY --chown=node:node . /app
+WORKDIR /app
+RUN --mount=type=cache,id=pnpm,target=${HOME}/.pnpm-store pnpm install --frozen-lockfile
+
+
 FROM php:8.3-apache-bookworm AS production
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -32,6 +41,6 @@ USER devuser
 CMD \
     composer install --no-dev --optimize-autoloader --no-interaction --no-progress && \
     composer clear-cache && \
-    rm public/storage && \
+    rm -f public/storage && \
     php artisan storage:link && \
     apache2-foreground
