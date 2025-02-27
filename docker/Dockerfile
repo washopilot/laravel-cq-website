@@ -53,7 +53,7 @@ RUN docker-php-ext-install \
     rm -rf /tmp/*
 
 # 5. install node, and pnpm
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs
 RUN npm install -g pnpm
 
@@ -69,6 +69,7 @@ RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
     chown -R devuser:devuser /home/devuser
 
 USER devuser
+RUN pnpm config set store-dir $HOME/.pnpm-store
 
 CMD \
     # pnpm install --frozen-lockfile && rm -rf public/build && pnpm run build && \

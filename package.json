@@ -35,8 +35,13 @@
         "three": "0.148.0"
     },
     "peerDependencies": {
+        "@inertiajs/core": "1.2.0",
         "react-color": "2.19.3",
-        "three-stdlib": "2.33.0",
-        "@inertiajs/core": "1.2.0"
+        "three-stdlib": "2.33.0"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild"
+        ]
     }
 }
