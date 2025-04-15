@@ -58,7 +58,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
 RUN npm install -g pnpm
 
 # 5. composer
-COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # 6. we need a user with the same UID/GID with host user
 # so when we execute CLI commands, all the host file's ownership remains intact

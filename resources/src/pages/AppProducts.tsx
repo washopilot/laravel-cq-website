@@ -11,14 +11,25 @@ import useProductModal from './hooks/useProductModal'
 
 interface AppProductsProps extends PageProps {
     products: PaginatedData<Product>
-    product: any
     currentPage: number
 }
 
-const AppProducts = () => {
-    const { products, product, currentPage } = usePage<AppProductsProps>().props
+const mockProduct: Product = {
+    id: 1,
+    name: 'Café Premium Molido',
+    slug: 'cafe-premium-molido',
+    description: 'Una mezcla selecta de granos de café 100% arábica, con notas a chocolate y caramelo.',
+    price: '129.99',
+    is_visible: true,
+    category_id: 2,
+    order_column: 1,
+    images: ['https://images.unsplash.com/photo-1587614295999-6d9dcf6b1c00?auto=format&fit=crop&w=800&q=80']
+}
 
-    // console.log(product)
+const AppProducts = () => {
+    const { products } = usePage<AppProductsProps>().props
+
+    console.log(products)
 
     // const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
     //     categories,
@@ -27,7 +38,7 @@ const AppProducts = () => {
 
     // console.log(products.meta.links)
 
-    const { selectedProduct, handleProductClick, openModal, closeModal } = useProductModal(currentPage)
+    const { selectedProduct, handleProductClick, openModal, closeModal } = useProductModal()
 
     // const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
     //     useCart(products.data, variants)
@@ -84,10 +95,10 @@ const AppProducts = () => {
                 <Pagination products={products} />
             </div>
 
-            {selectedProduct && product && (
+            {selectedProduct && (
                 <ProductModal
                     open={openModal}
-                    product={product.data}
+                    product={mockProduct}
                     closeModal={closeModal}
                     // handleAddToCart={handleAddToCart}
                 />

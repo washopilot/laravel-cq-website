@@ -1,11 +1,12 @@
-import { router } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 
-const useProductModal = (currentPage: number) => {
+const useProductModal = () => {
     const [selectedProduct, setSelectedProduct] = useState<number>(null!)
     const [openModal, setOpenModal] = useState(false)
 
     useEffect(() => {
+        console.log(selectedProduct)
+
         if (selectedProduct) {
             setOpenModal(true)
         }
@@ -13,21 +14,11 @@ const useProductModal = (currentPage: number) => {
 
     const handleProductClick = (productId: number) => {
         setSelectedProduct(productId)
-        router.visit(`/products/${productId}/show?page=${currentPage}`, {
-            preserveState: true,
-            preserveScroll: true,
-            replace: false
-        })
     }
 
     const closeModal = () => {
         setOpenModal(false)
-        setSelectedProduct(null)
-        router.visit(`/products?page=${currentPage}`, {
-            preserveState: true,
-            preserveScroll: true,
-            replace: true
-        })
+        setSelectedProduct(null!)
     }
 
     return {

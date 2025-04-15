@@ -22,7 +22,7 @@
             "configureZshAsDefaultShell": true,
             "installOhMyZsh": true,
             "installOhMyZshConfig": true,
-            "upgradePackages": false,
+            "upgradePackages": true,
             "username": "automatic",
             "userUid": "automatic",
             "userGid": "automatic"
@@ -30,7 +30,7 @@
     },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    "forwardPorts": [8080, 5173],
+    // "forwardPorts": [8080, 5173],
 
     // Uncomment the next line if you want start specific services in your Docker Compose config.
     // "runServices": [],
