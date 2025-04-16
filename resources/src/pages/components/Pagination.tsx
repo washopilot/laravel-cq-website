@@ -13,6 +13,7 @@ const Pagination = ({ products }: { products: PaginatedData<Product> }) => {
                 {products.links.prev && (
                     <Link
                         href={products.links.prev}
+                        preserveScroll
                         className='inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'>
                         <ArrowLongLeftIcon className='mr-3 h-5 w-5 text-gray-400' aria-hidden='true' />
                         Previo
@@ -27,6 +28,7 @@ const Pagination = ({ products }: { products: PaginatedData<Product> }) => {
                             <Link
                                 key={index}
                                 href={link.url!}
+                                preserveScroll
                                 className={classNames(
                                     'inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium',
                                     link.active
@@ -44,6 +46,7 @@ const Pagination = ({ products }: { products: PaginatedData<Product> }) => {
                 {products.links.next && (
                     <Link
                         href={products.links.next}
+                        preserveScroll
                         className='inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'>
                         Siguiente
                         <ArrowLongRightIcon className='ml-3 h-5 w-5 text-gray-400' aria-hidden='true' />
