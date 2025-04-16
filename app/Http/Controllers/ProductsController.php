@@ -20,27 +20,15 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
-        $products = Product::orderBy('order_column', 'asc')->paginate(4, ['*'], 'page', $page);
+
+        $products = Product::where('is_visible', true) // 👈 only visible products
+            ->orderBy('order_column', 'asc')
+            ->paginate(4, ['*'], 'page', $page);
 
         return Inertia::render('AppProducts', [
             'products' => new ProductCollection($products),
-            'currentPage' => $page
         ]);
     }
-
-    public function show(Request $request, Product $product)
-    {
-        $page = $request->input('page', 1);
-        $products = Product::orderBy('order_column', 'asc')->paginate(4, ['*'], 'page', $page);
-        // Debugbar::info(new ProductResource($product));
-
-        return Inertia::render('AppProducts', [
-            'products' => new ProductCollection($products),
-            'product' => new ProductResource($product),
-            'currentPage' => $page,
-        ]);
-    }
-
 
 
     public function checkout()

@@ -11,7 +11,6 @@ import useProductModal from './hooks/useProductModal'
 
 interface AppProductsProps extends PageProps {
     products: PaginatedData<Product>
-    currentPage: number
 }
 
 const AppProducts = () => {
@@ -22,8 +21,6 @@ const AppProducts = () => {
     //     products.data
     // )
 
-    // console.log(products.meta.links)
-
     const {
         selectedProduct,
         handleProductClick,
@@ -33,7 +30,6 @@ const AppProducts = () => {
         setSelectedVariant,
         selectedVariant
     } = useProductModal()
-    console.log({ selectedProduct, filteredVariants })
 
     // const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
     //     useCart(products.data, variants)
@@ -43,7 +39,7 @@ const AppProducts = () => {
         <div className='bg-white'>
             <div className='mx-auto w-full px-4 pt-48 md:pt-32 pb-16 sm:px-6 md:px-32 lg:px-40 bg-gradient-to-b from-gray-900 via-black to-gray-900'>
                 <h1 className='text-3xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500'>
-                    <Link href='/products/show'>Nuestro catálogo</Link>
+                    <Link href='/products'>Nuestro catálogo</Link>
                 </h1>
                 <p className='mt-4 max-w-xl text-sm text-white'>
                     Eleva tu espacio con nuestros muebles metálicos de edición limitada: perchas, góndolas y más.

@@ -9,11 +9,9 @@ const useProductModal = () => {
 
     const handleProductClick = useCallback(
         (product: Product) => {
-            const tempVariants = product.variants.sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
-
             setSelectedProduct(product)
-            setFilteredVariants(tempVariants)
-            setSelectedVariant(tempVariants[0] || null)
+            setFilteredVariants(product.variants)
+            setSelectedVariant(product.variants[0] || null)
             setOpenModal(true)
         },
         [selectedProduct]

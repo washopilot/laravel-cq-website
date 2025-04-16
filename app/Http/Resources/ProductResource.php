@@ -17,8 +17,11 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
+            'order_column' => $this->order_column,
             'description' => $this->description,
             'price' => $this->price,
+            'is_visible' => $this->is_visible,
             'category_id' => $this->category_id,
             'images' => $this->getMedia('products')->map(function ($media) {
                 return $media->getUrl('thumb');
@@ -28,13 +31,13 @@ class ProductResource extends JsonResource
                     'id' => $variant->id,
                     'name' => $variant->name,
                     'price' => $variant->price,
-                    // Añade aquí otros campos que necesites
+                    'order_column' => $variant->order_column,
+                    'is_visible' => $this->is_visible,
                     'images' => $variant->getMedia('variants')->map(function ($media) {
                         return $media->getUrl('thumb');
                     }),
-                    'order_column' => $variant->order_column
                 ];
-            }),
+            })->toArray(),
         ];
     }
 }
