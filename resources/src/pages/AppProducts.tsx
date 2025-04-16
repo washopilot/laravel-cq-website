@@ -14,22 +14,8 @@ interface AppProductsProps extends PageProps {
     currentPage: number
 }
 
-const mockProduct: Product = {
-    id: 1,
-    name: 'Café Premium Molido',
-    slug: 'cafe-premium-molido',
-    description: 'Una mezcla selecta de granos de café 100% arábica, con notas a chocolate y caramelo.',
-    price: '129.99',
-    is_visible: true,
-    category_id: 2,
-    order_column: 1,
-    images: ['https://images.unsplash.com/photo-1587614295999-6d9dcf6b1c00?auto=format&fit=crop&w=800&q=80']
-}
-
 const AppProducts = () => {
     const { products } = usePage<AppProductsProps>().props
-
-    console.log(products)
 
     // const { filters, setFilters, sortOptions, setSortOptions, filteredAndSortedProducts } = useFilters(
     //     categories,
@@ -38,7 +24,16 @@ const AppProducts = () => {
 
     // console.log(products.meta.links)
 
-    const { selectedProduct, handleProductClick, openModal, closeModal } = useProductModal()
+    const {
+        selectedProduct,
+        handleProductClick,
+        openModal,
+        setOpenModal,
+        filteredVariants,
+        setSelectedVariant,
+        selectedVariant
+    } = useProductModal()
+    console.log({ selectedProduct, filteredVariants })
 
     // const { cart, updateProductQuantity, removeProduct, openCart, setOpenCart, handleOnClickCart, handleAddToCart } =
     //     useCart(products.data, variants)
@@ -84,10 +79,7 @@ const AppProducts = () => {
                                         duration: 0.3,
                                         delay: index * 0.1
                                     }}>
-                                    <CardProduct
-                                        product={product}
-                                        onButtonClick={() => handleProductClick(product.id)}
-                                    />
+                                    <CardProduct product={product} onButtonClick={() => handleProductClick(product)} />
                                 </motion.div>
                             )
                     )}
@@ -98,8 +90,11 @@ const AppProducts = () => {
             {selectedProduct && (
                 <ProductModal
                     open={openModal}
-                    product={mockProduct}
-                    closeModal={closeModal}
+                    product={selectedProduct}
+                    setOpen={setOpenModal}
+                    filteredVariants={filteredVariants}
+                    setSelectedVariant={setSelectedVariant}
+                    selectedVariant={selectedVariant}
                     // handleAddToCart={handleAddToCart}
                 />
             )}

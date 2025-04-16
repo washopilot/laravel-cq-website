@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
+import { Product, Variant } from '../../types-and-interfaces'
 
 const useProductModal = () => {
-    const [selectedProduct, setSelectedProduct] = useState<number>(null!)
+    const [selectedProduct, setSelectedProduct] = useState<Product>(null!)
+    const [filteredVariants, setFilteredVariants] = useState<Variant[]>([])
+    const [selectedVariant, setSelectedVariant] = useState<Variant>(null!)
     const [openModal, setOpenModal] = useState(false)
 
-    useEffect(() => {
-        console.log(selectedProduct)
+    const handleProductClick = useCallback(
+        (product: Product) => {
+            const tempVariants = product.variants.sort((a, b) => (a.order_column ?? 0) - (b.order_column ?? 0))
 
-        if (selectedProduct) {
+            setSelectedProduct(product)
+            setFilteredVariants(tempVariants)
+            setSelectedVariant(tempVariants[0] || null)
             setOpenModal(true)
-        }
-    }, [selectedProduct])
-
-    const handleProductClick = (productId: number) => {
-        setSelectedProduct(productId)
-    }
-
-    const closeModal = () => {
-        setOpenModal(false)
-        setSelectedProduct(null!)
-    }
+        },
+        [selectedProduct]
+    )
 
     return {
         selectedProduct,
         handleProductClick,
+        filteredVariants,
         openModal,
         setOpenModal,
-        closeModal
+        selectedVariant,
+        setSelectedVariant
     }
 }
 

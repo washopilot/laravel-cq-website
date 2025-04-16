@@ -32,6 +32,24 @@ class ProductCollection extends ResourceCollection
                 return $media->getUrl('thumb');
             });
 
+            // Include variants data with images
+            $productData['variants'] = $product->variants->map(function ($variant) {
+                $variantData = $variant->only([
+                    'id',
+                    'name',
+                    'price',
+                    'is_visible',
+                    'order_column'
+                ]);
+
+                // Add variant images
+                $variantData['images'] = $variant->getMedia('variants')->map(function ($media) {
+                    return $media->getUrl('thumb');
+                });
+
+                return $variantData;
+            });
+
             return $productData;
         })->toArray();
     }

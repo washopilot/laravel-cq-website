@@ -8,6 +8,7 @@ export interface Product {
     category_id: number
     order_column: number
     images: string[]
+    variants: Variant[]
 }
 
 export interface Category {

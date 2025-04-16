@@ -32,6 +32,7 @@ class ProductResource extends JsonResource
                     'images' => $variant->getMedia('variants')->map(function ($media) {
                         return $media->getUrl('thumb');
                     }),
+                    'order_column' => $variant->order_column
                 ];
             }),
         ];
