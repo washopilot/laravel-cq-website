@@ -1,4 +1,4 @@
-FROM php:8.3-apache-bookworm AS php
+FROM php:8.3-apache-bullseye AS php
 
 # 1. development packages
 RUN apt-get update && \
@@ -55,7 +55,7 @@ RUN docker-php-ext-install \
 # 5. install node, and pnpm
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs
-RUN npm install -g pnpm
+RUN npm install -g pnpm@latest-10
 
 # 5. composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -71,10 +71,10 @@ RUN useradd -G www-data,root -u $uid -d /home/devuser devuser && \
 USER devuser
 RUN pnpm config set store-dir $HOME/.pnpm-store
 
-CMD \
+CMD ["/bin/sh", "-c", "rm -f \
     # pnpm install --frozen-lockfile && rm -rf public/build && pnpm run build && \
     # composer install --prefer-dist --no-progress --no-suggest && \
     # composer clear-cache && \
     rm -f public/storage && \
     php artisan storage:link && \
-    apache2-foreground
+    apache2-foreground"]
