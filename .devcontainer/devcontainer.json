@@ -56,7 +56,8 @@
                 "hakcorp.php-awesome-snippets",
                 "austenc.laravel-blade-spacer",
                 "DEVSENSE.phptools-vscode",
-                "mhutchie.git-graph"
+                "mhutchie.git-graph",
+                "saoudrizwan.claude-dev"
             ]
         }
     },
